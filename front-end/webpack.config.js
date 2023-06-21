@@ -54,7 +54,6 @@ module.exports = {
         ]
     },
     plugins: [
-/*        new webpack.HotModuleReplacementPlugin(), // 添加热模块替换插件*/
         ...templateArr
     ]
 
