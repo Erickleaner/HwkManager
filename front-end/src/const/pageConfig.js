@@ -35,7 +35,7 @@ const getTemplateArr = () => {
                     {
                         template: `./src/page/${key}/${name}/index.html`,
                         filename: `${key}/${name}.html`,
-                        chunks: [chunk]
+                        chunks: [chunk],
                     }
                 )
             )

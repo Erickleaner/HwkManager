@@ -1,5 +1,5 @@
 const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack');
 const {getEntryObj} = require('./src/const/pageConfig')
 const {getTemplateArr} = require('./src/const/pageConfig')
 const entryObj = getEntryObj();
@@ -25,7 +25,7 @@ module.exports = {
         open: true,
         hot: true,
         compress: true,
-        historyApiFallback :true
+        historyApiFallback :true,
     },
     module: {
         rules: [
@@ -43,9 +43,18 @@ module.exports = {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
                 type: "asset/resource"
             },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.html$/,
+                use: ['html-loader'],
+            },
         ]
     },
     plugins: [
+/*        new webpack.HotModuleReplacementPlugin(), // 添加热模块替换插件*/
         ...templateArr
     ]
 
