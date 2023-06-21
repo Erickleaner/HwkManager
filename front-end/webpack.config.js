@@ -1,22 +1,25 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const {getEntryObj} = require('./src/const/pageConfig')
+const {getTemplateArr} = require('./src/const/pageConfig')
+const entryObj = getEntryObj();
+const templateArr = getTemplateArr()
 module.exports = {
     mode: "development",
     entry: {
-        index: path.resolve(__dirname,"src/index.js"),
-        users: path.resolve(__dirname,"src/users.js")
+        ...entryObj
     },
     output: {
         path: path.resolve(__dirname,"dist"),
-        filename: "[name]_[contenthash].js",
+        filename: "[name].js",
         assetModuleFilename: "[name]_[contenthash][ext]",
         clean: true,
     },
     devtool: 'source-map',
+    //设置static避免404页面的发送
     devServer: {
         static: {
-            directory: path.resolve(__dirname,'dist'),
+            directory: path.resolve(__dirname,'dist/student'),
         },
         port: 3000,
         open: true,
@@ -43,16 +46,7 @@ module.exports = {
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({
-            template: './src/index.html',
-            filename: 'index.html',
-            chunks: ['index'],
-        }),
-        new HtmlWebpackPlugin({
-            template: './src/users.html',
-            filename: 'users.html',
-            chunks: ['users'],
-        })
+        ...templateArr
     ]
 
 }

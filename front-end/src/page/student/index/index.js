@@ -1,5 +1,5 @@
 import generateJoke from "./generateJoke";
-import laughing from './assets/image/laughing.png'
+import laughing from '../../../assets/image/laughing.png'
 
 const laughImg = document.getElementById('laughImg')
 laughImg.src = laughing
