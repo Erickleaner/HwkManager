@@ -3,16 +3,26 @@
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        :default-active="activeMenu"
-        :collapse="isCollapse"
+        :collapse="false"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
-        :unique-opened="false"
         :active-text-color="variables.menuActiveText"
-        :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
+        <el-menu-item index="1">Deal 01</el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">Deal 01</template>
+          <el-menu-item index="2-1">Deal 01</el-menu-item>
+          <el-menu-item index="2-2">Deal 01</el-menu-item>
+          <el-menu-item index="2-3">Deal 01</el-menu-item>
+          <el-submenu index="2-4">
+            <template slot="title">Deal 01</template>
+            <el-menu-item index="2-4-1">Deal 01</el-menu-item>
+            <el-menu-item index="2-4-2">Deal 01</el-menu-item>
+            <el-menu-item index="2-4-3">Deal 01</el-menu-item>
+          </el-submenu>
+        </el-submenu>
+        <el-menu-item index="3" disabled>Center</el-menu-item>
       </el-menu>
     </el-scrollbar>
   </div>
@@ -30,18 +40,6 @@ export default {
     ...mapGetters([
       'sidebar'
     ]),
-    routes() {
-      return this.$router.options.routes
-    },
-    activeMenu() {
-      const route = this.$route
-      const { meta, path } = route
-      // if set path, the sidebar will highlight the path you set
-      if (meta.activeMenu) {
-        return meta.activeMenu
-      }
-      return path
-    },
     showLogo() {
       return this.$store.state.settings.sidebarLogo
     },
