@@ -69,7 +69,7 @@ window.onload = function(){
 			}
 			this.className='active';
 		}
-		
+
 	}
 }
 </script>
@@ -79,7 +79,7 @@ window.onload = function(){
 	<div class="div_body">
 		<nav class="navbar">
 			<ul class="nav navbar-nav " style="border-bottom:#517fa4 2px">
-				<li class="li-sty">高校成绩管理系统<i class="fa fa-magic" aria-hidden="true"></i></li>
+				<li class="li-sty">大作业管理系统<i class="fa fa-magic" aria-hidden="true"></i></li>
 				<li class="li-sty1" style="float:right;"><a href="ServletLogout" >退出</a></li>
 			</ul>
 		</nav>
@@ -124,17 +124,17 @@ window.onload = function(){
                     </a>
                     <ul id="menu-stu" class="collapse">
                         <li><a href="ServletFindAllStu" target="mainRight">查询学生信息</a></li>
-                    </ul>                    
+                    </ul>
                 </li>
 			</ul>
 		</div>
 		<div class="div_right">
-			<iframe frameBorder="0" id="main" 
+			<iframe frameBorder="0" id="main"
 			name="mainRight" scrolling="yes" src="main.jsp"
 			style="HEIGHT: 130%; VISIBILITY: inherit; WIDTH: 100%; Z-INDEX: 1"></iframe>
 		</div>
 	</div>
-	
+
 	<script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 </body>
