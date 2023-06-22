@@ -23,26 +23,50 @@ const users = {
   }
 }
 
+const userList = [
+  {
+    role:'teacher',
+    username:'teacher',
+    password:'123456'
+  },
+  {
+    role:'student',
+    username:'student01',
+    password:'123456'
+  },
+  {
+    role:'student',
+    username:'student02',
+    password:'123456'
+  },
+]
+
+const validLogin = (username,password) =>{
+  let user = null;
+  userList.forEach(item =>{
+    if (item.username===username&&item.password===password){
+      user = item
+    }
+  })
+  return user;
+}
+
+
 module.exports = [
   // user login
   {
     url: '/vue-admin-template/user/login',
     type: 'post',
     response: config => {
-      const { username } = config.body
-      const token = tokens[username]
-
-      // mock error
-      if (!token) {
-        return {
-          code: 60204,
-          message: 'Account and password are incorrect.'
-        }
-      }
-
+      const { username,password } = config.body
+      const user = validLogin(username,password)
+      const isLogin = user !== null;
       return {
         code: 20000,
-        data: token
+        data: {
+          user,
+          isLogin
+        }
       }
     }
   },

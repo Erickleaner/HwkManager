@@ -54,6 +54,9 @@
 
 <script>
 import { validUsername } from '@/utils/validate'
+import {login} from "@/api/user";
+import {Message} from "element-ui";
+import router from "@/router";
 
 export default {
   name: 'Login',
@@ -74,11 +77,11 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: 'teacher',
+        password: '123456'
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
+        username: [{ required: true, trigger: 'blur'}],
         password: [{ required: true, trigger: 'blur', validator: validatePassword }]
       },
       loading: false,
@@ -108,16 +111,15 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true
-          this.$store.dispatch('user/login', this.loginForm).then(() => {
-            this.$router.push({ path: this.redirect || '/' })
-            this.loading = false
-          }).catch(() => {
-            this.loading = false
+          login(this.loginForm).then(response => {
+            const {data} = response
+            if (data.isLogin){
+              Message.success('登录成功！')
+              router.push('/teacher')
+            }else {
+              Message.error('登录失败!')
+            }
           })
-        } else {
-          console.log('error submit!!')
-          return false
         }
       })
     }
