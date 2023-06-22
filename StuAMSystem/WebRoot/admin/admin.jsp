@@ -99,7 +99,7 @@ width:15%;
 }
 </style>
 </head>
-
+<%--update--%>
 <body>
 	<div class="div_body">
 		<nav class="navbar">
