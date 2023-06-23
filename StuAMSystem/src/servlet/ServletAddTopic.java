@@ -48,7 +48,7 @@ public class ServletAddTopic extends HttpServlet{
         //验证是否存在该教师课程
         Topic top=topicServiceImpl.selectOneTop(topic);
         if(top==null){
-            int rs=topicServiceImpl.addTop(topic,start1Date);
+            int rs=topicServiceImpl.addTop(topic,start1Date,en1Date);
             if(rs>0){
                 request.setAttribute("msg", "添加成功！！");
                 servletFindAllTopic.doGet(request, response);

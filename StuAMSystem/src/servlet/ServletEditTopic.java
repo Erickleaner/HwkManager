@@ -44,7 +44,7 @@ public class ServletEditTopic extends HttpServlet{
         }
 
         topic=new Topic(topicID, courseName, topicName, courseTea, detail, startDate, enDate);
-        int rs=topicServiceImpl.editTop(topic,start1Date);
+        int rs=topicServiceImpl.editTop(topic,start1Date,en1Date);
         if(rs>0){
             request.setAttribute("msg", "ÐÞ¸Ä³É¹¦£¡£¡");
             servletFindAllTopic.doGet(request, response);

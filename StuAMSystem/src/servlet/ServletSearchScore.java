@@ -10,12 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import model.PageBean;
 import model.Score;
 
-import org.omg.CORBA.Request;
+//import org.omg.CORBA.Request;
 
 import service.Impl.ScoreServiceImpl;
 
 public class ServletSearchScore extends HttpServlet{
-	
+
 	private Score score;
 	private ScoreServiceImpl scoreServiceImpl=new ScoreServiceImpl();
 
@@ -24,9 +24,9 @@ public class ServletSearchScore extends HttpServlet{
 			throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
-		
+
 		doPost(req, resp);
-		
+
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class ServletSearchScore extends HttpServlet{
 			major=null;
 		}*/
 		double scoreGrade=0;
-		
+
 		score=new Score( stuNum,  stuName,  stuClass,
 				 courseName,  scoreGrade,  major);
 		PageBean rs=scoreServiceImpl.selectStuScore(pageNo, pageCount, score);

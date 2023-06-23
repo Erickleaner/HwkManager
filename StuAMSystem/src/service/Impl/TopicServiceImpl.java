@@ -15,9 +15,9 @@ public class TopicServiceImpl implements TopicService {
 
     private TopicDaoImpl topicDaoImpl=new TopicDaoImpl();
 
-    public int addTop(Topic topic, String startDate) {
+    public int addTop(Topic topic, String startDate,String enDate) {
 
-        int rs=topicDaoImpl.addTop(topic,startDate);
+        int rs=topicDaoImpl.addTop(topic,startDate,enDate);
         return rs;
     }
 
@@ -27,9 +27,9 @@ public class TopicServiceImpl implements TopicService {
         return rs;
     }
 
-    public int editTop(Topic topic, String startDate) {
+    public int editTop(Topic topic, String startDate,String enDate) {
 
-        int rs=topicDaoImpl.editTop(topic,startDate);
+        int rs=topicDaoImpl.editTop(topic,startDate,enDate);
         return rs;
     }
 
