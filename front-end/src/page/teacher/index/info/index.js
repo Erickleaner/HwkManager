@@ -1,9 +1,18 @@
 import './main.css'
 import main from './main.html'
-import item from './item.html'
 
+const info = {
+    account:'teacher',
+    name:'张三',
+    passWord:'123456'
+}
+const bindInfo = () =>{
+    for (const key in info){
+        $(`#${key}`).text(info[key])
+    }
+}
 const infoInit = () =>{
     $('#main').html(main)
-    $('#tableClass').append(item)
+    bindInfo()
 }
 export default infoInit
