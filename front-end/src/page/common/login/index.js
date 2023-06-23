@@ -19,6 +19,7 @@ const loginSubmit = () =>{
         console.log(data)
         const {isLogin,msg} = data
         if (!isLogin){
+            $('#myModalLabel').text('删除数据')
             $(".modal-body").text(msg)
             $('#myModal').modal('show')
         }else {
