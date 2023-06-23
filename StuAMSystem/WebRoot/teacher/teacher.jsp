@@ -104,7 +104,7 @@ window.onload = function(){
                         <i class="fa fa-cogs"></i>课程管理<i class="fa fa-angle-right"></i>
                     </a>
                     <ul id="menu-class" class="collapse">
-                        <li><a href="ServletTeaAllCos" target="mainRight">课程信息查看</a></li>
+                        <li><a href="ServletFindAllCos" target="mainRight">课程信息查看</a></li>
                         <li><a href="admin/addCourse.jsp" target="mainRight">添加课程信息</a></li>
                     </ul>
                 </li>
@@ -138,8 +138,8 @@ window.onload = function(){
 						<i class="fa fa-book"></i>题库管理<i class="fa fa-angle-right"></i>
 					</a>
 					<ul id="menu-topic" class="collapse">
-						<li><a href="ServletTeaAllCos" target="mainRight">题目信息查看</a></li>
-						<li><a href="admin/addCourse.jsp" target="mainRight">添加题目信息</a></li>
+						<li><a href="ServletFindAllTopic" target="mainRight">题目信息查看</a></li>
+						<li><a href="admin/addTopic.jsp" target="mainRight">添加题目信息</a></li>
 					</ul>
 				</li>
 
