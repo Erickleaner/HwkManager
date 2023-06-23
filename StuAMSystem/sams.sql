@@ -43,6 +43,29 @@ INSERT INTO `course` VALUES (6, '管理信息系统', 4, 60, '杜治国', '2022-
 INSERT INTO `course` VALUES (7, '编译原理', 4, 48, '涂序继', '2022-03-13');
 
 -- ----------------------------
+-- Table structure for topic
+-- ----------------------------
+DROP TABLE IF EXISTS `topic`;
+CREATE TABLE `topic`  (
+    `topic_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '大作业编号',
+    `course_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程名',
+    `topic_name` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '课程名',
+    `course_teacher` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '指导老师',
+    `detail` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '题目要求',
+    `startdate` date NOT NULL COMMENT '开始时间',
+    `endate` date NOT NULL COMMENT '结束时间',
+    PRIMARY KEY (`topic_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of topic
+-- ----------------------------
+INSERT INTO `topic` VALUES (1, 'C++程序设计教程','笔记应用程序','汪维清','暂无','2022-03-02', '2022-05-02');
+INSERT INTO `topic` VALUES (2, 'java入门基础','在线答题程序','肖兴江','暂无','2022-03-02', '2022-05-02');
+INSERT INTO `topic` VALUES (3, '计算机组成原理','计算机发展研究报告','胡继宽','暂无','2022-03-02', '2022-05-02');
+
+
+-- ----------------------------
 -- Table structure for role
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -341,7 +364,7 @@ INSERT INTO `user` VALUES (44, '192016', '无所谓', '123456', '19917907161', 0
 -- ----------------------------
 DROP TRIGGER IF EXISTS `stuLogin`;
 delimiter ;;
-CREATE TRIGGER `stuLogin` AFTER DELETE ON `student` FOR EACH ROW begin 
+CREATE TRIGGER `stuLogin` AFTER DELETE ON `student` FOR EACH ROW begin
 delete from user where user_num=old.stu_num;
 end
 ;;
