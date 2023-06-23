@@ -1,0 +1,44 @@
+<div class="div_body">
+    <div id="_body">
+        <h3 class="msg" style="cursor:default">登 录</h3>
+        <form id="loginForm" action="#" method="post">
+            <table>
+                <tr>
+                    <td><input class="input" type="text" name="userName" placeholder="账号">
+                    </td>
+                </tr>
+                <tr>
+                    <td><input class="input" type="password" name="passWord" placeholder="密码">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d-flex justify-content-between">
+                        <div class="check"><input type="radio" name="role" value="student" checked="checked">学生</div>
+                        <div class="check"><input type="radio" name="role" value="leader">组长</div>
+                        <div class="check"><input type="radio" name="role" value="teacher">教师</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="d-flex justify-content-between">
+                        <input class="btn" type="submit" value="登录">
+                        <input class="btn" type="reset" value="取消">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">登录失败</h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
