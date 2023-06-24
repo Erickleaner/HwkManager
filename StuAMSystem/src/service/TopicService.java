@@ -10,7 +10,7 @@ public interface TopicService {
     /*
      * 添加课程
      */
-    int addTop(Topic topic,String startDate);
+    int addTop(Topic topic,String startDate,String enDate);
     /*
      * 删除课程
      */
@@ -18,7 +18,7 @@ public interface TopicService {
     /*
      * 修改课程
      */
-    int editTop(Topic topic,String startDate);
+    int editTop(Topic topic,String startDate,String enDate);
     /*
      * 查询所有课程
      */

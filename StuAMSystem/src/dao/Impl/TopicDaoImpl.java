@@ -21,7 +21,7 @@ public class TopicDaoImpl implements TopicDao {
     private Topic topic;
     private PageBean pageBean;
 
-    public int addTop(Topic topic, String startDate) {
+    public int addTop(Topic topic, String startDate,String enDate) {
         System.out.println(startDate);
 
         String sql = "insert into topic(course_name,topic_name,course_teacher,detail,startdate,endate) values('"
@@ -32,11 +32,7 @@ public class TopicDaoImpl implements TopicDao {
                 + topic.getCourseTeacher()
                 + "','"
                 + topic.getDetail()
-                + "','"
-                + topic.getStartDate()
-                + "','"
-                + topic.getEnDate()
-                + "')";
+                + "',DATE('"+startDate+"'),DATE('"+enDate+"'))";
         int rs = dbCon.query(sql);
         return rs;
     }
@@ -47,13 +43,12 @@ public class TopicDaoImpl implements TopicDao {
         return rs;
     }
 
-    public int editTop(Topic topic, String startDate) {
+    public int editTop(Topic topic, String startDate,String enDate) {
         String sql = "update topic set topic_name='" + topic.getTopicName()
-                + "',course_name=" + topic.getCourseName()
-                + "',course_teacher=" + topic.getCourseTeacher()
-                + ",detail=" + topic.getDetail()
-                + ",endate=" + topic.getEnDate()
-                + "',startdate=DATE('" + startDate + "') where topic_id="
+                + "',course_name='" + topic.getCourseName()
+                + "',course_teacher='" + topic.getCourseTeacher()
+                + "',detail='" + topic.getDetail()
+                + "',startdate=DATE('" + startDate + "'),endate=DATE('" + enDate + "') where topic_id="
                 + topic.getTopicID();
         int rs = dbCon.query(sql);
         return rs;
