@@ -19,7 +19,7 @@ public class ServletEditTea extends HttpServlet{
 	private Teacher teacher;
 	private TeacherServiceImpl teacherServiceImpl=new TeacherServiceImpl();
 	private ServletFindAllTea findTea=new ServletFindAllTea();
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		String teaNum=request.getParameter("teaNum");
@@ -37,9 +37,9 @@ public class ServletEditTea extends HttpServlet{
 			findTea.doGet(request, response);
 		}else{
 			request.setAttribute("msg", "ÐÞ¸ÄÊ§°Ü£¡£¡");
-			request.getRequestDispatcher("admin/editTeacher.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/editTeacher.jsp").forward(request, response);
 		}
-		
+
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{

@@ -13,10 +13,10 @@ import model.User;
 import dao.Impl.UserDaoImpl;
 
 public class ServletEditPwd extends HttpServlet{
-	
+
 	private User user;
 	private UserServiceImpl userServiceImpl=new UserServiceImpl();
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		String userNum=(String) request.getSession().getAttribute("usernum");
@@ -28,13 +28,13 @@ public class ServletEditPwd extends HttpServlet{
 		if(rs>0){
 			request.setAttribute("msg", "修改成功！！");
 			request.setAttribute("password", user.getPassword());
-			request.getRequestDispatcher("admin/selectPwd.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/selectPwd.jsp").forward(request, response);
 		}else{
 			request.setAttribute("msg", "修改失败！！");
 			request.setAttribute("password", user.getPassword());
-			request.getRequestDispatcher("admin/selectPwd.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/selectPwd.jsp").forward(request, response);
 		}
-		
+
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{

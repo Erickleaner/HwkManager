@@ -15,7 +15,7 @@ import dao.Impl.UserDaoImpl;
 public class ServletselectPwd extends HttpServlet{
 	private User user;
 	private UserServiceImpl userServiceImpl=new UserServiceImpl();
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		String userNum=(String) request.getSession().getAttribute("usernum");
@@ -24,7 +24,7 @@ public class ServletselectPwd extends HttpServlet{
 		User rs=userServiceImpl.login(user);
 		String pwd=rs.getPassword();
 		request.setAttribute("password", pwd);
-		request.getRequestDispatcher("admin/selectPwd.jsp").forward(request, response);
+		request.getRequestDispatcher("teacher/selectPwd.jsp").forward(request, response);
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{

@@ -26,7 +26,7 @@ public class PageServlet extends HttpServlet{
 		}
 		if(pageNoStr!=null){
 			pageNo=Integer.parseInt(pageNoStr);
-			
+
 			if(pageNo==0){
 				pageNo=1;
 			}else if(pageNo>totalPage  || pageNo==totalPage){
@@ -36,10 +36,10 @@ public class PageServlet extends HttpServlet{
 		if(pageCountStr!=null){
 			pageCount=Integer.parseInt(pageCountStr);
 		}
-		
+
 		PageBean pageBean=biz.listEmps(pageNo, pageCount);
 		request.setAttribute("list", pageBean);
-		request.getRequestDispatcher("admin/userAllInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("teacher/userAllInfo.jsp").forward(request, response);
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{

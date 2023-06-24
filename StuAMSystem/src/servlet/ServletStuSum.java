@@ -12,7 +12,7 @@ import service.Impl.StudentServiceImpl;
 import model.PageBean;
 
 public class ServletStuSum extends HttpServlet{
-	
+
 	private StudentServiceImpl studentServiceImpl=new StudentServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -25,23 +25,23 @@ public class ServletStuSum extends HttpServlet{
 			throws ServletException, IOException {
 		int pageNo=1;
 		int pageCount=10;
-		
+
 		String pageNoStr=request.getParameter("pageNo");
 		String pageCountStr=request.getParameter("pageCount");
-	
-		
+
+
 		if(pageNoStr!=null){
 			pageNo=Integer.parseInt(pageNoStr);
 		}
 		if(pageCountStr!=null){
 			pageCount=Integer.parseInt(pageCountStr);
 		}
-		
-	
+
+
 		PageBean list=studentServiceImpl.stuListPage(pageNo, pageCount);
-	
+
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("admin/stuScore.jsp").forward(request, response);
+		request.getRequestDispatcher("teacher/stuScore.jsp").forward(request, response);
 	}
 
 }

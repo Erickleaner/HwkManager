@@ -1,14 +1,18 @@
 package servlet;
 
-import model.Teacher;
-import service.Impl.TeacherServiceImpl;
+import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
+
+import service.Impl.TeacherServiceImpl;
+
+import model.Teacher;
+
+import dao.Impl.TeacherDaoImpl;
 
 
 public class ServletSelectTea extends HttpServlet{
@@ -23,7 +27,7 @@ public class ServletSelectTea extends HttpServlet{
 		List rs=teacherServiceImpl.findOne(teaNum);
 
 		request.setAttribute("list", rs);
-		request.getRequestDispatcher("admin/editTeacher.jsp").forward(request, response);
+		request.getRequestDispatcher("teacher/editTeacher.jsp").forward(request, response);
 
 
 	}

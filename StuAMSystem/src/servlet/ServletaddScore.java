@@ -20,7 +20,7 @@ public class ServletaddScore extends HttpServlet{
 	private Score score;
 	private ServletFindAllScore servletFindAllScore=new ServletFindAllScore();
 	private ScoreServiceImpl scoreServiceImpl=new ScoreServiceImpl();
-	
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String stuNum = request.getParameter("stuNum");
@@ -29,7 +29,7 @@ public class ServletaddScore extends HttpServlet{
 		String courseName = request.getParameter("courseName");
 		double scoreGrade=Double.parseDouble(request.getParameter("scoreGrade"));
 		String major = request.getParameter("major");
-		
+
 		score=new Score(stuNum,stuName,stuClass,courseName,scoreGrade,major);
 		Score scor=scoreServiceImpl.selectScoreInfo(score);
 		if(scor==null){
@@ -40,11 +40,11 @@ public class ServletaddScore extends HttpServlet{
 			//	request.getRequestDispatcher("admin/addCourse.jsp").forward(request, response);
 			}else{
 				request.setAttribute("msg", "添加失败！！");
-				request.getRequestDispatcher("admin/addScore.jsp").forward(request, response);
+				request.getRequestDispatcher("teacher/addScore.jsp").forward(request, response);
 			}
 		}else{
 			request.setAttribute("msg", "该生的本门课成绩已录入，请重新录入！！");
-			request.getRequestDispatcher("admin/addScore.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/addScore.jsp").forward(request, response);
 		}
 	}
 

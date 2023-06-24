@@ -17,7 +17,7 @@ public class ServletEditScore extends HttpServlet{
 	private Score score;
 	private ServletFindAllScore servletFindAllScore=new ServletFindAllScore();
 	private ScoreServiceImpl scoreServiceImpl=new ScoreServiceImpl();
-	
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int scoreID = Integer.parseInt(request.getParameter("scoreID"));
@@ -27,7 +27,7 @@ public class ServletEditScore extends HttpServlet{
 		String courseName = request.getParameter("courseName");
 		double scoreGrade=Double.parseDouble(request.getParameter("scoreGrade"));
 		String major = request.getParameter("major");
-		
+
 		score=new Score(scoreID,stuNum,stuName,stuClass,courseName,scoreGrade,major);
 		int rs=scoreServiceImpl.editCos(score);
 		if(rs>0){
@@ -36,9 +36,9 @@ public class ServletEditScore extends HttpServlet{
 			//	request.getRequestDispatcher("admin/addCourse.jsp").forward(request, response);
 		}else{
 			request.setAttribute("msg", "ÐÞ¸ÄÊ§°Ü£¡£¡");
-			request.getRequestDispatcher("admin/editScore.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/editScore.jsp").forward(request, response);
 		}
-		
+
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

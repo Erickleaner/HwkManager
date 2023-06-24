@@ -105,7 +105,7 @@ window.onload = function(){
                     </a>
                     <ul id="menu-class" class="collapse">
                         <li><a href="ServletFindAllCos" target="mainRight">课程信息查看</a></li>
-                        <li><a href="admin/addCourse.jsp" target="mainRight">添加课程信息</a></li>
+                        <li><a href="teacher/addCourse.jsp" target="mainRight">添加课程信息</a></li>
                     </ul>
                 </li>
 
@@ -116,7 +116,7 @@ window.onload = function(){
 					</a>
 					<ul id="menu-clazz" class="collapse">
 						<li><a href="ServletTeaAllCos" target="mainRight">班级信息查看</a></li>
-						<li><a href="admin/addCourse.jsp" target="mainRight">添加班级信息</a></li>
+						<li><a href="teacher/addCourse.jsp" target="mainRight">添加班级信息</a></li>
 					</ul>
 				</li>
 
@@ -139,7 +139,7 @@ window.onload = function(){
 					</a>
 					<ul id="menu-topic" class="collapse">
 						<li><a href="ServletFindAllTopic" target="mainRight">题目信息查看</a></li>
-						<li><a href="admin/addTopic.jsp" target="mainRight">添加题目信息</a></li>
+						<li><a href="teacher/addTopic.jsp" target="mainRight">添加题目信息</a></li>
 					</ul>
 				</li>
 
@@ -150,7 +150,7 @@ window.onload = function(){
 					<ul id="menu-grades" class="collapse">
 						<li><a href="ServletFindAllScore" target="mainRight">成绩信息查看</a></li>
 						<li><a href="ServletTeaStuScoreStatis" target="mainRight">成绩信息统计</a></li>
-						<li><a href="admin/addScore.jsp" target="mainRight">添加学生成绩</a></li>
+						<li><a href="teacher/addScore.jsp" target="mainRight">添加学生成绩</a></li>
 					</ul>
                 </li>
 

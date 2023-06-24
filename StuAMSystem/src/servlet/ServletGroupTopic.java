@@ -8,23 +8,27 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.PageBean;
+import model.Student;
+import model.Topic;
 import service.Impl.CourseServiceImpl;
 
-import dao.Impl.CourseDaoImpl;
-
 import model.Course;
-import model.PageBean;
+import dao.Impl.CourseDaoImpl;
+import service.Impl.StudentServiceImpl;
 import service.Impl.TopicServiceImpl;
 
-public class ServletFindAllTopic extends HttpServlet{
+public class ServletGroupTopic extends HttpServlet{
 
 
-    private TopicServiceImpl topicServiceImpl=new TopicServiceImpl();
+
+    private Student student;
+    private StudentServiceImpl studentServiceImpl=new StudentServiceImpl();
 
     public void doGet(HttpServletRequest request,HttpServletResponse response)
             throws ServletException,IOException{
         int pageNo=1;
-        int pageCount=10;
+        int pageCount=4;
 
         String pageNoStr=request.getParameter("pageNo");
         String pageCountStr=request.getParameter("pageCount");
@@ -35,13 +39,12 @@ public class ServletFindAllTopic extends HttpServlet{
             pageCount=Integer.parseInt(pageCountStr);
         }
 
-        PageBean list=topicServiceImpl.topicListPage(pageNo, pageCount);
+        PageBean list=studentServiceImpl.stuListPage(pageNo, pageCount);
         request.setAttribute("list", list);
-        request.getRequestDispatcher("teacher/topicAllInfo.jsp").forward(request, response);
+        request.getRequestDispatcher("teacher/groupTopic.jsp").forward(request, response);
     }
     public void doPost(HttpServletRequest request,HttpServletResponse response)
             throws ServletException,IOException{
         doGet(request,response);
     }
-
 }

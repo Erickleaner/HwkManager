@@ -13,7 +13,7 @@ import model.PageBean;
 import service.Impl.ScoreServiceImpl;
 
 public class ServletStuSumList extends HttpServlet{
-	
+
 	private ScoreServiceImpl scoreServiceImpl=new ScoreServiceImpl();
 
 	@Override
@@ -39,7 +39,7 @@ public class ServletStuSumList extends HttpServlet{
 		request.setAttribute("list", rs);
 		int num=(pageNo-1)*pageCount;
 		request.setAttribute("num", num);
-		request.getRequestDispatcher("admin/stuScoreList.jsp").forward(request, response);
+		request.getRequestDispatcher("teacher/stuScoreList.jsp").forward(request, response);
 	}
 
 }

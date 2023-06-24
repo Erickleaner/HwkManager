@@ -55,11 +55,11 @@ public class ServletAddTopic extends HttpServlet{
                 //	request.getRequestDispatcher("admin/addCourse.jsp").forward(request, response);
             }else{
                 request.setAttribute("msg", "添加失败！！");
-                request.getRequestDispatcher("admin/addTopic.jsp").forward(request, response);
+                request.getRequestDispatcher("teacher/addTopic.jsp").forward(request, response);
             }
         }else{
             request.setAttribute("msg", "该课程已录入，请重新输入！！");
-            request.getRequestDispatcher("admin/addTopic.jsp").forward(request, response);
+            request.getRequestDispatcher("teacher/addTopic.jsp").forward(request, response);
         }
 
     }
