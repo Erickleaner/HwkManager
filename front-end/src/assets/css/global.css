@@ -16,6 +16,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.align-items-start{
+    align-items: start;
+}
 .justify-content-right{
     justify-content: right;
 }
@@ -25,5 +28,14 @@
 /*main.css*/
 .mlr-30{
     margin-left: 30px;
+    margin-right: 30px;
+}
+.input-group .input-group-addon{
+    font-size: 18px;
+}
+.input-group .form-control{
+    font-size: 18px;
+}
+.mr-30{
     margin-right: 30px;
 }

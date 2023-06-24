@@ -5,7 +5,9 @@ import main from './main.html'
 import '../../../assets/css/frame.css'
 import './main.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import '../../../mock/teacher'
+//mock data
+
+
 import infoInit from './info'
 import {redirectLogin} from "../../../tool/redirect";
 import {getUser} from "../../../storage";
