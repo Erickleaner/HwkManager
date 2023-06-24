@@ -13,16 +13,16 @@ import service.Impl.UserServiceImpl;
 import dao.Impl.UserDaoImpl;
 
 public class ServletFindAllUser extends HttpServlet{
-	
+
 	private UserServiceImpl userServiceImpl=new UserServiceImpl();
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		List rs=userServiceImpl.findAll();
 		request.setAttribute("list", rs);
-		request.getRequestDispatcher("admin/userAllInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("teacher/userAllInfo.jsp").forward(request, response);
 	}
-	
+
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		doGet(request,response);

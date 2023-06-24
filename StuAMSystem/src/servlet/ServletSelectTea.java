@@ -20,16 +20,16 @@ public class ServletSelectTea extends HttpServlet{
 	private Teacher teacher;
 	private TeacherServiceImpl teacherServiceImpl=new TeacherServiceImpl();
 	private ServletFindAllTea findTea=new ServletFindAllTea();
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		String teaNum=request.getParameter("teanum");
 		List rs=teacherServiceImpl.findOne(teaNum);
-		
+
 		request.setAttribute("list", rs);
-		request.getRequestDispatcher("admin/editTeacher.jsp").forward(request, response);
-	
-		
+		request.getRequestDispatcher("teacher/editTeacher.jsp").forward(request, response);
+
+
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{

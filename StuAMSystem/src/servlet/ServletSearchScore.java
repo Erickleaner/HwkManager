@@ -69,7 +69,7 @@ public class ServletSearchScore extends HttpServlet{
 		PageBean rs=scoreServiceImpl.selectStuScore(pageNo, pageCount, score);
 		request.setAttribute("list", rs);
 		request.setAttribute("score", score);
-		request.getRequestDispatcher("admin/selectblurScore.jsp").forward(request, response);
+		request.getRequestDispatcher("teacher/selectblurScore.jsp").forward(request, response);
 	}
 
 }

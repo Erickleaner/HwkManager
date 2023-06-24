@@ -89,7 +89,7 @@
           <td>${list.getDetail() }</td>
           <td>${list.getStartDate() }</td>
           <td>${list.getEnDate() }</td>
-          <td><a href="ServletSelectTopic?topicID=${list.getTopicID() }">修改</a>&nbsp;&nbsp;&nbsp;<a href="ServletDeleteTopic?topicID=${list.getTopicID() }" onclick="return confirm('是否确认删除？')">删除</a></td>
+          <td><a href="ServletSelectTopic?topicID=${list.getTopicID() }">修改</a>&nbsp;<a href="ServletDeleteTopic?topicID=${list.getTopicID() }" onclick="return confirm('是否确认删除？')">删除</a>&nbsp;&nbsp;<a href="ServletGroupTopic?topicID=${list.getTopicID() }">分组信息</a></td>
 
         </tr>
       </c:forEach>

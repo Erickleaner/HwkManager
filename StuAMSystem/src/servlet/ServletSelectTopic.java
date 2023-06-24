@@ -27,7 +27,7 @@ public class ServletSelectTopic extends HttpServlet{
 
         List rs=topicServiceImpl.findOne(topicID);
         request.setAttribute("list", rs);
-        request.getRequestDispatcher("admin/editTopic.jsp").forward(request, response);
+        request.getRequestDispatcher("teacher/editTopic.jsp").forward(request, response);
 
     }
 

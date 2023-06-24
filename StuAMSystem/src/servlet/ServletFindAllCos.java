@@ -17,14 +17,14 @@ import model.PageBean;
 
 public class ServletFindAllCos extends HttpServlet{
 
-	
+
 	private CourseServiceImpl courseServiceImpl=new CourseServiceImpl();
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		int pageNo=1;
 		int pageCount=10;
-		
+
 		String pageNoStr=request.getParameter("pageNo");
 		String pageCountStr=request.getParameter("pageCount");
 		if(pageNoStr!=null){
@@ -33,10 +33,10 @@ public class ServletFindAllCos extends HttpServlet{
 		if(pageCountStr!=null){
 			pageCount=Integer.parseInt(pageCountStr);
 		}
-		
+
 		PageBean list=courseServiceImpl.courseListPage(pageNo, pageCount);
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("admin/courseAllInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("teacher/courseAllInfo.jsp").forward(request, response);
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{

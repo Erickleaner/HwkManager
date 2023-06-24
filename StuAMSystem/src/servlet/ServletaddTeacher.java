@@ -53,13 +53,13 @@ public class ServletaddTeacher extends HttpServlet{
 				request.getRequestDispatcher("admin/studentAllInfo.jsp").forward(request, response);*/
 			}else{
 				request.setAttribute("msg", "添加失败！！");
-				request.getRequestDispatcher("admin/addTeacher.jsp").forward(request, response);
+				request.getRequestDispatcher("teacher/addTeacher.jsp").forward(request, response);
 			}
 		}else{
 			request.setAttribute("msg", "该工号已存在，请重新录入！！");
-			request.getRequestDispatcher("admin/addTeacher.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/addTeacher.jsp").forward(request, response);
 		}
-		
+
 
 	}
 
@@ -67,5 +67,5 @@ public class ServletaddTeacher extends HttpServlet{
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-	
+
 }

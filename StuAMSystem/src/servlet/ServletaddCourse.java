@@ -19,11 +19,11 @@ import model.Student;
 import model.User;
 
 public class ServletaddCourse extends HttpServlet{
-	
+
 	private Course course;
 	private ServletFindAllCos servletFindAllCos=new ServletFindAllCos();
 	private CourseServiceImpl courseServiceImpl=new CourseServiceImpl();
-	
+
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String courseName = request.getParameter("courseName");
@@ -35,10 +35,10 @@ public class ServletaddCourse extends HttpServlet{
 		try {
 			 courseDate = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("courseDate"));
 		} catch (ParseException e) {
-			
+
 			e.printStackTrace();
-		} 
-		
+		}
+
 	//	System.out.println(courseDate);
 		course=new Course(courseName,courseCredit,courseHours,courseTea,courseDate);
 		//new Course( courseName,  courseCredit,  courseHours,
@@ -53,13 +53,13 @@ public class ServletaddCourse extends HttpServlet{
 			//	request.getRequestDispatcher("admin/addCourse.jsp").forward(request, response);
 			}else{
 				request.setAttribute("msg", "添加失败！！");
-				request.getRequestDispatcher("admin/addCourse.jsp").forward(request, response);
+				request.getRequestDispatcher("teacher/addCourse.jsp").forward(request, response);
 			}
 		}else{
 			request.setAttribute("msg", "该课程已录入，请重新输入！！");
-			request.getRequestDispatcher("admin/addCourse.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/addCourse.jsp").forward(request, response);
 		}
-		
+
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)

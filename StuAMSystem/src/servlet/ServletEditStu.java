@@ -14,11 +14,11 @@ import model.Student;
 import dao.Impl.StudentDaoImpl;
 
 public class ServletEditStu extends HttpServlet{
-	
+
 	private Student student;
 	private StudentServiceImpl studentServiceImpl=new StudentServiceImpl();
 	private ServletFindAllStu findStu=new ServletFindAllStu();
-	
+
 	public void doGet(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{
 		String stuNum=request.getParameter("stuNum");
@@ -36,9 +36,9 @@ public class ServletEditStu extends HttpServlet{
 			findStu.doGet(request, response);
 		}else{
 			request.setAttribute("msg", "ÐÞ¸ÄÊ§°Ü£¡£¡");
-			request.getRequestDispatcher("admin/editStudent.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/editStudent.jsp").forward(request, response);
 		}
-		
+
 	}
 	public void doPost(HttpServletRequest request,HttpServletResponse response)
 			throws ServletException,IOException{

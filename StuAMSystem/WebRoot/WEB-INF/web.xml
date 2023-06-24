@@ -264,6 +264,15 @@
 		<servlet-name>ServletEditTopic</servlet-name>
 		<url-pattern>/ServletEditTopic</url-pattern>
 	</servlet-mapping>
+	<!-- 题目分组信息 -->
+	<servlet>
+		<servlet-name>ServletGroupTopic</servlet-name>
+		<servlet-class>servlet.ServletGroupTopic</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServletGroupTopic</servlet-name>
+		<url-pattern>/ServletGroupTopic</url-pattern>
+	</servlet-mapping>
 
 	<!-- 添加成绩 -->
 	<servlet>

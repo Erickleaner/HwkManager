@@ -47,19 +47,19 @@ public class ServletaddStudent extends HttpServlet {
 			if(rsStu>0 && rsUser>0){
 				request.setAttribute("msg", "添加成功！！");
 				findStu.doGet(request, response);
-				
+
 				/*List list=studentDaoImpl.findAll();
 				request.setAttribute("list", list);
 				request.getRequestDispatcher("admin/studentAllInfo.jsp").forward(request, response);*/
 			}else{
 				request.setAttribute("msg", "添加失败！！");
-				request.getRequestDispatcher("admin/addStudent.jsp").forward(request, response);
+				request.getRequestDispatcher("teacher/addStudent.jsp").forward(request, response);
 			}
 		}else{
 			request.setAttribute("msg", "该学号已存在，请重新录入！！");
-			request.getRequestDispatcher("admin/addStudent.jsp").forward(request, response);
+			request.getRequestDispatcher("teacher/addStudent.jsp").forward(request, response);
 		}
-		
+
 
 	}
 
