@@ -16,17 +16,26 @@
           <i class="fa-solid fa-user"></i>个人信息<i class="fa fa-angle-right"></i>
         </a>
         <ul id="menu-info" class="collapse">
-          <li><a id="self-info" href="#">查询个人信息</a></li>
+          <li><a id="self_info" href="#">查询个人信息</a></li>
         </ul>
       </li>
-      <li>
-        <a href="#menu-class" data-toggle="collapse">
+      <li id="special" style="display:none;">
+        <a href="#menu-special" data-toggle="collapse">
           <i class="fa-sharp fa-solid fa-gears"></i>特级权限<i class="fa fa-angle-right"></i>
         </a>
-        <ul id="menu-class" class="collapse">
+        <ul id="menu-special" class="collapse">
           <li><a id="spe_course" href="#" target="mainRight">课程管理</a></li>
           <li><a id="spe_clazz" href="#" target="mainRight">班级管理</a></li>
           <li><a id="spe_student" href="#" target="mainRight">学生管理</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#menu-normal" data-toggle="collapse">
+          <i class="fa-sharp fa-solid fa-gears"></i>普通权限<i class="fa fa-angle-right"></i>
+        </a>
+        <ul id="menu-normal" class="collapse">
+          <li><a id="nor_teach" href="#" target="mainRight">领课</a></li>
+          <li><a id="nor_clazz" href="#" target="mainRight">我的课程</a></li>
         </ul>
       </li>
     </ul>

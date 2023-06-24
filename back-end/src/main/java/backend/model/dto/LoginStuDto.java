@@ -13,5 +13,6 @@ public class LoginStuDto {
     String clazz;
     int grade;
     String role;
+    String power;
     public LoginStuDto(){}
 }

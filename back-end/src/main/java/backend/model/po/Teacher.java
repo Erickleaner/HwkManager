@@ -25,6 +25,11 @@ public class Teacher implements Serializable {
      */
     private String name;
 
+    /**
+     *
+     */
+    private String power;
+
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 }

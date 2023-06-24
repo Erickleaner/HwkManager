@@ -8,5 +8,7 @@ public class LoginTeaDto {
     String password;
     String name;
     String role;
+
+    String power;
     public LoginTeaDto(){}
 }

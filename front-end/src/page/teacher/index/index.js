@@ -10,9 +10,11 @@ import '../../../mock/teacher'
 import infoInit from './info'
 import speCourseInit from './spe_course'
 import {redirectLogin} from "../../../tool/redirect";
-import {getUser} from "../../../storage";
+import {getUser, removeUser} from "../../../storage";
 import speClazzInit from "./spe_clazz";
 import speStudentInit from "./spe_student";
+import norTeachInit from "./nor_teach";
+import templateInit from "./template";
 
 $('#root').html(main)
 
@@ -20,13 +22,21 @@ const initUI = () =>{
     const {name} = getUser()
     $('.name').text(name)
 }
-const initEvent = () => {
+const initNormal = () =>{
     $('#loginOut').click(()=>{
         event.preventDefault();
+        removeUser()
         redirectLogin()
     })
-
-    $("#self-info").click((event)=>{
+    $("#nor_teach").click((event)=>{
+        event.preventDefault(); // 阻止默认的跳转行为
+        norTeachInit()
+    })
+}
+const initSpecial = () =>{
+    const {power} = getUser()
+    if (power === 'special') $('#special').show()
+    $("#self_info").click((event)=>{
         event.preventDefault(); // 阻止默认的跳转行为
         infoInit()
     })
@@ -43,6 +53,10 @@ const initEvent = () => {
         speStudentInit()
     })
 }
-speStudentInit()
+const initEvent = () => {
+    initNormal()
+    initSpecial()
+}
+templateInit()
 initUI();
 initEvent();

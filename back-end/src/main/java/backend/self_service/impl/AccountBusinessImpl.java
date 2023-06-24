@@ -74,6 +74,7 @@ public class AccountBusinessImpl implements AccountBusiness {
                 loginTeaDto.setPassword(password);
                 loginTeaDto.setName(name);
                 loginTeaDto.setRole(role);
+                loginTeaDto.setPower(teacher.getPower());
                 loginVo.setUser(loginTeaDto);
             }
         }
