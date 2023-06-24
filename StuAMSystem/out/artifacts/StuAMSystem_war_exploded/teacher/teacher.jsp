@@ -69,7 +69,7 @@ window.onload = function(){
 			}
 			this.className='active';
 		}
-		
+
 	}
 }
 </script>
@@ -79,7 +79,7 @@ window.onload = function(){
 	<div class="div_body">
 		<nav class="navbar">
 			<ul class="nav navbar-nav " style="border-bottom:#517fa4 2px">
-				<li class="li-sty">高校成绩管理系统<i class="fa fa-magic" aria-hidden="true"></i></li>
+				<li class="li-sty">大作业管理系统<i class="fa fa-magic" aria-hidden="true"></i></li>
 				<li class="li-sty1" style="float:right;"><a href="ServletLogout" >退出</a></li>
 			</ul>
 		</nav>
@@ -104,37 +104,65 @@ window.onload = function(){
                         <i class="fa fa-cogs"></i>课程管理<i class="fa fa-angle-right"></i>
                     </a>
                     <ul id="menu-class" class="collapse">
-                        <li><a href="ServletTeaAllCos" target="mainRight">课程信息查看</a></li>
+                        <li><a href="ServletFindAllCos" target="mainRight">课程信息查看</a></li>
                         <li><a href="admin/addCourse.jsp" target="mainRight">添加课程信息</a></li>
                     </ul>
                 </li>
+
+				<%--新增--%>
+				<li>
+					<a href="#menu-clazz" data-toggle="collapse">
+						<i class="fa fa-group"></i>班级管理<i class="fa fa-angle-right"></i>
+					</a>
+					<ul id="menu-clazz" class="collapse">
+						<li><a href="ServletTeaAllCos" target="mainRight">班级信息查看</a></li>
+						<li><a href="admin/addCourse.jsp" target="mainRight">添加班级信息</a></li>
+					</ul>
+				</li>
+
+
+
+				<li>
+					<a href="#menu-stu" data-toggle="collapse">
+						<i class="fa fa-group"></i>学生管理<i class="fa fa-angle-right"></i>
+					</a>
+					<ul id="menu-stu" class="collapse">
+						<li><a href="ServletFindAllStu" target="mainRight">查询学生信息</a></li>
+						<li><a href="teacher/addStudent.jsp" target="mainRight">添加学生信息</a></li>
+					</ul>
+				</li>
+
+				<%--新增--%>
+				<li>
+					<a href="#menu-topic" data-toggle="collapse">
+						<i class="fa fa-book"></i>题库管理<i class="fa fa-angle-right"></i>
+					</a>
+					<ul id="menu-topic" class="collapse">
+						<li><a href="ServletFindAllTopic" target="mainRight">题目信息查看</a></li>
+						<li><a href="admin/addTopic.jsp" target="mainRight">添加题目信息</a></li>
+					</ul>
+				</li>
+
 				<li>
 					<a href="#menu-grades" data-toggle="collapse">
 						<i class="fa fa-frown-o"></i>成绩管理<i class="fa fa-angle-right"></i>
 					</a>
 					<ul id="menu-grades" class="collapse">
-						<li><a href="ServletTeaStuScore" target="mainRight">成绩信息查看</a></li>
+						<li><a href="ServletFindAllScore" target="mainRight">成绩信息查看</a></li>
 						<li><a href="ServletTeaStuScoreStatis" target="mainRight">成绩信息统计</a></li>
 						<li><a href="admin/addScore.jsp" target="mainRight">添加学生成绩</a></li>
 					</ul>
                 </li>
-                <li>
-                    <a href="#menu-stu" data-toggle="collapse">
-                        <i class="fa fa-group"></i>学生管理<i class="fa fa-angle-right"></i>
-                    </a>
-                    <ul id="menu-stu" class="collapse">
-                        <li><a href="ServletFindAllStu" target="mainRight">查询学生信息</a></li>
-                    </ul>                    
-                </li>
+
 			</ul>
 		</div>
 		<div class="div_right">
-			<iframe frameBorder="0" id="main" 
+			<iframe frameBorder="0" id="main"
 			name="mainRight" scrolling="yes" src="main.jsp"
 			style="HEIGHT: 130%; VISIBILITY: inherit; WIDTH: 100%; Z-INDEX: 1"></iframe>
 		</div>
 	</div>
-	
+
 	<script src="js/jquery-3.3.1.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
 </body>

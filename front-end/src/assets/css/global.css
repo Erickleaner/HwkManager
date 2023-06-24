@@ -13,5 +13,17 @@
     display: flex;
 }
 .justify-content-between{
+    align-items: center;
     justify-content: space-between;
+}
+.justify-content-right{
+    justify-content: right;
+}
+.btn.ft-18{
+    font-size: 18px;
+}
+/*main.css*/
+.mlr-30{
+    margin-left: 30px;
+    margin-right: 30px;
 }

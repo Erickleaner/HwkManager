@@ -1,0 +1,19 @@
+.title{
+    padding: 10px 10px 10px 20px;
+}
+.mr-10{
+    margin-right: 10px;
+}
+.mr-15{
+    margin-right: 15px;
+}
+.plr-10{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.form-control.search-input{
+    width: 200px;
+}
+.mt-15{
+    padding-bottom: 15px;
+}

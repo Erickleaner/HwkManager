@@ -1,0 +1,24 @@
+.div_pwd {
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-left: 20%;
+}
+#tableClass{
+    margin:0 auto;
+    width: 100%
+
+}
+font {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+table{
+    margin:0 auto;
+}
+table tr td{
+    text-align: center;
+    width:150px;
+    height:50px;
+}

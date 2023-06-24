@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<display-name></display-name>
 	<!-- 乱码过滤器 -->
@@ -26,7 +26,7 @@
   		<filter-name>login</filter-name>
  		 <url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
- 
+
 	<!-- 管理员功能 -->
 	<!-- 登录登出配置 -->
 	<servlet>
@@ -54,7 +54,7 @@
 		<servlet-name>ServletPwd</servlet-name>
 		<url-pattern>/ServletPwd</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ServletselectPwd</servlet-name>
 		<servlet-class>servlet.ServletselectPwd</servlet-class>
@@ -126,7 +126,7 @@
 		<servlet-name>ServletEditStu</servlet-name>
 		<url-pattern>/ServletEditStu</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 添加教师信息 -->
 	<servlet>
 		<servlet-name>ServletaddTeacher</servlet-name>
@@ -172,7 +172,7 @@
 		<servlet-name>ServletEditTea</servlet-name>
 		<url-pattern>/ServletEditTea</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 添加课程信息 -->
 	<servlet>
 		<servlet-name>ServletaddCourse</servlet-name>
@@ -218,7 +218,7 @@
 		<servlet-name>ServletEditCos</servlet-name>
 		<url-pattern>/ServletEditCos</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 添加成绩 -->
 	<servlet>
 		<servlet-name>ServletaddScore</servlet-name>
@@ -228,7 +228,7 @@
 		<servlet-name>ServletaddScore</servlet-name>
 		<url-pattern>/ServletaddScore</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ServletFindStu</servlet-name>
 		<servlet-class>servlet.ServletFindStu</servlet-class>
@@ -282,7 +282,7 @@
 		<servlet-name>ServletSearchScore</servlet-name>
 		<url-pattern>/ServletSearchScore</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 查询所有账号 -->
 	<servlet>
 		<servlet-name>ServletFindAllUser</servlet-name>
@@ -310,7 +310,7 @@
 		<servlet-name>ServletEditUser</servlet-name>
 		<url-pattern>/ServletEditUser</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ServletStuAllScore</servlet-name>
 		<servlet-class>servlet.ServletStuAllScore</servlet-class>
@@ -319,7 +319,7 @@
 		<servlet-name>ServletStuAllScore</servlet-name>
 		<url-pattern>/ServletStuAllScore</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ServletStuSum</servlet-name>
 		<servlet-class>servlet.ServletStuSum</servlet-class>
@@ -364,7 +364,7 @@
 		<servlet-name>ServletDownloadFile</servlet-name>
 		<url-pattern>/ServletDownloadFile</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 教师功能 -->
 	<!-- 查询教师信息 -->
 	<servlet>
@@ -375,7 +375,7 @@
 		<servlet-name>ServletTeacherInfo</servlet-name>
 		<url-pattern>/ServletTeacherInfo</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ServletselectTeacherInfo</servlet-name>
 		<servlet-class>servlet.teacher.ServletselectTeacherInfo</servlet-class>
@@ -429,7 +429,7 @@
 		<servlet-name>ServletTeaStuScoreStatis</servlet-name>
 		<url-pattern>/ServletTeaStuScoreStatis</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 学生功能 -->
 	<!-- 查询学生信息 -->
 	<servlet>
@@ -440,7 +440,7 @@
 		<servlet-name>ServletStudentInfo</servlet-name>
 		<url-pattern>/ServletStudentInfo</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>ServletSelectStudentInfo</servlet-name>
 		<servlet-class>servlet.student.ServletSelectStudentInfo</servlet-class>
@@ -476,7 +476,7 @@
 		<servlet-name>ServletOneStudentScore</servlet-name>
 		<url-pattern>/ServletOneStudentScore</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>PageServlet</servlet-name>
 		<servlet-class>servlet.PageServlet</servlet-class>
@@ -485,7 +485,7 @@
 		<servlet-name>PageServlet</servlet-name>
 		<url-pattern>/PageServlet</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 注册 -->
 	<servlet>
 		<servlet-name>ServletRegisterStu</servlet-name>
@@ -504,7 +504,7 @@
 		<servlet-name>ServletRegistersStudent</servlet-name>
 		<url-pattern>/ServletRegistersStudent</url-pattern>
 	</servlet-mapping>
-	
+
 	<welcome-file-list>
 		<welcome-file>login/login.jsp</welcome-file>
 	</welcome-file-list>

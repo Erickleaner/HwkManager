@@ -2,13 +2,13 @@
   <nav class="navbar">
     <ul class="nav navbar-nav " style="border-bottom:#517fa4 2px">
       <li class="li-sty">高校成绩管理系统<i class="fa fa-magic" aria-hidden="true"></i></li>
-      <li class="li-sty1" style="float:right;"><a href="ServletLogout" >退出</a></li>
+      <li class="li-sty1" style="float:right;"><a id="loginOut" href="#" >退出</a></li>
     </ul>
   </nav>
   <div class="aside">
     <div class="profile">
       <img class="avatar" src="../../../assets/images/pic.jpg">
-      <h3 class="name">王一番</h3>
+      <h3 class="name"></h3>
     </div>
     <ul class="nav">
       <li>
@@ -25,24 +25,8 @@
         </a>
         <ul id="menu-class" class="collapse">
           <li><a id="spe_course" href="#" target="mainRight">课程管理</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#menu-grades" data-toggle="collapse">
-          <i class="fa fa-frown-o"></i>成绩管理<i class="fa fa-angle-right"></i>
-        </a>
-        <ul id="menu-grades" class="collapse">
-          <li><a href="ServletTeaStuScore" target="mainRight">成绩信息查看</a></li>
-          <li><a href="ServletTeaStuScoreStatis" target="mainRight">成绩信息统计</a></li>
-          <li><a href="admin/addScore.jsp" target="mainRight">添加学生成绩</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#menu-stu" data-toggle="collapse">
-          <i class="fa fa-group"></i>学生管理<i class="fa fa-angle-right"></i>
-        </a>
-        <ul id="menu-stu" class="collapse">
-          <li><a href="ServletFindAllStu" target="mainRight">查询学生信息</a></li>
+          <li><a id="spe_clazz" href="#" target="mainRight">班级管理</a></li>
+          <li><a id="spe_student" href="#" target="mainRight">学生管理</a></li>
         </ul>
       </li>
     </ul>

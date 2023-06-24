@@ -1,8 +1,8 @@
-import mockRequest from "../utils/mockRequest";
+import request from "../utils/request";
 
 export function login(obj) {
-    return mockRequest({
-        url: '/user/login',
+    return request({
+        url: '/account/login',
         method: 'post',
         data: obj
     })
