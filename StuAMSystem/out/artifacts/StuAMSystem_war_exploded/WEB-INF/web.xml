@@ -219,52 +219,6 @@
 		<url-pattern>/ServletEditCos</url-pattern>
 	</servlet-mapping>
 
-	<!-- 添加题目信息 -->
-	<servlet>
-		<servlet-name>ServletaddTopic</servlet-name>
-		<servlet-class>servlet.ServletAddTopic</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServletaddTopic</servlet-name>
-		<url-pattern>/ServletaddTopic</url-pattern>
-	</servlet-mapping>
-	<!-- 查询所有题目信息 -->
-	<servlet>
-		<servlet-name>ServletFindAllTopic</servlet-name>
-		<servlet-class>servlet.ServletFindAllTopic</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServletFindAllTopic</servlet-name>
-		<url-pattern>/ServletFindAllTopic</url-pattern>
-	</servlet-mapping>
-	<!-- 删除题目信息 -->
-	<servlet>
-		<servlet-name>ServletDeleteTopic</servlet-name>
-		<servlet-class>servlet.ServletDeleteTopic</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServletDeleteTopic</servlet-name>
-		<url-pattern>/ServletDeleteTopic</url-pattern>
-	</servlet-mapping>
-	<!-- 查询一个题目信息 -->
-	<servlet>
-		<servlet-name>ServletSelectTopic</servlet-name>
-		<servlet-class>servlet.ServletSelectTopic</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServletSelectTopic</servlet-name>
-		<url-pattern>/ServletSelectTopic</url-pattern>
-	</servlet-mapping>
-	<!-- 修改题目信息 -->
-	<servlet>
-		<servlet-name>ServletEditTopic</servlet-name>
-		<servlet-class>servlet.ServletEditTopic</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>ServletEditTopic</servlet-name>
-		<url-pattern>/ServletEditTopic</url-pattern>
-	</servlet-mapping>
-
 	<!-- 添加成绩 -->
 	<servlet>
 		<servlet-name>ServletaddScore</servlet-name>

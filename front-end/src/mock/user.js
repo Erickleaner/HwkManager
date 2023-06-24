@@ -11,6 +11,11 @@ const users = [
         userName:'20201619',
         passWord:'123456',
         role:'student',
+        no:'20201619',
+        name:'王一番',
+        clazz:'202016',
+        grade:3,
+        major:'软件工程'
     },
     {
         userName:'20201618',
@@ -26,18 +31,19 @@ const users = [
 
 // 模拟登录接口
 Mock.mock(`/user/login`, 'post', (options) => {
-    console.log(options.body)
     const { userName, passWord, role } = JSON.parse(options.body)
     let isLogin = false;
     let msg = ""
+    let user = null;
     for (let i=0;i<users.length;i++){
-        const user = users[i]
-        if (userName === user.userName &&
-            passWord === user.passWord &&
-            role === user.role)
+        const item = users[i]
+        if (userName === item.userName &&
+            passWord === item.passWord &&
+            role === item.role)
         {
             isLogin = true
             msg = '登录成功！'
+            user = item
             break;
         }
     }
@@ -46,7 +52,8 @@ Mock.mock(`/user/login`, 'post', (options) => {
         code: 200,
         data: {
             isLogin,
-            msg
+            msg,
+            user
         }
     }
 })

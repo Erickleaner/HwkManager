@@ -5,50 +5,29 @@ import 'bootstrap-table/dist/bootstrap-table'
 import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
 import edit from './edit.html'
 import {semesterStr} from "../../../../utils/string";
+import {courseInsert, courseList, courseRemove, courseUpdate} from "../../../../api/course";
 
-let data = [
-    {
-        'id': 1,
-        'courseName': '课程01',
-        'number':'01',
-        'stuTime':'4',
-        'semester':'1-up',
-    },
-    {
-        'id': 2,
-        'courseName': '课程02',
-        'number':'02',
-        'stuTime':'16',
-        'semester':'1-down',
-    },
-    {
-        'id': 3,
-        'courseName': '课程03',
-        'number':'03',
-        'stuTime':'24',
-        'semester':'2-up',
-    },
-]
 const Operate = {
-    DELETE:'DELETE',
-    UPDATE:'UPDATE'
+    REMOVE:'REMOVE',
+    UPDATE:'UPDATE',
+    INSERT:'INSERT',
 }
 const isDelete = (row) =>{
     $('#myModalLabel').text('删除数据')
     $(".modal-body").html('是否确定删除？')
-    $('#confirm').data('operate',Operate.DELETE).data('row',row);
+    $('#confirm').data('operate',Operate.REMOVE).data('row',row);
     $('#myModal').modal('show')
 }
 const initEdit = (row) =>{
     for (const key in row){
-        if (key==='id') continue
+        if (key==='courseId') continue
         let value = row[key]
         $(`[name="${key}"]`).val(value)
     }
 }
 const bindEdit = (row) =>{
     for (const key in row){
-        if (key==='id') continue
+        if (key==='courseId') continue
         row[key] = $(`[name="${key}"]`).val();
     }
 }
@@ -60,28 +39,65 @@ const isUpdate = (row) =>{
     $('#myModal').modal('show')
 
 }
-const initModel = () => {
+const isInsert = () =>{
+    $('#myModalLabel').text('添加数据')
+    $(".modal-body").html(edit)
+    let row = emptyRow()
+    bindEdit(row)
+    $('#confirm').data('operate',Operate.INSERT).data('row',row);
+    $('#myModal').modal('show')
+}
+const initConfirm = () => {
     $('#confirm').click(function() {
-        const row = $(this).data('row');
+        let row = $(this).data('row');
         const operate = $(this).data('operate');
         if (operate===Operate.UPDATE){
             bindEdit(row)
-            $('#table_server').bootstrapTable('updateByUniqueId', {
-                id: row.id,
-                row: row
-            });
-            $('#myModal').modal('hide')
+            courseUpdate(row).then(data =>{
+                if (data){
+                    $('#myModal').modal('hide')
+                    $('#table_server').bootstrapTable('updateByUniqueId', {
+                        courseId: row.courseId,
+                        row: row
+                    });
+                }else {
+                    $('#myModal').modal('hide')
+                    alert('更新数据失败！')
+                }
+            })
         }
-        if (operate===Operate.DELETE){
-            $('#table_server').bootstrapTable('remove', {
-                field: 'id',
-                values: [row.id]
-            });
-            $('#myModal').modal('hide')
+        if (operate===Operate.REMOVE){
+            const courseId = row.courseId
+            courseRemove({courseId}).then(data => {
+                if (data){
+                    $('#myModal').modal('hide')
+                    $('#table_server').bootstrapTable('remove', {
+                        field: 'courseId',
+                        values: [row.courseId]
+                    });
+                }else {
+                    $('#myModal').modal('hide')
+                    alert('删除数据失败!')
+                }
+            })
+        }
+        if (operate===Operate.INSERT){
+            row = emptyRow();
+            bindEdit(row)
+            courseInsert(row).then(data=>{
+                if (!data.isInsert){
+                    row.courseId = data.insertId
+                    $('#myModal').modal('hide')
+                    $('#table_server').bootstrapTable('append', row);
+                }else {
+                    $('#myModal').modal('hide')
+                    alert('添加数据失败！')
+                }
+            })
         }
     })
 }
-const initTable = () =>{
+const initTable = (data) =>{
     let t = $("#table_server").bootstrapTable({
         data:data,
         height:'auto',
@@ -94,12 +110,11 @@ const initTable = () =>{
         pageList: [5, 10],	//如果设置了分页，设置可供选择的页面数据条数。设置为All 则显示所有记录。
         paginationPreText: '‹',//指定分页条中上一页按钮的图标或文字,这里是<
         paginationNextText: '›',//指定分页条中下一页按钮的图标或文字,这里是>
-        search: false, //显示搜索框
         data_local: "zh-US",//表格汉化
-        uniqueId: 'id',
+        uniqueId: 'courseId',
         columns: [
             {
-                field: 'id',
+                field: 'courseId',
                 visible: false
             },
             {
@@ -111,12 +126,17 @@ const initTable = () =>{
             },
             {
                 title: '课程名',
-                field: 'courseName',
+                field: 'name',
                 align: 'center'
             },
             {
                 title: '编号',
-                field: 'number',
+                field: 'serialNum',
+                align: 'center'
+            },
+            {
+                title: '学分',
+                field: 'score',
                 align: 'center'
             },
             {
@@ -153,9 +173,30 @@ const initTable = () =>{
         ],
     });
 }
+const emptyRow = () =>{
+    return {
+        'courseId': null,
+        'name': '',
+        'serialNum':'',
+        'score':'',
+        'stuTime':'',
+        'semester':'1-up',
+    }
+}
+const initInsert = () =>{
+    $('#insertCourse').click(()=>{
+        isInsert()
+    })
+}
+const initTableByBack = () =>{
+    courseList().then(data => {
+        initTable(data)
+    })
+}
 const speCourseInit = () =>{
     $('#main').html(main)
-    initTable()
-    initModel()
+    initTableByBack()
+    initConfirm()
+    initInsert()
 }
 export default speCourseInit

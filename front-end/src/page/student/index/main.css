@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.li-sty{
+    left: 20%;
+    height: 50px;
+    font-size: 40px;
+    cursor: pointer;
+    line-height: 100px;
+    color: aliceblue;
+    float:left;
+}
+.li-sty1{
+    height: 50px;
+    font-size: 40px;
+    cursor: pointer;
+    line-height: 100px;
+    color: aliceblue;
+    float:left;
+}
+.navbar{
+    height: 100px;
+    margin: 0;
+    background-image: linear-gradient( #82a2a8 20%, #727e8f 70%)
+}
+.navbar ul{
+    width: 100%;
+    height: 100px;
+    position: relative;
+
+}

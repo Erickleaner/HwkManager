@@ -8,3 +8,10 @@ export const semesterStr = (str) =>{
     if (arr[1]==='down') arr[1] = '下'
     return arr[0]+arr[1]
 }
+export const gradeStr = (str) =>{
+    if (str===1) return '大一'
+    if (str===2) return '大二'
+    if (str===3) return '大三'
+    if (str===4) return '大四'
+    return str
+}

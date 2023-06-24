@@ -1,19 +1,14 @@
 package servlet;
 
-import java.io.IOException;
-import java.util.List;
+import model.Topic;
+import service.Impl.TopicServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import model.Topic;
-import service.Impl.CourseServiceImpl;
-
-import model.Course;
-import dao.Impl.CourseDaoImpl;
-import service.Impl.TopicServiceImpl;
+import java.io.IOException;
+import java.util.List;
 
 public class ServletSelectTopic extends HttpServlet{
 

@@ -1,14 +1,14 @@
 import './main.css'
 import main from './main.html'
+import {getUser} from "../../../../storage";
 
-const info = {
-    account:'teacher',
-    name:'张三',
-    passWord:'123456'
-}
+
 const bindInfo = () =>{
-    for (const key in info){
-        $(`#${key}`).text(info[key])
+    const arr = ['username','name','password']
+    const user = getUser()
+    for (let i=0;i<arr.length;i++){
+        const key = arr[i];
+        $(`#${key}`).text(user[key])
     }
 }
 const infoInit = () =>{
