@@ -119,8 +119,8 @@ const initTableByBack = () =>{
         initTable(data)
     })
 }
-const norTeachInit = () =>{
+const norAcquireInit = () =>{
     $('#main').html(main)
     initTableByBack()
 }
-export default norTeachInit
+export default norAcquireInit

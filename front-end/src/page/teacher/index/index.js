@@ -17,7 +17,7 @@ import {redirectLogin} from "../../../tool/redirect";
 import {getUser, removeUser} from "../../../storage";
 import speClazzInit from "./spe_clazz";
 import speStudentInit from "./spe_student";
-import norTeachInit from "./nor_teach";
+import norAcquireInit from "./nor_teach";
 import norCourseInit from "./nor_course";
 import norHmkInit from "./nor_hmk";
 import norGroupInit from "./nor_group";
@@ -57,7 +57,7 @@ const normalEvent = [
     },
     {
         id:'nor_teach',
-        action:norTeachInit,
+        action:norAcquireInit,
     },
     {
         id:'nor_course',
