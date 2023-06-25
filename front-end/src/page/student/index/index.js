@@ -6,19 +6,18 @@ import '../../../assets/css/frame.css'
 import './main.css'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 //mock data
-
+import '../../../mock/memCourse'
+import '../../../mock/leaHmk'
+import '../../../mock/leaTask'
 
 import infoInit from './info'
 import {redirectLogin} from "../../../tool/redirect";
-import {getUser, removeUser} from "../../../storage";
-import speCourseInit from "../../teacher/index/spe_course";
-import speClazzInit from "../../teacher/index/spe_clazz";
-import speStudentInit from "../../teacher/index/spe_student";
-import norTeachInit from "../../teacher/index/nor_teach";
-import norCourseInit from "../../teacher/index/nor_course";
-import norHmkInit from "../../teacher/index/nor_hmk";
-import norGroupInit from "../../teacher/index/nor_group";
-import norTaskInit from "../../teacher/index/nor_task";
+import {getUser, removeUser} from "../../../storage"
+import memCourseInit from "./mem_course";
+import memTaskInit from "./mem_task";
+import memPlanInit from "./mem_plan";
+import memHmkInit from "./mem_hmk";
+import leaTaskInit from "./lea_task";
 
 $('#root').html(main)
 
@@ -26,13 +25,7 @@ const initUI = () =>{
     const {name} = getUser()
     $('.name').text(name)
 }
-const leaderEvent = [
-    {
-        id:'lea_course',
-        action:speCourseInit,
-    },
-]
-const memberEvent = [
+const commonEvent =[
     {
         id:'self_info',
         action:infoInit,
@@ -45,6 +38,38 @@ const memberEvent = [
         }
     },
 ]
+const leaderEvent = [
+    {
+        id:'lea_task',
+        action:leaTaskInit,
+    },
+]
+const memberEvent = [
+    {
+        id:'mem_course',
+        action:memCourseInit,
+    },
+    {
+        id:'mem_task',
+        action:memTaskInit,
+    },
+    {
+        id:'mem_plan',
+        action:memPlanInit,
+    },
+    {
+        id:'mem_hmk',
+        action:memHmkInit,
+    },
+]
+const initCommon = () =>{
+    commonEvent.forEach(item=>{
+        $(`#${item.id}`).click(()=>{
+            event.preventDefault();
+            item.action()
+        })
+    })
+}
 const initMember = () =>{
     memberEvent.forEach(item=>{
         $(`#${item.id}`).click(()=>{
@@ -62,8 +87,10 @@ const initLeader = () =>{
     })
 }
 const initEvent = () => {
+    initCommon()
     initMember()
     initLeader()
 }
 initUI();
 initEvent();
+leaTaskInit()
