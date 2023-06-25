@@ -8,6 +8,6 @@ spring:
     name: server-end
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3506/hmk_manager
+    url: jdbc:mysql://localhost:3306/hmk_manager
     username: root
-    password: 111111
+    password: 123456
