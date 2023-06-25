@@ -37,6 +37,13 @@ const memberEvent = [
         id:'self_info',
         action:infoInit,
     },
+    {
+        id:'loginOut',
+        action:()=>{
+            removeUser()
+            redirectLogin()
+        }
+    },
 ]
 const initMember = () =>{
     memberEvent.forEach(item=>{

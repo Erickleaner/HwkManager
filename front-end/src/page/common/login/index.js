@@ -3,7 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 import main from './main.html'
 import './main.css'
+
+//mock data
 import '../../../mock/user'
+
 import {login} from "../../../api/login";
 import {redirectStudent, redirectTeacher} from "../../../tool/redirect";
 import {getUser, saveUser} from "../../../storage";
