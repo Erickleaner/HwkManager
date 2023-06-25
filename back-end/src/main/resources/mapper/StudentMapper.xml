@@ -23,7 +23,7 @@
         SELECT s.*, c.name AS clazzName ,a.*
         FROM student s
             LEFT JOIN clazz c ON s.clazz_id = c.clazz_id
-            LEFT JOIN account a ON a.account_id = s.student_id
+            LEFT JOIN user a ON a.user_id = s.student_id
         WHERE c.name LIKE CONCAT(#{clazzName}, '%')
     </select>
 </mapper>

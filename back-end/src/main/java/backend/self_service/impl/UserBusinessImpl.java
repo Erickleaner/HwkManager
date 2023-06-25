@@ -5,13 +5,13 @@ import backend.enums.Role;
 import backend.model.dto.LoginDto;
 import backend.model.dto.LoginStuDto;
 import backend.model.dto.LoginTeaDto;
-import backend.model.po.Account;
+import backend.model.po.User;
 import backend.model.po.Clazz;
 import backend.model.po.Student;
 import backend.model.po.Teacher;
 import backend.model.vo.LoginVo;
-import backend.self_service.AccountBusiness;
-import backend.service.AccountService;
+import backend.self_service.UserBusiness;
+import backend.service.UserService;
 import backend.service.ClazzService;
 import backend.service.StudentService;
 import backend.service.TeacherService;
@@ -21,9 +21,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
 @Service
-public class AccountBusinessImpl implements AccountBusiness {
+public class UserBusinessImpl implements UserBusiness {
     @Resource
-    private AccountService accountService;
+    private UserService UserService;
     @Resource
     private StudentService studentService;
     @Resource
@@ -35,17 +35,17 @@ public class AccountBusinessImpl implements AccountBusiness {
         String username = loginDto.getUsername();
         String password = loginDto.getPassword();
         String role = loginDto.getRole();
-        LambdaQueryWrapper<Account> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(Account::getUsername,username);
-        queryWrapper.eq(Account::getPassword,password);
-        queryWrapper.eq(Account::getRole,role);
-        Account account = accountService.getOne(queryWrapper);
+        LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(User::getUsername,username);
+        queryWrapper.eq(User::getPassword,password);
+        queryWrapper.eq(User::getRole,role);
+        User User = UserService.getOne(queryWrapper);
         LoginVo loginVo = new LoginVo();
-        if (account == null){
+        if (User == null){
             loginVo.setIsLogin(false);
             loginVo.setUser(null);
         }else {
-            Integer id = account.getAccountId();
+            Integer id = User.getUserId();
             loginVo.setIsLogin(true);
             if (role.equals(Role.STUDENT.value)){
                 Student student = studentService.getById(id);
