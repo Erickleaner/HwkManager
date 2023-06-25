@@ -9,8 +9,6 @@ import {courseList} from "../../../../api/course";
 import edit from './edit.html'
 import {tcInsert} from "../../../../api/tc";
 import {getUser} from "../../../../storage";
-/*import 'bootstrap-select/dist/js/bootstrap-select.min'
-import 'bootstrap-select/dist/css/bootstrap-select.min.css'*/
 const Operate = {
     ACQUIRE:'ACQUIRE',
 }
@@ -27,11 +25,12 @@ const makeRow = (row) =>{
         courseId: row.courseId
     }
 }
+//绑定提交事件
 const initConfirm = () => {
     $('#confirm').click(function() {
         let row = $(this).data('row');
         const operate = $(this).data('operate');
-        if (operate===Operate.INSERT){
+        if (operate===Operate.ACQUIRE){
             $('#myModal').modal('hide')
             tcInsert(makeRow(row)).then((isInsert) => {
                 if (isInsert){
@@ -122,5 +121,6 @@ const initTableByBack = () =>{
 const norAcquireInit = () =>{
     $('#main').html(main)
     initTableByBack()
+    initConfirm()
 }
 export default norAcquireInit
