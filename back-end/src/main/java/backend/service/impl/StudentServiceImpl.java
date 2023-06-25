@@ -16,7 +16,7 @@ import java.util.List;
 */
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student>
-    implements StudentService{
+        implements StudentService{
     @Override
     public List<StudentDto> getStudentsLikeClazzName(String clazzName){
         return this.baseMapper.getStudentsLikeClazzName(clazzName);

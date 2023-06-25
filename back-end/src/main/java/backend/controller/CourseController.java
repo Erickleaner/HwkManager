@@ -1,7 +1,10 @@
 package backend.controller;
 
 
+import backend.model.dto.CourseDto;
 import backend.model.dto.LoginDto;
+import backend.model.dto.LoginTeaDto;
+import backend.model.dto.StudentDto;
 import backend.model.po.Course;
 import backend.model.vo.InsertVo;
 import backend.model.vo.LoginVo;
@@ -44,5 +47,15 @@ public class CourseController {
     public Result<Boolean> update(@RequestBody Course course) {
         boolean updateById = courseService.updateById(course);
         return Result.success(updateById);
+    }
+
+    //by teacher_id
+    @GetMapping("/searchList")
+    public Result<List<CourseDto>> searchList(HttpServletRequest request) {
+        LoginVo loginVo = (LoginVo) request.getSession().getAttribute("localUser");
+        LoginTeaDto loginTeaDto = (LoginTeaDto) loginVo.getUser();
+        int teacherId = loginTeaDto.getTeacherId();
+        List<CourseDto> courseList = courseService.getCourseByTeacherId(teacherId);
+        return Result.success(courseList);
     }
 }

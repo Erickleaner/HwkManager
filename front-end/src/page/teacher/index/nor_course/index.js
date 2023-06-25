@@ -3,15 +3,13 @@ import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import {semesterStr} from "../../../../utils/string";
-import {courseList} from "../../../../mockApi/course";
+/*import {courseList} from "../../../../mockApi/course";*/
+import {courseListByTeacherId} from "../../../../api/course";
 import norHmkInit from "../nor_hmk";
 
 
 const frame = {
     idField:'courseId',
-    operate:{
-        list:courseList,
-    },
     columns: [
         {
             title: '序号',
@@ -104,7 +102,8 @@ const initTable = (data) =>{
     });
 }
 const initTableByBack = () =>{
-    frame.operate.list().then(data => {
+
+    courseListByTeacherId().then(data => {
         initTable(data)
     })
 }

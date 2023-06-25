@@ -1,7 +1,10 @@
 package backend.mapper;
 
+import backend.model.dto.CourseDto;
 import backend.model.po.Course;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+
+import java.util.List;
 
 /**
 * @author lenovo
@@ -10,7 +13,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity backend.model.po.Course
 */
 public interface CourseMapper extends BaseMapper<Course> {
-
+    List<CourseDto> getCourseByTeacherId(int teacher_id);
 }
 
 

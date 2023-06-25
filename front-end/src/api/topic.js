@@ -1,36 +1,35 @@
 import request from "../utils/request";
 
-export function courseList() {
+export function topicList() {
     return request({
-        url: '/course/list',
+        url: '/topic/list',
         method: 'get',
     })
 }
-export function courseInsert(data) {
+export function topicInsert(data) {
     return request({
-        url: '/course/insert',
+        url: '/topic/insert',
         method: 'post',
         data:data
     })
 }
-export function courseRemove(obj) {
+export function topicRemove(obj) {
     return request({
-        url: '/course/remove',
+        url: '/topic/remove',
         method: 'get',
         params:obj
     })
 }
-export function courseUpdate(obj) {
+export function topicUpdate(obj) {
     return request({
-        url: '/course/update',
+        url: '/topic/update',
         method: 'post',
         data:obj
     })
 }
-export function courseListByTeacherId(obj) {
+export function topicOptions() {
     return request({
-        url: '/course/searchList',
+        url: '/topic/optionList',
         method: 'get',
-        params: obj
     })
 }

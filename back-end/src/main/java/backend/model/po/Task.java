@@ -9,26 +9,21 @@ import lombok.Data;
 
 /**
  *
- * @TableName tc
+ * @TableName task
  */
-@TableName(value ="tc")
+@TableName(value ="task")
 @Data
-public class Tc implements Serializable {
+public class Task implements Serializable {
     /**
      *
      */
     @TableId(type = IdType.AUTO)
-    private Integer tcId;
+    private Integer taskId;
 
     /**
      *
      */
-    private Integer teacherId;
-
-    /**
-     *
-     */
-    private Integer courseId;
+    private String name;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

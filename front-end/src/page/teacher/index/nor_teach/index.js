@@ -5,25 +5,41 @@ import 'bootstrap-table/dist/bootstrap-table'
 import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
 import {semesterStr} from "../../../../utils/string";
 import {courseList} from "../../../../api/course";
+
 import edit from './edit.html'
+import {tcInsert} from "../../../../api/tc";
+import {getUser} from "../../../../storage";
 /*import 'bootstrap-select/dist/js/bootstrap-select.min'
 import 'bootstrap-select/dist/css/bootstrap-select.min.css'*/
 const Operate = {
-    TEACH:'TEACH',
+    ACQUIRE:'ACQUIRE',
 }
-const isTeach = (row) =>{
+const aquireCourse = (row) =>{
     $('#myModalLabel').text('领课')
     $(".modal-body").html(edit)
-    $('#confirm').data('operate',Operate.UPDATE).data('row',row);
+    $('#confirm').data('operate',Operate.ACQUIRE).data('row',row);
     $('#myModal').modal('show')
+}
+const makeRow = (row) =>{
+    const user = getUser()
+    return {
+        teacherId: user.teacherId,
+        courseId: row.courseId
+    }
 }
 const initConfirm = () => {
     $('#confirm').click(function() {
         let row = $(this).data('row');
         const operate = $(this).data('operate');
-        if (operate===Operate.TEACH){
+        if (operate===Operate.INSERT){
             $('#myModal').modal('hide')
-            alert('领课成功！')
+            tcInsert(makeRow(row)).then((isInsert) => {
+                if (isInsert){
+                    alert('领课成功！')
+                }else {
+                    alert('领课失败！')
+                }
+            })
         }
     })
 }
@@ -86,12 +102,12 @@ const initTable = (data) =>{
                 title: '操作',
                 align: 'center',
                 formatter: function () {
-                    return '<a href="#" class="operate-teach mr-15">领课</a>'
+                    return '<a href="#" class="operate-acquire mr-15">领课</a>'
                 },
                 events: {
-                    'click .operate-teach': function (e, value, row, index) {
+                    'click .operate-acquire': function (e, value, row, index) {
                         e.preventDefault()
-                        isTeach(row)
+                        aquireCourse(row)
                     },
                 }
             }

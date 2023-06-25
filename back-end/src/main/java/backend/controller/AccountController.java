@@ -18,7 +18,9 @@ public class AccountController {
     @PostMapping("/login")
     public Result<LoginVo> validLogin(@RequestBody LoginDto loginDto, HttpServletRequest request) {
         LoginVo loginVo = accountBusiness.login(loginDto);
+        if (loginVo.getIsLogin()){
+            request.getSession().setAttribute("localUser",loginVo);
+        }
         return Result.success(loginVo);
     }
-
 }

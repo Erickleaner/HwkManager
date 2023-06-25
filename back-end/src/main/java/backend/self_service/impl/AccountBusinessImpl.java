@@ -49,6 +49,7 @@ public class AccountBusinessImpl implements AccountBusiness {
             loginVo.setIsLogin(true);
             if (role.equals(Role.STUDENT.value)){
                 Student student = studentService.getById(id);
+                Integer studentId = student.getStudentId();
                 Integer clazzId = student.getClazzId();
                 String name = student.getName();
                 String no = student.getNo();
@@ -62,18 +63,21 @@ public class AccountBusinessImpl implements AccountBusiness {
                 loginStuDto.setPhone(phone);
                 loginStuDto.setGrade(grade);
                 loginStuDto.setRole(role);
+                loginStuDto.setStudentId(studentId);
                 Clazz clazz = clazzService.getById(clazzId);
                 loginStuDto.setClazz(clazz.getName());
                 loginVo.setUser(loginStuDto);
             }
             if (role.equals(Role.TEACHER.value)){
                 Teacher teacher = teacherService.getById(id);
+                Integer teacherId = teacher.getTeacherId();
                 String name = teacher.getName();
                 LoginTeaDto loginTeaDto = new LoginTeaDto();
                 loginTeaDto.setUsername(username);
                 loginTeaDto.setPassword(password);
                 loginTeaDto.setName(name);
                 loginTeaDto.setRole(role);
+                loginTeaDto.setTeacherId(teacherId);
                 loginTeaDto.setPower(teacher.getPower());
                 loginVo.setUser(loginTeaDto);
             }
