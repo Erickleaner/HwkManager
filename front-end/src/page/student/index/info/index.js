@@ -6,7 +6,7 @@ import {gradeStr} from "../../../../utils/string";
 
 const bindInfo = () =>{
     const info = getUser()
-    let attrs = ['no','name','clazz','grade','major','passWord']
+    let attrs = ['no','name','clazz','grade','major','password']
     for (let i=0;i<attrs.length;i++){
         const key = attrs[i]
         let value = info[key];

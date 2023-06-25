@@ -1,11 +1,28 @@
-<h2 class="mlr-30">学生管理</h2>
+<h2 class="mlr-30">任务管理</h2>
 <div class="mlr-30">
     <div class="mb-20 d-flex justify-content-between">
         <div class="input-group">
-            <span class="input-group-addon">班级名：</span>
-            <input id="clazzNameInput" type="text" class="form-control" placeholder="请输入查询班级名">
+            <span class="input-group-addon">课程名:&nbsp;&nbsp;&nbsp;</span>
+            <input readonly type="text" class="form-control" value="操作系统">
         </div>
-        <button id="searchBtn" class="btn btn-primary ft-18">查询</button>
+        <div class="input-group">
+            <span class="input-group-addon">班级名:&nbsp;&nbsp;&nbsp;</span>
+            <input readonly type="text" class="form-control" value="202016">
+        </div>
+    </div>
+    <div class="mb-20 d-flex justify-content-between">
+        <div class="input-group">
+            <span class="input-group-addon">大作业名:</span>
+            <input readonly type="text" class="form-control" value="酒店管理系统的设计与实现">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">发布状态：</span>
+            <select class="form-control">
+                <option value=1>全部</option>
+                <option value=2>已发布</option>
+                <option value=2>未发布</option>
+            </select>
+        </div>
     </div>
 </div>
 <div class="mlr-30">
@@ -15,7 +32,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-right">
-        <button id="insertStudent" class="btn ft-18 btn-primary">添加学生</button>
+        <button id="insertElem" class="btn ft-18 btn-primary"></button>
     </div>
 </div>
 <!--isDelete-->

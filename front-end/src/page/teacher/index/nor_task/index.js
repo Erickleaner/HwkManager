@@ -2,15 +2,15 @@ import './main.css'
 import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
-import {homeworkList} from "../../../../mockApi/homework";
 import norGroupInit from "../nor_group";
+import {taskList} from "../../../../mockApi/task";
 
 
 const frame = {
-    idField:'homeworkId',
-    insertBtn:'分组添加',
+    idField:'taskId',
+    insertBtn:'添加任务',
     operate:{
-        list:homeworkList,
+        list:taskList,
     },
     columns: [
         {
@@ -21,18 +21,13 @@ const frame = {
             }
         },
         {
-            title: '大作业名',
+            title: '任务名',
             field: 'name',
             align: 'center'
         },
         {
-            title: '大作业描述',
+            title: '任务描述',
             field: 'desc',
-            align: 'center'
-        },
-        {
-            title: '分组数',
-            field: 'groupNum',
             align: 'center'
         },
         {
@@ -46,10 +41,38 @@ const frame = {
             align: 'center'
         },
         {
-            title: '操作',
+            title: '发布状态',
+            field: 'isPublish',
             align: 'center',
-            formatter: function () {
-                return '<a href="#" class="operate-task">任务管理</a>'
+            formatter: function (value) {
+                return value===0? '否':'是'
+            },
+        },
+        {
+            title: '操作',
+            field: 'isPublish',
+            align: 'center',
+            formatter: function (value) {
+                if (value===0) return '<a href="#" class="operate-update mr-15">修改</a>' +
+                    '<a href="#" class="operate-delete" >删除</a>';
+                if (value===1) return '无'
+            },
+            events: {
+                'click .operate-update': function (e, value, row, index) {
+                    e.preventDefault()
+                },
+                'click .operate-delete': function (e, value, row, index) {
+                    e.preventDefault()
+                },
+            }
+        },
+        {
+            title: '发布',
+            field: 'isPublish',
+            align: 'center',
+            formatter: function (value) {
+                if (value===1) return '<a href="#" class="operate-cancel">取消发布</a>'
+                if (value===0) return '<a href="#" class="operate-publish">发布</a>'
             },
             events: {
                 'click .operate-task': function (e, value, row, index) {
@@ -104,10 +127,10 @@ const initTableByBack = () =>{
         initTable(data)
     })
 }
-const norHmkInit = () =>{
+const norTaskInit = () =>{
     $('#main').html(main)
     initTableByBack()
     initConfirm()
     initInsert()
 }
-export default norHmkInit
+export default norTaskInit

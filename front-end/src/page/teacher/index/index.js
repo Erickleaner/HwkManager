@@ -9,6 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import '../../../mock/course'
 import '../../../mock/homework'
 import '../../../mock/group'
+import '../../../mock/task'
 
 import infoInit from './info'
 import speCourseInit from './spe_course'
@@ -20,6 +21,7 @@ import norTeachInit from "./nor_teach";
 import norCourseInit from "./nor_course";
 import norHmkInit from "./nor_hmk";
 import norGroupInit from "./nor_group";
+import norTaskInit from "./nor_task";
 
 $('#root').html(main)
 
@@ -28,10 +30,6 @@ const initUI = () =>{
     $('.name').text(name)
 }
 const specialEvent = [
-    {
-        id:'self_info',
-        action:infoInit,
-    },
     {
         id:'spe_course',
         action:speCourseInit,
@@ -46,6 +44,10 @@ const specialEvent = [
     }
 ]
 const normalEvent = [
+    {
+        id:'self_info',
+        action:infoInit,
+    },
     {
         id:'loginOut',
         action:()=>{
@@ -68,6 +70,10 @@ const normalEvent = [
     {
         id:'nor_group',
         action:norGroupInit,
+    },
+    {
+        id:'nor_task',
+        action:norTaskInit,
     }
 ]
 const initNormal = () =>{
@@ -92,6 +98,6 @@ const initEvent = () => {
     initNormal()
     initSpecial()
 }
-norGroupInit()
+norTaskInit()
 initUI();
 initEvent();

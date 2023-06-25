@@ -10,7 +10,15 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 
 import infoInit from './info'
 import {redirectLogin} from "../../../tool/redirect";
-import {getUser} from "../../../storage";
+import {getUser, removeUser} from "../../../storage";
+import speCourseInit from "../../teacher/index/spe_course";
+import speClazzInit from "../../teacher/index/spe_clazz";
+import speStudentInit from "../../teacher/index/spe_student";
+import norTeachInit from "../../teacher/index/nor_teach";
+import norCourseInit from "../../teacher/index/nor_course";
+import norHmkInit from "../../teacher/index/nor_hmk";
+import norGroupInit from "../../teacher/index/nor_group";
+import norTaskInit from "../../teacher/index/nor_task";
 
 $('#root').html(main)
 
@@ -18,19 +26,37 @@ const initUI = () =>{
     const {name} = getUser()
     $('.name').text(name)
 }
-const initEvent = () =>{
-    $('#loginOut').click((event)=>{
-        event.preventDefault();
-        redirectLogin()
-    })
-
-    $("#self-info").click((event)=>{
-        event.preventDefault(); // 阻止默认的跳转行为
-        infoInit()
+const leaderEvent = [
+    {
+        id:'lea_course',
+        action:speCourseInit,
+    },
+]
+const memberEvent = [
+    {
+        id:'self_info',
+        action:infoInit,
+    },
+]
+const initMember = () =>{
+    memberEvent.forEach(item=>{
+        $(`#${item.id}`).click(()=>{
+            event.preventDefault();
+            item.action()
+        })
     })
 }
-
-initUI()
-initEvent()
-
-
+const initLeader = () =>{
+    leaderEvent.forEach(item=>{
+        $(`#${item.id}`).click(()=>{
+            event.preventDefault();
+            item.action()
+        })
+    })
+}
+const initEvent = () => {
+    initMember()
+    initLeader()
+}
+initUI();
+initEvent();

@@ -22,6 +22,9 @@
 .justify-content-right{
     justify-content: right;
 }
+.justify-content-center{
+    justify-content: center;
+}
 .btn.ft-18{
     font-size: 18px;
 }

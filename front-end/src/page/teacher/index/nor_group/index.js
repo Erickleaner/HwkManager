@@ -3,6 +3,7 @@ import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import {groupList} from "../../../../mockApi/group";
+import edit from "./edit.html";
 
 
 const frame = {
@@ -48,7 +49,7 @@ const frame = {
                     e.preventDefault()
                 }
             }
-        }
+        },
     ],
 }
 
@@ -86,8 +87,15 @@ const initTable = (data) =>{
         ]
     });
 }
+const isInsert = () =>{
+    $('#myModalLabel').text('添加数据')
+    $(".modal-body").html(edit)
+    //$('#confirm').data('operate',Operate.INSERT).data('row',row);
+    $('#myModal').modal('show')
+}
 const initInsert = () =>{
     $('#insertElem').click(()=>{
+        isInsert()
     })
 }
 const initTableByBack = () =>{
