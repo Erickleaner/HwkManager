@@ -9,6 +9,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css'
 import '../../../mock/memCourse'
 import '../../../mock/leaHmk'
 import '../../../mock/leaTask'
+import '../../../mock/memTask'
 
 import infoInit from './info'
 import {redirectLogin} from "../../../tool/redirect";

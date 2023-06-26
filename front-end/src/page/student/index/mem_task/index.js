@@ -3,26 +3,14 @@ import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
-import {semesterStr} from "../../../../utils/string";
-import {courseInsert, courseList, courseRemove, courseUpdate} from "../../../../api/course";
+import {memTaskList} from "../../../../mockApi/memTask";
 
 
 const frame = {
     idField:'courseId',
     insertBtn:'添加课程',
     operate:{
-        insert:courseInsert,
-        update:courseUpdate,
-        remove:courseRemove,
-        list:courseList,
-    },
-    empty:{
-        'courseId': null,
-        'name': '',
-        'serialNum':'',
-        'score':'',
-        'stuTime':'',
-        'semester':'1-up',
+        list:memTaskList,
     },
     columns: [
         {
@@ -33,49 +21,55 @@ const frame = {
             }
         },
         {
-            title: '课程名',
+            title: '任务名',
             field: 'name',
             align: 'center'
         },
         {
-            title: '编号',
-            field: 'serialNum',
+            title: '任务描述',
+            field: 'desc',
             align: 'center'
         },
         {
-            title: '学分',
-            field: 'score',
-            align: 'center'
+            title: '开始时间',
+            field: 'startTime',
+            align: 'center',
         },
         {
-            title: '学时',
-            field: 'stuTime',
-            align: 'center'
+            title: '截止时间',
+            field: 'endTime',
+            align: 'center',
         },
         {
-            title: '开课学期',
-            field: 'semester',
+            title: '拆分计划数',
+            field: 'endTime',
+            align: 'center',
+        },
+        {
+            title: '完成计划数',
+            field: 'endTime',
+            align: 'center',
+        },
+        {
+            title: '完成状态',
+            field: 'completed',
             align: 'center',
             formatter: function(value) {
-                return semesterStr(value);
+                if (value===0) return'未完成'
+                if (value===1) return'已完成'
             }
         },
         {
             title: '操作',
             align: 'center',
             formatter: function () {
-                return '<a href="#" class="operate-update mr-15">修改</a>' +
-                    '<a href="#" class="operate-delete" >删除</a>';
+                return '<a href="#" class="operate-update mr-15">修改</a>'
             },
             events: {
                 'click .operate-update': function (e, value, row, index) {
                     e.preventDefault()
                     isUpdate(row)
                 },
-                'click .operate-delete': function (e, value, row, index) {
-                    e.preventDefault()
-                    isDelete(row)
-                }
             }
         }
     ],
