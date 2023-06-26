@@ -10,6 +10,7 @@ import '../../../mock/course'
 import '../../../mock/homework'
 import '../../../mock/group'
 import '../../../mock/task'
+import '../../../mock/team'
 
 import infoInit from './info'
 import speCourseInit from './spe_course'
@@ -22,6 +23,7 @@ import norCourseInit from "./nor_course";
 import norHmkInit from "./nor_hmk";
 import norGroupInit from "./nor_group";
 import norTaskInit from "./nor_task";
+import norExamineInit from "./nor_examine";
 
 $('#root').html(main)
 
@@ -42,6 +44,7 @@ const specialEvent = [
         id:'spe_student',
         action:speStudentInit,
     }
+
 ]
 const normalEvent = [
     {
@@ -74,6 +77,10 @@ const normalEvent = [
     {
         id:'nor_task',
         action:norTaskInit,
+    },
+    {
+        id:'nor_examine',
+        action:norExamineInit,
     }
 ]
 const initNormal = () =>{
@@ -98,6 +105,6 @@ const initEvent = () => {
     initNormal()
     initSpecial()
 }
-norTaskInit()
+norExamineInit()
 initUI();
 initEvent();

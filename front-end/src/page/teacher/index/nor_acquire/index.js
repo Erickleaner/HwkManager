@@ -8,6 +8,7 @@ import {courseList} from "../../../../api/course";
 
 import edit from './edit.html'
 import {tcInsert} from "../../../../api/tc";
+//import {ctcInsert} from "../../../../api/ctc";
 import {getUser} from "../../../../storage";
 const Operate = {
     ACQUIRE:'ACQUIRE',
@@ -32,6 +33,7 @@ const initConfirm = () => {
         const operate = $(this).data('operate');
         if (operate===Operate.ACQUIRE){
             $('#myModal').modal('hide')
+            //ctcInsert()
             tcInsert(makeRow(row)).then((isInsert) => {
                 if (isInsert){
                     alert('领课成功！')

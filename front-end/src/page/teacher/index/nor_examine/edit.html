@@ -1,0 +1,43 @@
+<style>
+    thead tr th{
+        text-align: center;
+    }
+    .input-group input.form-control{
+        width: 180px;
+    }
+    .f-col{
+        margin-left: 10%;
+        margin-right: 10%;
+        flex-direction: column;
+    }
+    .f-col .d-flex{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    table{
+        width: 100%;
+    }
+    .pt-5{
+        padding-top: 5px;
+    }
+</style>
+<div class="d-flex f-col pt-5 justify-content-center">
+    <div class="d-flex justify-content-between">
+        <div class="input-group">
+            <span class="input-group-addon">组员姓名：</span>
+            <input readonly name="name" type="text" class="form-control" placeholder="请输入组长学号">
+        </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <div class="input-group">
+            <span class="input-group-addon">组员学号：</span>
+            <input readonly name="no" type="text" class="form-control" placeholder="请输入组员学号">
+        </div>
+    </div>
+    <div class="d-flex justify-content-between">
+        <div class="input-group">
+            <span class="input-group-addon">成绩：</span>
+            <input name="grade" type="text" class="form-control" placeholder="请输入成绩">
+        </div>
+    </div>
+</div>
