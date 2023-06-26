@@ -1,0 +1,55 @@
+<h2 class="mlr-30">考核评分</h2>
+<div class="mlr-30">
+    <div class="mb-20 d-flex justify-content-between">
+        <div class="input-group">
+            <span class="input-group-addon">课程：</span>
+            <select class="form-control">
+                <option value=1>操作系统</option>
+                <option value=2>数据库原理</option>
+            </select>
+        </div>
+    </div>
+    <div class="mb-20 d-flex justify-content-between">
+        <div class="input-group">
+            <span class="input-group-addon">班级：</span>
+            <select class="form-control">
+                <option value=1>202016</option>
+                <option value=2>202017</option>
+            </select>
+        </div>
+    </div>
+    <div class="mb-20 d-flex justify-content-between">
+        <div class="input-group">
+            <span class="input-group-addon">小组名：</span>
+            <select class="form-control">
+                <option value=1>第一组</option>
+                <option value=2>第二组</option>
+                <option value=3>第三组</option>
+                <option value=4>第四组</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="mlr-30">
+    <div class="panel panel-default plr-10" style="height: max-content">
+        <div class="panel-body">
+            <table id="table_server"></table>
+        </div>
+    </div>
+</div>
+<!--isDelete-->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" id="confirm" class="btn btn-primary">确定</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
