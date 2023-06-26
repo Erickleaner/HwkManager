@@ -11,6 +11,8 @@ import '../../../mock/leaHmk'
 import '../../../mock/leaTask'
 import '../../../mock/memTask'
 import '../../../mock/memPlan'
+import '../../../mock/leaDoc'
+import '../../../mock/leaScore'
 
 import infoInit from './info'
 import {redirectLogin} from "../../../tool/redirect";
@@ -20,6 +22,9 @@ import memTaskInit from "./mem_task";
 import memPlanInit from "./mem_plan";
 import memHmkInit from "./mem_hmk";
 import leaTaskInit from "./lea_task";
+import leaDocInit from "./lea_doc";
+import leaDScoreInit from "./lea_score";
+import leaScoreInit from "./lea_score";
 
 $('#root').html(main)
 
@@ -40,10 +45,19 @@ const commonEvent =[
         }
     },
 ]
+//lea_doc
 const leaderEvent = [
     {
         id:'lea_task',
         action:leaTaskInit,
+    },
+    {
+        id:'lea_doc',
+        action:leaDocInit,
+    },
+    {
+        id:'lea_score',
+        action:leaScoreInit,
     },
 ]
 const memberEvent = [
@@ -95,4 +109,4 @@ const initEvent = () => {
 }
 initUI();
 initEvent();
-leaTaskInit()
+leaScoreInit()

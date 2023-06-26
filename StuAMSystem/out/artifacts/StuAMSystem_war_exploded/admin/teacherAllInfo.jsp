@@ -62,28 +62,30 @@ text-decoration: none;
   <body>
     
     <div class="div_list panel panel-default">
-				<div class="panel-heading">教师信息</div>
+				<div class="panel-heading">代码信息</div>
 		<table class="table panel-body" id="tableClass">
 			<tr>
-				<td>工号号</td>
+				<td>学号</td>
 				<td>姓名</td>
-				<td>性别</td>
-				<td>年龄</td>
-				<td>所任课程</td>
-				<td>专业</td>
-				<td>院系</td>
-				<td>操作</td>
+<%--				<td>性别</td>--%>
+<%--				<td>年龄</td>--%>
+				<td>所属任务</td>
+				<td>代码</td>
+<%--				<td>院系</td>--%>
+<%--				<td>操作</td>--%>
 			</tr>
 			<c:forEach var="list" items="${list }">
 			<tr>
 				<td>${list.getTeaNum() }</td>
 				<td>${list.getTeaName() }</td>
-				<td>${list.getTeaSex() }</td>
-				<td>${list.getTeaAge() }</td>
+<%--				<td>${list.getTeaSex() }</td>--%>
+<%--				<td>${list.getTeaAge() }</td>--%>
 				<td>${list.getTeaCourse() }</td>
 				<td>${list.getMajor() }</td>
-				<td>${list.getDepartment() }</td>
-				<td><a href="ServletSelectTea?teanum=${list.getTeaNum() }">修改</a>&nbsp;&nbsp;&nbsp;<a href="ServletDeleteTea?teanum=${list.getTeaNum() }" onclick="return confirm('是否确认删除？')">删除</a></td>
+<%--				<td>${list.getDepartment() }</td>--%>
+				<td><a href="ServletSelectTea?teanum=${list.getTeaNum() }">查看</a>&nbsp;&nbsp;&nbsp;
+<%--					<a href="ServletDeleteTea?teanum=${list.getTeaNum() }" onclick="return confirm('是否确认删除？')">删除</a>--%>
+				</td>
 				
 			</tr>
 			</c:forEach>

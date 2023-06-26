@@ -76,16 +76,16 @@ function page(s){
 	<form action="ServletFindAllStu" method="post" id="frm">
 		<div class="div_list">
 		<div class=" panel panel-default">
-			<div class="panel-heading">学生信息</div>
+			<div class="panel-heading">所有文档</div>
 			<table class="table panel-body" id="tableClass">
 				<tr>
 					<td>学号</td>
 					<td>姓名</td>
 					<td>性别</td>
-					<td>年龄</td>
-					<td>班级</td>
-					<td>专业</td>
-					<td>院系</td>
+<%--					<td>年龄</td>--%>
+<%--					<td>班级</td>--%>
+<%--					<td>专业</td>--%>
+					<td>文档</td>
 					<td>操作</td>
 				</tr>
 				<c:forEach var="list" items="${list.pbjs }">
@@ -93,13 +93,15 @@ function page(s){
 						<td>${list.getStuNum() }</td>
 						<td>${list.getStuName() }</td>
 						<td>${list.getStuSex() }</td>
-						<td>${list.getStuAge() }</td>
-						<td>${list.getStuClass() }</td>
-						<td>${list.getMajor() }</td>
+<%--						<td>${list.getStuAge() }</td>--%>
+<%--						<td>${list.getStuClass() }</td>--%>
+<%--						<td>${list.getMajor() }</td>--%>
 						<td>${list.getDepartment() }</td>
-						<td><a href="ServletSelectStu?stunum=${list.getStuNum() }">修改</a>&nbsp;&nbsp;&nbsp;<a
-							href="ServletDeleteStu?stunum=${list.getStuNum() }"
-							onclick="return confirm('是否确认删除？')">删除</a></td>
+						<td><a href="ServletSelectStu?stunum=${list.getStuNum() }">查看</a>&nbsp;&nbsp;&nbsp;
+<%--							<a--%>
+<%--							href="ServletDeleteStu?stunum=${list.getStuNum() }"--%>
+<%--							onclick="return confirm('是否确认删除？')">删除</a>--%>
+						</td>
 
 					</tr>
 				</c:forEach>

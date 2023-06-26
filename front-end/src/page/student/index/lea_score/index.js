@@ -6,12 +6,13 @@ import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
 import {leaTaskList} from "../../../../mockApi/leaTask";
 import {memTaskList} from "../../../../mockApi/memTask";
 import memTaskInit from "../mem_task";
-
+import {leaScoreList} from "../../../../mockApi/leaScore";
+import edit from './edit.html'
 
 const frame = {
     idField:'taskId',
     operate:{
-        list:leaTaskList,
+        list:leaScoreList,
     },
     columns: [
         {
@@ -22,55 +23,42 @@ const frame = {
             }
         },
         {
-            title: '任务名',
+            title: '姓名',
             field: 'name',
             align: 'center'
         },
         {
-            title: '任务描述',
-            field: 'desc',
+            title: '任务名',
+            field: 'taskName',
             align: 'center'
         },
+
         {
-            title: '开始时间',
-            field: 'startTime',
+            title: '分数',
+            field: 'score',
             align: 'center'
         },
+
         {
-            title: '截止时间',
-            field: 'endTime',
-            align: 'center'
-        },
-        {
-            title: '拆分数',
-            field: 'subTask.splitNum',
-            align: 'center'
-        },
-        {
-            title: '完成数',
-            field: 'subTask.completedNum',
-            align: 'center'
-        },
-        {
-            title: '完成状态',
-            field: 'completed',
+            title: '评分状态',
+            field: 'scoreState',
             align: 'center',
             formatter: function(value) {
-                if (value===0) return'未完成'
-                if (value===1) return'已完成'
+                if (value===0) return'未评分'
+                if (value===1) return'已评分'
             }
         },
         {
             title: '操作',
             align: 'center',
             formatter: function () {
-                return '<a href="#" class="operate-update">拆分任务</a>';
+                return '<a href="#" class="operate-score">评分</a>';
             },
             events: {
-                'click .operate-update': function (e, value, row, index) {
+                'click .operate-score': function (e, value, row, index) {
                     e.preventDefault()
-                   // isUpdate(row)
-                    memTaskInit()
+                   isUpdate(row)
+
                 },
             }
         }
@@ -78,15 +66,7 @@ const frame = {
 }
 
 const Operate = {
-    REMOVE:'REMOVE',
     UPDATE:'UPDATE',
-    INSERT:'INSERT',
-}
-const isDelete = (row) =>{
-    $('#myModalLabel').text('删除数据')
-    $(".modal-body").html('是否确定删除？')
-    $('#confirm').data('operate',Operate.REMOVE).data('row',row);
-    $('#myModal').modal('show')
 }
 const initEdit = (row) =>{
     for (const key in row){
@@ -102,20 +82,12 @@ const bindEdit = (row) =>{
     }
 }
 const isUpdate = (row) =>{
-    $('#myModalLabel').text('更新数据')
+    $('#myModalLabel').text('考核评分')
     $(".modal-body").html(edit)
     initEdit(row);
     $('#confirm').data('operate',Operate.UPDATE).data('row',row);
     $('#myModal').modal('show')
 
-}
-const isInsert = () =>{
-    $('#myModalLabel').text('添加数据')
-    $(".modal-body").html(edit)
-    let row = emptyRow()
-    bindEdit(row)
-    $('#confirm').data('operate',Operate.INSERT).data('row',row);
-    $('#myModal').modal('show')
 }
 const initConfirm = () => {
     $('#confirm').click(function() {
@@ -123,48 +95,12 @@ const initConfirm = () => {
         const operate = $(this).data('operate');
         if (operate===Operate.UPDATE){
             bindEdit(row)
-            frame.operate.update(row).then(data =>{
-                if (data){
-                    $('#myModal').modal('hide')
-                    $('#table_server').bootstrapTable('updateByUniqueId', {
-                        [frame.idField]: row[frame.idField],
-                        row: row
-                    });
-                }else {
-                    $('#myModal').modal('hide')
-                    alert('更新数据失败！')
-                }
-            })
-        }
-        if (operate===Operate.REMOVE){
-            const idKey = frame.idField;
-            const id = row[idKey]
-            frame.operate.remove({[idKey]:id}).then(data => {
-                if (data){
-                    $('#myModal').modal('hide')
-                    $('#table_server').bootstrapTable('remove', {
-                        field: idKey,
-                        values: [id]
-                    });
-                }else {
-                    $('#myModal').modal('hide')
-                    alert('删除数据失败!')
-                }
-            })
-        }
-        if (operate===Operate.INSERT){
-            row = emptyRow();
-            bindEdit(row)
-            frame.operate.insert(row).then(data=>{
-                if (!data.isInsert){
-                    row.courseId = data.insertId
-                    $('#myModal').modal('hide')
-                    $('#table_server').bootstrapTable('append', row);
-                }else {
-                    $('#myModal').modal('hide')
-                    alert('添加数据失败！')
-                }
-            })
+            $('#myModal').modal('hide')
+            row.scoreState = 1
+            $('#table_server').bootstrapTable('updateByUniqueId', {
+                [frame.idField]: row[frame.idField],
+                row: row
+            });
         }
     })
 }
@@ -205,10 +141,10 @@ const initTableByBack = () =>{
         initTable(data)
     })
 }
-const leaTaskInit = () =>{
+const leaScoreInit = () =>{
     $('#main').html(main)
     initTableByBack()
     initConfirm()
     initInsert()
 }
-export default leaTaskInit
+export default leaScoreInit
