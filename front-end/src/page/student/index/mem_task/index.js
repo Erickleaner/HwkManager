@@ -8,7 +8,6 @@ import {memTaskList} from "../../../../mockApi/memTask";
 
 const frame = {
     idField:'courseId',
-    insertBtn:'添加课程',
     operate:{
         list:memTaskList,
     },
@@ -42,12 +41,12 @@ const frame = {
         },
         {
             title: '拆分计划数',
-            field: 'endTime',
+            field: 'plan.splitNum',
             align: 'center',
         },
         {
             title: '完成计划数',
-            field: 'endTime',
+            field: 'plan.completedNum',
             align: 'center',
         },
         {
@@ -63,10 +62,10 @@ const frame = {
             title: '操作',
             align: 'center',
             formatter: function () {
-                return '<a href="#" class="operate-update mr-15">修改</a>'
+                return '<a href="#" class="operate-plan mr-15">拆分计划</a>'
             },
             events: {
-                'click .operate-update': function (e, value, row, index) {
+                'click .operate-plan': function (e, value, row, index) {
                     e.preventDefault()
                     isUpdate(row)
                 },
@@ -193,11 +192,6 @@ const initTable = (data) =>{
 const emptyRow = () =>{
     return frame.empty
 }
-const initInsert = () =>{
-    $('#insertElem').text(frame.insertBtn).click(()=>{
-        isInsert()
-    })
-}
 const initTableByBack = () =>{
     frame.operate.list().then(data => {
         initTable(data)
@@ -207,6 +201,5 @@ const memTaskInit = () =>{
     $('#main').html(main)
     initTableByBack()
     initConfirm()
-    initInsert()
 }
 export default memTaskInit
