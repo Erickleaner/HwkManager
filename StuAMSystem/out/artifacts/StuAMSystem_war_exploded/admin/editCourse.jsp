@@ -52,30 +52,41 @@ table tr td {
 					<td><input type="text" name="courseID" class="form-control" value="${list.getCourseID() }" readonly="readonly" /></td>
 				</tr>
 				<tr>
-					<td>科&nbsp;&nbsp;&nbsp;目：</td>
-					<td><input type="text" name="courseName" class="form-control" value="${list.getCourseName() }" /></td>
+					<td>任&nbsp;&nbsp;&nbsp;务：</td>
+					<td><input type="text" name="courseName" class="form-control" value="${list.getCourseName() }"  readonly="readonly" /></td>
+				</tr>/></td>
 				</tr>
 				<tr>
-					<td>学&nbsp;&nbsp;&nbsp;分：</td>
-					<td><input type="text"  name="courseCredit" class="form-control" value="${list.getCourseCredit() }"  />
+					<td>分&nbsp;&nbsp;&nbsp;数：</td>
+					<td><input type="text"  name="courseCredit" class="form-control" value="${list.getCourseCredit() }" readonly="readonly" /></td>
+				</tr> />
 						
 					</td>
 				</tr>
 				<tr>
-					<td>学&nbsp;&nbsp;&nbsp;时：</td>
-					<td><input type="text" name="courseHours" class="form-control" value="${list.getCourseHours() }" /></td>
+					<td>要求时间/天：</td>
+					<td><input type="text" name="courseHours" class="form-control" value="${list.getCourseHours() }" readonly="readonly" /></td>
+				</tr>/></td>
 				</tr>
 				<tr>
-					<td>任课教师：</td>
-					<td><input type="text" name="courseTea" class="form-control" value="${list.getCourseTeacher() }" /></td>
+					<td>开始时间：</td>
+					<td><input type="text" name="courseDate" class="form-control" value="${list.getCourseDate() }" readonly="readonly" /></td>
+				</tr>/></td>
 				</tr>
 				<tr>
-					<td>开课时间：</td>
-					<td><input type="text" name="courseDate" class="form-control" value="${list.getCourseDate() }" /></td>
+					<td>任务详细：</td>
+					<td><textarea type="text" name="courseTea" rows="10" cols="50"
+								  class="form-control" value="${list.getCourseDate() }" readonly="readonly" >这里是从数据库拿到的任务详细
+				</textarea></td>
 				</tr>
+
 				<tr>
-					<td><input type="submit" value="修改" class="btn btn-primary" /></td>
-					<td><input type="reset" value="清空" class="btn btn-danger" /></td>
+					<td><form action="admin/viewTask.jsp" method="GET">
+						<button type="submit">分解任务</button>
+					</form></td>
+
+<%--					<td><input type="submit" value="修改" class="btn btn-primary" /></td>--%>
+<%--					<td><input type="reset" value="清空" class="btn btn-danger" /></td>--%>
 				</tr>
 			</table>
 			</c:forEach>

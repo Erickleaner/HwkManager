@@ -52,38 +52,12 @@ font{
 		<c:forEach var="list" items="${list }">
 			<table>
 				<tr>
-					<td>学&nbsp;&nbsp;&nbsp;号：</td>
-					<td><input type="text" name="stuNum" class="form-control" value="${list.getStuNum() }" readonly="readonly" /></td>
+					<td>文档名：</td>
+					<td><input type="text" name="document" class="form-control" value="${list.getStuNum() }" readonly="readonly" /></td>
 				</tr>
 				<tr>
-					<td>姓&nbsp;&nbsp;&nbsp;名：</td>
-					<td><input type="text" name="stuName" class="form-control" value="${list.getStuName() }" /></td>
-				</tr>
-				<tr>
-					<td>性&nbsp;&nbsp;&nbsp;别：</td>
-					<td><input type="text"  name="stuSex" class="form-control" value="${list.getStuSex() }"  />
-						
-					</td>
-				</tr>
-				<tr>
-					<td>年&nbsp;&nbsp;&nbsp;龄：</td>
-					<td><input type="text" name="stuAge" class="form-control" value="${list.getStuAge() }" /></td>
-				</tr>
-				<tr>
-					<td>班&nbsp;&nbsp;&nbsp;级：</td>
-					<td><input type="text" name="stuClass" class="form-control" value="${list.getStuClass() }" /></td>
-				</tr>
-				<tr>
-					<td>专&nbsp;&nbsp;&nbsp;业：</td>
-					<td><input type="text" name="major" class="form-control" value="${list.getMajor() }" /></td>
-				</tr>
-				<tr>
-					<td>院&nbsp;&nbsp;&nbsp;系：</td>
-					<td><input type="text" name="department" class="form-control" value="${list.getDepartment() }" /></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="修改" class="btn btn-primary" /></td>
-					<td><input type="reset" value="清空" class="btn btn-danger" /></td>
+					<td>文档详细：</td>
+					<td><textarea type="text" name="documentDetail" class="form-control" rows="20" cols="50" value="${list.getMajor() }" ></textarea></td>
 				</tr>
 			</table>
 			</c:forEach>

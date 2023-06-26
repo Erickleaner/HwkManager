@@ -48,40 +48,12 @@ table tr td {
 		<font>${msg }</font>
 		<c:forEach var="list" items="${list }">
 			<table>
+
 				<tr>
-					<td>工&nbsp;&nbsp;&nbsp;号：</td>
-					<td><input type="text" name="teaNum" class="form-control" value="${list.getTeaNum() }" readonly="readonly" /></td>
+					<td>代码：</td>
+					<td><textarea type="text" name="major" class="form-control" rows="20" cols="50" value="${list.getMajor() }" ></textarea></td>
 				</tr>
-				<tr>
-					<td>姓&nbsp;&nbsp;&nbsp;名：</td>
-					<td><input type="text" name="teaName" class="form-control" value="${list.getTeaName() }" /></td>
-				</tr>
-				<tr>
-					<td>性&nbsp;&nbsp;&nbsp;别：</td>
-					<td><input type="text"  name="teaSex" class="form-control" value="${list.getTeaSex() }"  />
-						
-					</td>
-				</tr>
-				<tr>
-					<td>年&nbsp;&nbsp;&nbsp;龄：</td>
-					<td><input type="text" name="teaAge" class="form-control" value="${list.getTeaAge() }" /></td>
-				</tr>
-				<tr>
-					<td>所任课程：</td>
-					<td><input type="text" name="teaCourse" class="form-control" value="${list.getTeaCourse() }" /></td>
-				</tr>
-				<tr>
-					<td>专&nbsp;&nbsp;&nbsp;业：</td>
-					<td><input type="text" name="major" class="form-control" value="${list.getMajor() }" /></td>
-				</tr>
-				<tr>
-					<td>院&nbsp;&nbsp;&nbsp;系：</td>
-					<td><input type="text" name="department" class="form-control" value="${list.getDepartment() }" /></td>
-				</tr>
-				<tr>
-					<td><input type="submit" value="修改" class="btn btn-primary" /></td>
-					<td><input type="reset" value="清空" class="btn btn-danger" /></td>
-				</tr>
+
 			</table>
 			</c:forEach>
 		</div>

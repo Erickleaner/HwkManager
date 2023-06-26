@@ -3,15 +3,14 @@ import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
-import {leaTaskList} from "../../../../mockApi/leaTask";
-import {memTaskList} from "../../../../mockApi/memTask";
-import memTaskInit from "../mem_task";
+import {leaDocList} from "../../../../mockApi/leaDoc";
+import leaTaskInit from "../lea_task";
 
 
 const frame = {
     idField:'taskId',
     operate:{
-        list:leaTaskList,
+        list:leaDocList,
     },
     columns: [
         {
@@ -22,55 +21,47 @@ const frame = {
             }
         },
         {
-            title: '任务名',
+            title: '文档名',
             field: 'name',
             align: 'center'
         },
         {
-            title: '任务描述',
-            field: 'desc',
+            title: '作者',
+            field: 'author',
             align: 'center'
         },
         {
-            title: '开始时间',
-            field: 'startTime',
+            title: '提交时间',
+            field: 'submitTime',
             align: 'center'
         },
         {
-            title: '截止时间',
-            field: 'endTime',
+            title: '所属大作业',
+            field: 'parentHmk',
             align: 'center'
         },
         {
-            title: '拆分数',
-            field: 'subTask.splitNum',
-            align: 'center'
-        },
-        {
-            title: '完成数',
-            field: 'subTask.completedNum',
-            align: 'center'
-        },
-        {
-            title: '完成状态',
-            field: 'completed',
+            title: '发布状态',
+            field: 'publishState',
             align: 'center',
             formatter: function(value) {
-                if (value===0) return'未完成'
-                if (value===1) return'已完成'
+                if (value===0) return'未发布'
+                if (value===1) return'已发布'
             }
         },
         {
             title: '操作',
             align: 'center',
             formatter: function () {
-                return '<a href="#" class="operate-update">拆分任务</a>';
+                return '<a href="#" class="operate-publish">发布</a>';
             },
             events: {
-                'click .operate-update': function (e, value, row, index) {
+                'click .operate-publish': function (e, value, row, index) {
                     e.preventDefault()
-                   // isUpdate(row)
-                    memTaskInit()
+                    publish(row)
+                    alert('发布成功！')
+
+
                 },
             }
         }
@@ -78,9 +69,7 @@ const frame = {
 }
 
 const Operate = {
-    REMOVE:'REMOVE',
-    UPDATE:'UPDATE',
-    INSERT:'INSERT',
+    PUBLISH:'PUBLISH',
 }
 const isDelete = (row) =>{
     $('#myModalLabel').text('删除数据')
@@ -109,13 +98,13 @@ const isUpdate = (row) =>{
     $('#myModal').modal('show')
 
 }
-const isInsert = () =>{
-    $('#myModalLabel').text('添加数据')
-    $(".modal-body").html(edit)
-    let row = emptyRow()
-    bindEdit(row)
-    $('#confirm').data('operate',Operate.INSERT).data('row',row);
-    $('#myModal').modal('show')
+const publish = (row) =>{
+    row.publishState = 1
+    $('#table_server').bootstrapTable('updateByUniqueId', {
+        [frame.idField]: row[frame.idField],
+        row: row
+    });
+
 }
 const initConfirm = () => {
     $('#confirm').click(function() {
@@ -195,20 +184,14 @@ const initTable = (data) =>{
 const emptyRow = () =>{
     return frame.empty
 }
-const initInsert = () =>{
-    $('#insertElem').text(frame.insertBtn).click(()=>{
-        isInsert()
-    })
-}
 const initTableByBack = () =>{
     frame.operate.list().then(data => {
         initTable(data)
     })
 }
-const leaTaskInit = () =>{
+const leaDocInit = () =>{
     $('#main').html(main)
     initTableByBack()
     initConfirm()
-    initInsert()
 }
-export default leaTaskInit
+export default leaDocInit
