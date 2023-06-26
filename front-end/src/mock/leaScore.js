@@ -5,7 +5,7 @@ const scoreList = [
         'scoreId': 1,
         'name': '张三',
         'taskName':'需求分析',
-        'score':78,
+        'score':0,
         'scoreState':0,
 
     },
@@ -13,7 +13,7 @@ const scoreList = [
         'scoreId': 2,
         'name': '李四',
         'taskName':'需求分析',
-        'score':85,
+        'score':0,
         'scoreState':0,
 
     },
@@ -21,7 +21,7 @@ const scoreList = [
         'scoreId': 3,
         'name': '王五',
         'taskName':'需求分析',
-        'score':90,
+        'score':0,
         'scoreState':0,
 
     },

@@ -68,15 +68,15 @@ function page(s){
   <body>
     <form action="ServletFindAllCos" method="post" id="frm">
     <div class="div_list panel panel-default">
-				<div class="panel-heading">课程信息</div>
+				<div class="panel-heading">任务信息</div>
 		<table class="table panel-body" id="tableClass">
 			<tr>
 				<td>编号</td>
-				<td>科目</td>
-				<td>学分</td>
-				<td>学时</td>
-				<td>任课教师</td>
-				<td>开课时间</td>
+				<td>任务</td>
+				<td>分数</td>
+				<td>要求时间/天</td>
+				<td>发布教师</td>
+				<td>开始时间</td>
 				<td>操作</td>
 			</tr>
 			<c:forEach var="list" items="${list.pbjs }">
@@ -87,8 +87,9 @@ function page(s){
 				<td>${list.getCourseHours() }</td>
 				<td>${list.getCourseTeacher() }</td>
 				<td>${list.getCourseDate() }</td>
-				<td><a href="ServletSelectCos?courseID=${list.getCourseID() }">修改</a>&nbsp;&nbsp;&nbsp;<a href="ServletDeleteCos?courseID=${list.getCourseID() }" onclick="return confirm('是否确认删除？')">删除</a></td>
-				
+				<td><a href="ServletSelectCos?courseID=${list.getCourseID() }">查看详细</a>&nbsp;&nbsp;&nbsp;</td>
+<%--				查看详细按钮跳转页面方法在servlt里，点击之后跳转到对应的任务详细界面--%>
+<%--				<a href="ServletDeleteCos?courseID=${list.getCourseID() }" onclick="return confirm('是否确认删除？')">删除</a>--%>
 			</tr>
 			</c:forEach>
 			<tr>
