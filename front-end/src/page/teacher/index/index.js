@@ -105,6 +105,6 @@ const initEvent = () => {
     initNormal()
     initSpecial()
 }
-norExamineInit()
+norTaskInit()
 initUI();
 initEvent();
