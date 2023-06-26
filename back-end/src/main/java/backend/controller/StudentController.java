@@ -2,9 +2,6 @@ package backend.controller;
 
 
 import backend.model.dto.StudentDto;
-import backend.model.po.Account;
-import backend.model.po.Clazz;
-import backend.model.po.Student;
 import backend.model.vo.InsertVo;
 import backend.self_service.StudentBusiness;
 import backend.service.StudentService;
