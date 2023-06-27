@@ -58,4 +58,4 @@ const entry = () => {
     }
 }
 initEvent()
-//entry()
+entry()
