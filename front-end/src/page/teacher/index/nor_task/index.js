@@ -250,7 +250,7 @@ const initTableByBack = () =>{
 }
 const norTaskInit = () =>{
     $('#main').html(main)
-    initTableByBack()
+    //initTableByBack()
     initConfirm()
     initInsert()
 }

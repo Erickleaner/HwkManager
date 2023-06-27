@@ -6,10 +6,17 @@ import backend.model.dto.LoginDto;
 import backend.model.dto.LoginTeaDto;
 import backend.model.dto.StudentDto;
 import backend.model.po.Course;
+import backend.model.po.Ctc;
+import backend.model.po.Tc;
+import backend.model.po.User;
 import backend.model.vo.InsertVo;
 import backend.model.vo.LoginVo;
 import backend.service.CourseService;
+import backend.service.CtcService;
+import backend.service.TcService;
+import backend.tool.Tool;
 import backend.util.Result;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,6 +28,10 @@ import java.util.List;
 public class CourseController {
     @Resource
     CourseService courseService;
+    @Resource
+    TcService tcService;
+    @Resource
+    CtcService ctcService;
     @GetMapping("/list")
     public Result<List<Course>> list() {
         List<Course> courseList = courseService.list();
@@ -47,14 +58,23 @@ public class CourseController {
         boolean updateById = courseService.updateById(course);
         return Result.success(updateById);
     }
-
-    //by teacher_id
-    @GetMapping("/searchList")
-    public Result<List<CourseDto>> searchList(HttpServletRequest request) {
-        LoginVo loginVo = (LoginVo) request.getSession().getAttribute("localUser");
-        LoginTeaDto loginTeaDto = (LoginTeaDto) loginVo.getUser();
-        int teacherId = loginTeaDto.getTeacherId();
+    //
+    @GetMapping("/ownList")
+    public Result<List<CourseDto>> ownList(HttpServletRequest request) {
+        int teacherId = Tool.teaIdFromSession(request);
         List<CourseDto> courseList = courseService.getCourseByTeacherId(teacherId);
+        for (CourseDto courseDto:courseList){
+            //find target tc
+            LambdaQueryWrapper<Tc> tcQueryWrapper = new LambdaQueryWrapper<>();
+            tcQueryWrapper.eq(Tc::getCourseId,courseDto.getCourseId());
+            tcQueryWrapper.eq(Tc::getTeacherId,teacherId);
+            Tc tc = tcService.getOne(tcQueryWrapper);
+            //find count of ctc
+            LambdaQueryWrapper<Ctc> ctcQueryWrapper = new LambdaQueryWrapper<>();
+            ctcQueryWrapper.eq(Ctc::getTcId,tc.getTcId());
+            int clazzNum = (int) ctcService.count(ctcQueryWrapper);
+            courseDto.setClazzNum(clazzNum);
+        }
         return Result.success(courseList);
     }
 }
