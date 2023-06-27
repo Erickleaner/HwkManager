@@ -3,8 +3,9 @@ import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import norGroupInit from "../nor_group";
-import {taskList} from "../../../../mockApi/task";
-import edit from "../template/edit.html";
+//import {taskList} from "../../../../mockApi/task";
+import edit from "./edit.html";
+import {taskInsert, taskList,taskRemove, taskUpdate} from "../../../../api/task";
 
 
 const frame = {
@@ -28,7 +29,7 @@ const frame = {
         },
         {
             title: '任务描述',
-            field: 'desc',
+            field: 'descr',
             align: 'center'
         },
         {
@@ -61,10 +62,12 @@ const frame = {
             events: {
                 'click .operate-update': function (e, value, row, index) {
                     e.preventDefault()
+                    isUpdate(row)
                 },
                 'click .operate-delete': function (e, value, row, index) {
                     e.preventDefault()
-                },
+                    isDelete(row)
+                }
             }
         },
         {
@@ -100,9 +103,47 @@ const publish = (row) =>{
     $('#confirm').data('operate',Operate.PUBLISH).data('row',row);
     $('#myModal').modal('show')
 }
+const isDelete = (row) =>{
+    $('#myModalLabel').text('删除数据')
+    $(".modal-body").html('是否确定删除？')
+    $('#confirm').data('operate',Operate.REMOVE).data('row',row);
+    $('#myModal').modal('show')
+}
+const initEdit = (row) =>{
+    for (const key in row){
+        if (key==='taskId') continue
+        let value = row[key]
+        $(`[name="${key}"]`).val(value)
+    }
+}
+const bindEdit = (row) =>{
+    for (const key in row){
+        if (key==='taskId') continue
+        row[key] = $(`[name="${key}"]`).val();
+    }
+}
+const isUpdate = (row) =>{
+    $('#myModalLabel').text('更新数据')
+    $(".modal-body").html(edit)
+    initEdit(row);
+    $('#confirm').data('operate',Operate.UPDATE).data('row',row);
+    $('#myModal').modal('show')
+
+}
+const isInsert = () =>{
+    $('#myModalLabel').text('添加数据')
+    $(".modal-body").html(edit)
+    let row = emptyRow()
+    bindEdit(row)
+    $('#confirm').data('operate',Operate.INSERT).data('row',row);
+    $('#myModal').modal('show')
+}
 const Operate = {
     CANCEL:'CANCEL',
-    PUBLISH:'PUBLISH'
+    PUBLISH:'PUBLISH',
+    REMOVE:'REMOVE',
+    UPDATE:'UPDATE',
+    INSERT:'INSERT',
 }
 
 const initConfirm = () => {
@@ -124,6 +165,52 @@ const initConfirm = () => {
                 row: row
             });
             $('#myModal').modal('hide')
+        }
+        if (operate===Operate.UPDATE){
+            bindEdit(row)
+            taskUpdate(row).then(data =>{
+                if (data){
+                    $('#myModal').modal('hide')
+                    $('#table_server').bootstrapTable('updateByUniqueId', {
+                        //taskId: row.taskId,
+                        [frame.idField]: row[frame.idField],
+                        row: row
+                    });
+                }else {
+                    $('#myModal').modal('hide')
+                    alert('更新数据失败！')
+                }
+            })
+        }
+        if (operate===Operate.REMOVE){
+            const taskId = row.taskId
+            taskRemove({taskId}).then(data => {
+                if (data){
+                    $('#myModal').modal('hide')
+                    $('#table_server').bootstrapTable('remove', {
+                        field: 'taskId',
+                        values: [row.taskId]
+                    });
+                }else {
+                    $('#myModal').modal('hide')
+                    alert('删除数据失败!')
+                }
+            })
+        }
+        if (operate===Operate.INSERT){
+            row = emptyRow();
+            bindEdit(row)
+            taskInsert(row).then(data=>{
+                if (!data.isInsert){
+                    //row.taskId = data.insertId
+                    [frame.idField]= row[frame.idField],
+                    $('#myModal').modal('hide')
+                    $('#table_server').bootstrapTable('append', row);
+                }else {
+                    $('#myModal').modal('hide')
+                    alert('添加数据失败！')
+                }
+            })
         }
     })
 }

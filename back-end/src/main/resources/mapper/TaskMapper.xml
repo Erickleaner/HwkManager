@@ -7,9 +7,14 @@
     <resultMap id="BaseResultMap" type="backend.model.po.Task">
             <id property="taskId" column="task_id" jdbcType="INTEGER"/>
             <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="descr" column="descr" jdbcType="VARCHAR"/>
+            <result property="startTime" column="start_time" jdbcType="DATE"/>
+            <result property="endTime" column="end_time" jdbcType="DATE"/>
+            <result property="isPublish" column="isPublish" jdbcType="INTEGER"/>
     </resultMap>
 
-    <sql id="Base_Column_List">
-        task_id,name
-    </sql>
+   <!-- <sql id="Base_Column_List">
+        task_id,name,descr,
+        start_time,end_time,isPublish
+    </sql>-->
 </mapper>
