@@ -21,9 +21,10 @@ import speStudentInit from "./spe_student";
 import norTeachInit from "./nor_acquire";
 import norCourseInit from "./nor_course";
 import norHmkInit from "./nor_hmk";
-import norGroupInit from "./nor_group";
+import norTeamInit from "./nor_team";
 import norTaskInit from "./nor_task";
 import norExamineInit from "./nor_examine";
+import norAcquireInit from "./nor_acquire";
 
 $('#root').html(main)
 
@@ -72,7 +73,9 @@ const normalEvent = [
     },
     {
         id:'nor_group',
-        action:norGroupInit,
+        action:()=>{
+            norTeamInit(null)
+        },
     },
     {
         id:'nor_task',
@@ -105,6 +108,13 @@ const initEvent = () => {
     initNormal()
     initSpecial()
 }
-norTaskInit()
+norHmkInit()
+
+/*norTeamInit(
+    {
+        clazz:{name:'202016'},
+        course:{name:'操作系统'},
+    }
+    )*/
 initUI();
 initEvent();

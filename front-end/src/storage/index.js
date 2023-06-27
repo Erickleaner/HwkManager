@@ -8,3 +8,7 @@ export const getUser = () => {
 export const removeUser = () => {
     localStorage.removeItem('localUser');
 }
+export const teaIdFromUser = () => {
+    const teacher = JSON.parse(localStorage.getItem('localUser'));
+    return teacher.teacherId
+}

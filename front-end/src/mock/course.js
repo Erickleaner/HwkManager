@@ -1,6 +1,6 @@
 import Mock from "mockjs";
 
-let myCourses = [
+const myCourses = [
     {
         'courseId': 1,
         'name': '操作系统',
@@ -21,12 +21,6 @@ let myCourses = [
     },
 ]
 Mock.mock(`/course/list`, 'get', (options) => {
-    //row
-    let row = null;
-    myCourses.forEach(item=>{
-        if (item.courseId===row.courseId)
-            item = row
-    })
     return{
         code:200,
         data:myCourses

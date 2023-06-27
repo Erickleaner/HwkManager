@@ -2,10 +2,12 @@ package backend.controller;
 
 
 import backend.model.dto.StudentDto;
+import backend.model.po.Student;
 import backend.model.vo.InsertVo;
 import backend.self_service.StudentBusiness;
 import backend.service.StudentService;
 import backend.util.Result;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -45,5 +47,12 @@ public class StudentController {
     public Result<List<StudentDto>> searchList(String clazzName) {
         List<StudentDto> studentList = studentService.getStudentsLikeClazzName(clazzName);
         return Result.success(studentList);
+    }
+    @GetMapping("/searchNo")
+    public Result<Student> searchNo(String no) {
+        LambdaQueryWrapper<Student> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(Student::getNo,no);
+        Student student = studentService.getOne(queryWrapper);
+        return Result.success(student);
     }
 }

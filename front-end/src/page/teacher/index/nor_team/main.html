@@ -1,11 +1,18 @@
 <h2 class="mlr-30">分组添加</h2>
 <div class="mlr-30">
-    <div class="mb-20 mt-5 d-flex justify-content-between">
-        <span class="ft-18">班级名：202016</span>
+    <div class="mb-20 d-flex justify-content-between">
+        <div class="input-group">
+            <span class="input-group-addon">课程名:&nbsp;&nbsp;&nbsp;</span>
+            <input name="courseName" readonly type="text" class="form-control">
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon">班级名:&nbsp;&nbsp;&nbsp;</span>
+            <input name="clazzName" readonly type="text" class="form-control">
+        </div>
     </div>
     <div class="mb-20 d-flex justify-content-between align-items-start">
         <div class="input-group">
-            <span class="input-group-addon">大作业名：&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span class="input-group-addon">大作业名：</span>
             <input id="hmkNameInput" type="text" class="form-control" placeholder="请输入大作业名">
         </div>
         <div class="input-group">
@@ -31,9 +38,8 @@
         </div>
     </div>
     <div class="d-flex justify-content-right">
-
         <button id="insertSubmit" class="btn ft-18 btn-primary mr-30">确认分组</button>
-        <button id="insertElem" class="btn ft-18 btn-primary">添加分组</button>
+        <button id="insertElem" class="btn ft-18 btn-primary">添加小组</button>
     </div>
 </div>
 <!--isDelete-->

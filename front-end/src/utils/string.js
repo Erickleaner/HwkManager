@@ -15,3 +15,14 @@ export const gradeStr = (str) =>{
     if (str===4) return '大四'
     return str
 }
+export const dutyStr = (str) =>{
+    if (str==='leader') return '组长'
+    if (str==='member') return '组员'
+}
+export const dateStr = (dateStr) =>{
+    const date = new Date(dateStr);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}-${month}-${day}`;
+}

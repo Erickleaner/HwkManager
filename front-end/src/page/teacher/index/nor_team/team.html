@@ -25,16 +25,16 @@
     <div class="d-flex justify-content-between">
         <div class="input-group">
             <span class="input-group-addon">组长学号：</span>
-            <input type="text" class="form-control" placeholder="请输入组长学号">
+            <input name="leaderNo" type="text" class="form-control" placeholder="请输入组长学号">
         </div>
-        <button class="btn btn-primary">确认</button>
+        <button name="leaderSubmit" class="btn btn-primary">确认</button>
     </div>
     <div class="d-flex justify-content-between">
         <div class="input-group">
             <span class="input-group-addon">组员学号：</span>
-            <input type="text" class="form-control" placeholder="请输入组员学号">
+            <input name="memberNo" type="text" class="form-control" placeholder="请输入组员学号">
         </div>
-        <button class="btn btn-primary">确认添加</button>
+        <button name="memberSubmit" class="btn btn-primary">确认添加</button>
     </div>
     <table class="table table-bordered">
         <thead>
@@ -45,26 +45,7 @@
             <th>操作</th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>20201607</td>
-            <td>小明</td>
-            <td>组长</td>
-            <td><button class="btn btn-primary">删除</button></td>
-        </tr>
-        <tr>
-            <td>20201621</td>
-            <td>喜羊羊</td>
-            <td>组员</td>
-            <td><button class="btn btn-primary">删除</button></td>
-        </tr>
-        <tr>
-            <td>20201622</td>
-            <td>美羊羊</td>
-            <td>组员</td>
-            <td><button class="btn btn-primary">删除</button></td>
-        </tr>
-        </tr>
+        <tbody name="members">
         </tbody>
     </table>
 </div>

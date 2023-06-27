@@ -6,25 +6,42 @@ import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
 import {semesterStr} from "../../../../utils/string";
 import {courseList} from "../../../../api/course";
 
-import edit from './edit.html'
-import {tcInsert} from "../../../../api/tc";
-//import {ctcInsert} from "../../../../api/ctc";
-import {getUser} from "../../../../storage";
+import modal from './modal.html'
+import {clazzList} from "../../../../api/clazz";
+import {teaBusinessAcquire} from "../../../../api/teaBusiness";
 const Operate = {
     ACQUIRE:'ACQUIRE',
 }
+const bindAcquire = ()=>{
+    localClazzList.forEach(clazz =>{
+        const element = $('<option>').text(clazz.name).val(clazz.clazzId);
+        $(`[name="clazzList"]`).append(element)
+    })
+}
 const aquireCourse = (row) =>{
     $('#myModalLabel').text('领课')
-    $(".modal-body").html(edit)
+    $(".modal-body").html(modal)
+    bindAcquire()
     $('#confirm').data('operate',Operate.ACQUIRE).data('row',row);
     $('#myModal').modal('show')
 }
-const makeRow = (row) =>{
-    const user = getUser()
+const acquireDto = (row) =>{
     return {
-        teacherId: user.teacherId,
-        courseId: row.courseId
+        course: {courseId:row.courseId},
+        clazzList: editClazzList()
     }
+}
+const editClazzList = () => {
+    let clazzArr = $(`[name="clazzList"]`).val();
+    let clazzList = []
+    clazzArr.forEach(clazzId=>{
+        clazzList.push(
+            {
+                clazzId
+            }
+        )
+    })
+    return clazzList
 }
 //绑定提交事件
 const initConfirm = () => {
@@ -33,9 +50,9 @@ const initConfirm = () => {
         const operate = $(this).data('operate');
         if (operate===Operate.ACQUIRE){
             $('#myModal').modal('hide')
-            //ctcInsert()
-            tcInsert(makeRow(row)).then((isInsert) => {
-                if (isInsert){
+            const dto = acquireDto(row)
+            teaBusinessAcquire(dto).then((isAcquire) => {
+                if (isAcquire){
                     alert('领课成功！')
                 }else {
                     alert('领课失败！')
@@ -115,14 +132,21 @@ const initTable = (data) =>{
         ],
     });
 }
+let localClazzList = null;
+const initClazzList = ()=>{
+    clazzList().then(data =>{
+        localClazzList = data
+    })
+}
 const initTableByBack = () =>{
     courseList().then(data => {
         initTable(data)
     })
 }
-const norAcquireInit = () =>{
+const norAcquireInit = function (){
     $('#main').html(main)
     initTableByBack()
     initConfirm()
+    initClazzList()
 }
 export default norAcquireInit

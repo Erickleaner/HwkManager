@@ -27,9 +27,9 @@ export function courseUpdate(obj) {
         data:obj
     })
 }
-export function courseListByTeacherId(obj) {
+export function courseOwnList(obj) {
     return request({
-        url: '/course/searchList',
+        url: '/course/ownList',
         method: 'get',
         params: obj
     })

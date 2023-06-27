@@ -3,10 +3,8 @@ import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import {semesterStr} from "../../../../utils/string";
-/*import {courseList} from "../../../../mockApi/course";*/
-import {courseListByTeacherId} from "../../../../api/course";
+import {courseOwnList} from "../../../../api/course";
 import norHmkInit from "../nor_hmk";
-
 
 const frame = {
     idField:'courseId',
@@ -103,7 +101,7 @@ const initTable = (data) =>{
 }
 const initTableByBack = () =>{
 
-    courseListByTeacherId().then(data => {
+    courseOwnList().then(data => {
         initTable(data)
     })
 }

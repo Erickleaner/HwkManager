@@ -4,8 +4,6 @@ import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
 import {leaTaskList} from "../../../../mockApi/leaTask";
-import {memTaskList} from "../../../../mockApi/memTask";
-import memTaskInit from "../mem_task";
 
 
 const frame = {
@@ -69,8 +67,7 @@ const frame = {
             events: {
                 'click .operate-update': function (e, value, row, index) {
                     e.preventDefault()
-                   // isUpdate(row)
-                    memTaskInit()
+                    isUpdate(row)
                 },
             }
         }

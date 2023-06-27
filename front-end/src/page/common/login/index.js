@@ -45,7 +45,7 @@ const initEvent = () => {
 }
 const entry = () => {
     const user = getUser();
-    if (user!=null){
+    if (user!==null&&user!==undefined){
         const role = user.role;
         if (role==='student'){
             saveUser(user)

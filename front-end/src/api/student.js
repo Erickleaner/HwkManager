@@ -34,3 +34,10 @@ export function studentListByClazz(obj) {
         params: obj
     })
 }
+export function studentByNo(obj) {
+    return request({
+        url: '/student/searchNo',
+        method: 'get',
+        params: obj
+    })
+}
