@@ -3,13 +3,14 @@ import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
-import {semesterStr} from "../../../../utils/string";
-import {mockCourseList} from "../../../../mockApi/course";
-import memHmkInit from "../mem_hmk";
+import {leaDocList} from "../../../../mockApi/leaDoc";
+import leaTaskInit from "../lea_task";
+
+
 const frame = {
-    idField:'ctcId',
+    idField:'taskId',
     operate:{
-        list:mockCourseList,
+        list:leaDocList,
     },
     columns: [
         {
@@ -20,60 +21,55 @@ const frame = {
             }
         },
         {
-            title: '课程名',
+            title: '文档名',
             field: 'name',
             align: 'center'
         },
         {
-            title: '授课教师',
-            field: 'teacherName',
+            title: '作者',
+            field: 'author',
             align: 'center'
         },
         {
-            title: '编号',
-            field: 'serialNum',
+            title: '提交时间',
+            field: 'submitTime',
             align: 'center'
         },
         {
-            title: '学分',
-            field: 'score',
+            title: '所属大作业',
+            field: 'parentHmk',
             align: 'center'
         },
         {
-            title: '学时',
-            field: 'stuTime',
-            align: 'center'
-        },
-        {
-            title: '开课学期',
-            field: 'semester',
+            title: '发布状态',
+            field: 'publishState',
             align: 'center',
             formatter: function(value) {
-                return semesterStr(value);
+                if (value===0) return'未发布'
+                if (value===1) return'已发布'
             }
         },
         {
             title: '操作',
             align: 'center',
-            formatter: function (value, row) {
-                return '<a href="#" class="operate-leaTask">我的大作业</a>'
+            formatter: function () {
+                return '<a href="#" class="operate-publish">发布</a>';
             },
             events: {
-                'click .operate-leaTask': function (e, value, row, index) {
+                'click .operate-publish': function (e, value, row, index) {
                     e.preventDefault()
-                    memHmkInit(row)
+                    publish(row)
+                    alert('发布成功！')
+
+
                 },
             }
-        },
+        }
     ],
 }
-const hmkData = (row) => {
 
-}
 const Operate = {
-    REMOVE:'REMOVE',
-    UPDATE:'UPDATE',
-    INSERT:'INSERT',
+    PUBLISH:'PUBLISH',
 }
 const isDelete = (row) =>{
     $('#myModalLabel').text('删除数据')
@@ -102,13 +98,13 @@ const isUpdate = (row) =>{
     $('#myModal').modal('show')
 
 }
-const isInsert = () =>{
-    $('#myModalLabel').text('添加数据')
-    $(".modal-body").html(edit)
-    let row = emptyRow()
-    bindEdit(row)
-    $('#confirm').data('operate',Operate.INSERT).data('row',row);
-    $('#myModal').modal('show')
+const publish = (row) =>{
+    row.publishState = 1
+    $('#table_server').bootstrapTable('updateByUniqueId', {
+        [frame.idField]: row[frame.idField],
+        row: row
+    });
+
 }
 const initConfirm = () => {
     $('#confirm').click(function() {
@@ -188,20 +184,14 @@ const initTable = (data) =>{
 const emptyRow = () =>{
     return frame.empty
 }
-const initInsert = () =>{
-    $('#insertElem').text(frame.insertBtn).click(()=>{
-        isInsert()
-    })
-}
 const initTableByBack = () =>{
     frame.operate.list().then(data => {
         initTable(data)
     })
 }
-const memCourseInit = () =>{
+const leaDocInit = () =>{
     $('#main').html(main)
     initTableByBack()
     initConfirm()
-    initInsert()
 }
-export default memCourseInit
+export default leaDocInit
