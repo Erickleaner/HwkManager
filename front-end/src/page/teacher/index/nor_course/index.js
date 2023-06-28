@@ -58,22 +58,11 @@ const frame = {
             events: {
                 'click .operate-hmk': function (e, value, row, index) {
                     e.preventDefault()
-                    norHmkInit()
+                    norHmkInit(row)
                 },
             }
         }
     ],
-}
-
-const Operate = {
-    REMOVE:'REMOVE',
-}
-
-const initConfirm = () => {
-    $('#confirm').click(function() {
-        let row = $(this).data('row');
-        const operate = $(this).data('operate');
-    })
 }
 const initTable = (data) =>{
     let t = $("#table_server").bootstrapTable({
@@ -108,6 +97,5 @@ const initTableByBack = () =>{
 const norCourseInit = () =>{
     $('#main').html(main)
     initTableByBack()
-    initConfirm()
 }
 export default norCourseInit

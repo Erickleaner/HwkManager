@@ -12,4 +12,10 @@ public class Tool {
         return loginTeaDto.getTeacherId();*/
         return 100;
     }
+    public static Integer stuIdFromSession(HttpServletRequest request){
+        /*LoginVo loginVo = (LoginVo) request.getSession().getAttribute("localUser");
+        LoginTeaDto loginTeaDto = (LoginTeaDto) loginVo.getUser();
+        return loginTeaDto.getTeacherId();*/
+        return 1;
+    }
 }

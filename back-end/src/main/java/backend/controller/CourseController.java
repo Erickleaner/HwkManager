@@ -5,15 +5,11 @@ import backend.model.dto.CourseDto;
 import backend.model.dto.LoginDto;
 import backend.model.dto.LoginTeaDto;
 import backend.model.dto.StudentDto;
-import backend.model.po.Course;
-import backend.model.po.Ctc;
-import backend.model.po.Tc;
-import backend.model.po.User;
+import backend.model.po.*;
 import backend.model.vo.InsertVo;
 import backend.model.vo.LoginVo;
-import backend.service.CourseService;
-import backend.service.CtcService;
-import backend.service.TcService;
+import backend.model.vo.MemCourseVo;
+import backend.service.*;
 import backend.tool.Tool;
 import backend.util.Result;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -21,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,6 +29,13 @@ public class CourseController {
     TcService tcService;
     @Resource
     CtcService ctcService;
+    @Resource
+    ClazzService clazzService;
+
+    @Resource
+    StudentService studentService;
+    @Resource
+    TeacherService teacherService;
     @GetMapping("/list")
     public Result<List<Course>> list() {
         List<Course> courseList = courseService.list();
@@ -76,5 +80,23 @@ public class CourseController {
             courseDto.setClazzNum(clazzNum);
         }
         return Result.success(courseList);
+    }
+    @GetMapping("/memList")
+    public Result<List<MemCourseVo>> memList(HttpServletRequest request) {
+        int studentId = Tool.stuIdFromSession(request);
+        List<MemCourseVo> memCourseVoList = new ArrayList<>();
+        Student student = studentService.getById(studentId);
+        Clazz clazz = clazzService.getById(student.getClazzId());
+        Integer clazzId = clazz.getClazzId();
+        LambdaQueryWrapper<Ctc> ctcQueryWrapper = new LambdaQueryWrapper<>();
+        ctcQueryWrapper.eq(Ctc::getClazzId,clazzId);
+        List<Ctc> ctcList = ctcService.list(ctcQueryWrapper);
+        for (Ctc ctc:ctcList){
+            int tcId = ctc.getTcId();
+            Tc tc = tcService.getById(tcId);
+            Teacher teacher = teacherService.getById(tc.getTeacherId());
+            Course course = courseService.getById(tc.getCourseId());
+        }
+        return Result.success(null);
     }
 }

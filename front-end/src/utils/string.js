@@ -19,10 +19,14 @@ export const dutyStr = (str) =>{
     if (str==='leader') return '组长'
     if (str==='member') return '组员'
 }
+const dateFormat = (val) =>{
+    if (val<10) return `0${val}`
+    else return val
+}
 export const dateStr = (dateStr) =>{
-    const date = new Date(dateStr);
-    const year = date.getFullYear();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
+    const date = new Date(dateStr)
+    const year = date.getFullYear()
+    const month = dateFormat(date.getMonth() + 1)
+    const day = dateFormat(date.getDate())
     return `${year}-${month}-${day}`;
 }

@@ -24,7 +24,6 @@ import norHmkInit from "./nor_hmk";
 import norTeamInit from "./nor_team";
 import norTaskInit from "./nor_task";
 import norExamineInit from "./nor_examine";
-import norAcquireInit from "./nor_acquire";
 
 $('#root').html(main)
 

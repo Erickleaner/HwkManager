@@ -15,6 +15,10 @@ import org.springframework.stereotype.Service;
 public class TeamAssignServiceImpl extends ServiceImpl<TeamAssignMapper, TeamAssign>
     implements TeamAssignService{
 
+    @Override
+    public Integer countFromTeamByNo(Integer teamId, String no) {
+        return this.baseMapper.countFromTeamByNo(teamId,no);
+    }
 }
 
 

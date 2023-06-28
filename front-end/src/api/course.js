@@ -34,3 +34,9 @@ export function courseOwnList(obj) {
         params: obj
     })
 }
+export function memCourseList() {
+    return request({
+        url: '/course/memList',
+        method: 'get',
+    })
+}

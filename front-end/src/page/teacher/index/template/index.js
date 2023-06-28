@@ -161,7 +161,7 @@ const initConfirm = () => {
             row = emptyRow();
             bindEdit(row)
             frame.operate.insert(row).then(data=>{
-                if (!data.isInsert){
+                if (data.insert){
                     row.courseId = data.insertId
                     $('#myModal').modal('hide')
                     $('#table_server').bootstrapTable('append', row);

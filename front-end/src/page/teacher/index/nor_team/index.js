@@ -6,11 +6,13 @@ import {groupList} from "../../../../mockApi/group";
 import team from "./team.html";
 import item from "./item.html";
 import {studentByNo} from "../../../../api/student";
-import {dutyStr} from "../../../../utils/string";
-
+import {dateStr, dutyStr} from "../../../../utils/string";
+import {teamInsert, teamList, teamRemove, teamUpdate} from "../../../../api/team";
+import {hmkSave, hmkSubmit} from "../../../../api/hmk";
+import norHmkInit from "../nor_hmk";
 
 const frame = {
-    idField:'groupId',
+    idField:'teamId',
     operate:{
         list:groupList,
     },
@@ -47,35 +49,152 @@ const frame = {
             events: {
                 'click .operate-update': function (e, value, row, index) {
                     e.preventDefault()
+                    isUpdate(row)
                 },
                 'click .operate-delete': function (e, value, row, index) {
                     e.preventDefault()
+                    isDelete(row)
                 }
             }
         },
     ],
 }
 
-
-const validTeam = () =>{
-    //valid -> data
-    //else -> nul
-    const {leader,members} = currentRow
-    if (leader!=null&&members.length>0){
-
-    }else return null;
+let global = {
+    hmk:null
 }
-const bindTeam = (row) =>{
-/*    const leader = {
-        no:$('#')
-    }*/
+const initGlobal = (obj) =>{
+    //row of homework
+    const {row} = obj
+    global.hmk = row
+}
+
+const makeRow = ({leader,members,teamId}) =>{
+    return {
+        teamId,
+        leaderName:leader.name,
+        leaderNo:leader.no,
+        groupNum:members.length+1
+    }
+}
+const validInsert = ({leader,members}) =>{
+    let msg;
+    if (leader===null){
+        msg = '小组一定要选择一个组长'
+        return {
+            valid:false,
+            msg
+        }
+    }
+    if (members.length===0){
+        msg = '小组成员数量必须大于0'
+        return {
+            valid:false,
+            msg
+        }
+    }
+    return {valid: true}
+}
+const hmkData = () =>{
+    const hwk = global.hmk
+    return {
+        homeworkId: hwk.homeworkId,
+        name: $("[name='hmkName']").val(),
+        detail: $("[name='hmkDetail']").val(),
+        startTime: $("[name='hmkStartTime']").val(),
+        endTime: $("[name='hmkEndTime']").val(),
+    }
 }
 const initConfirm = () => {
     $('#confirm').click(function() {
-        let row = $(this).data('row');
         const operate = $(this).data('operate');
         if (operate===Operate.INSERT){
-            bindTeam(row)
+            const validRes = validInsert(currentRow);
+            if (!validRes.valid){
+                alert(validRes.msg)
+                return
+            }
+            const {leader,members} = currentRow
+            const hmk = global.hmk;
+            teamInsert({leader,members,hmk}).then(data=>{
+                if (data.insert){
+                    alert('添加成功！')
+                    const teamId = data.insertId
+                    const row = makeRow({leader, members, teamId})
+                    $('#table_server').bootstrapTable('append', row);
+                    $('#myModal').modal('hide')
+                }else {
+                    alert('添加小组有误，不符合添加要求！')
+                }
+            })
+        }
+        if (operate===Operate.SAVE){
+            const newData = hmkData()
+            hmkSave(newData).then(data=>{
+                if (data) alert('保存成功！')
+                else alert('保存失败！')
+                $('#myModal').modal('hide')
+            })
+        }
+        if (operate===Operate.UPDATE){
+            const row = $(this).data('row');
+            const validRes = validInsert(currentRow);
+            if (!validRes.valid){
+                alert(validRes.msg)
+                return
+            }
+            const {leader,members} = currentRow
+            const hmk = global.hmk;
+            const teamId = row.teamId
+            teamUpdate({leader,members,teamId,hmk}).then(data=>{
+                if (data){
+                    row.teamRowVo = currentRow
+                    alert('更新成功！')
+                    $('#table_server').bootstrapTable('updateByUniqueId', {
+                        [frame.idField]: row[frame.idField],
+                        row: row
+                    });
+                    $('#myModal').modal('hide')
+                }else {
+                    alert('添加小组有误，不符合添加要求！')
+                }
+            })
+        }
+        if (operate===Operate.REMOVE){
+            const row = $(this).data('row');
+            const teamId = row.teamId
+            teamRemove({teamId}).then(data=>{
+                if (data) {
+                    alert('删除成功！')
+                    $('#table_server').bootstrapTable('remove', {
+                        field: frame.idField,
+                        values: [teamId]
+                    });
+                }else {
+                    alert('删除失败！')
+                }
+                $('#myModal').modal('hide')
+            })
+        }
+        if (operate===Operate.SUBMIT){
+            const newData = hmkData()
+            hmkSave(newData).then(data=>{
+                if (!data) {
+                    alert('保存失败,不可提交！')
+                }else {
+                    const hmk = global.hmk
+                    const homeworkId = hmk.homeworkId
+                    hmkSubmit({homeworkId}).then(data=>{
+                        if (data){
+                            alert('提交成功！')
+                            norHmkInit()
+                        }else{
+                            alert('提交要求班级全员均组队！')
+                        }
+                    })
+                }
+                $('#myModal').modal('hide')
+            })
         }
     })
 }
@@ -105,6 +224,10 @@ const initTable = (data) =>{
 }
 const Operate = {
     INSERT:'INSERT',
+    SAVE:'SAVE',
+    UPDATE:'UPDATE',
+    REMOVE:'DELETE',
+    SUBMIT:'SUBMIT',
 }
 let currentRow = null;
 const emptyRow = () =>{
@@ -211,26 +334,77 @@ const initInsetEvent = () =>{
         })
     })
 }
+const cloneRow = (row) =>{
+    const leader = row.leader
+    const members = row.members
+    return {leader,members:[...members]}
+}
+const isUpdate = (row) =>{
+    $('#myModalLabel').text('更新分组')
+    $(".modal-body").html(team)
+    initInsetEvent()
+    const teamRow = cloneRow(row.teamRowVo)
+    currentRow = teamRow
+    renderTable()
+    $('#confirm').data('operate',Operate.UPDATE).data('row',row);
+    $('#myModal').modal('show')
+}
+const isDelete = (row) =>{
+    $('#myModalLabel').text('删除分组')
+    $(".modal-body").html('是否确认删除分组')
+    $('#confirm').data('operate',Operate.REMOVE).data('row',row);
+    $('#myModal').modal('show')
+}
 const isInsert = () =>{
     $('#myModalLabel').text('添加分组')
     $(".modal-body").html(team)
     initInsetEvent()
     const row = emptyRow();
     currentRow = row
-    $('#confirm').data('operate',Operate.INSERT).data('row',row);
+    $('#confirm').data('operate',Operate.INSERT).data('row',row)
     $('#myModal').modal('show')
+}
+const isSubmit = () =>{
+    $('#myModalLabel').text('提交分组')
+    $(".modal-body").html('是否确认提交分组？')
+    $('#confirm').data('operate',Operate.SUBMIT)
+    $('#myModal').modal('show')
+}
+const isSave = () =>{
+    $('#myModalLabel').text('保存')
+    $(".modal-body").html('是否确认保存？')
+    $('#confirm').data('operate',Operate.SAVE)
+    $('#myModal').modal('show')
+}
+const initSave = () =>{
+    $('#save').click(()=>{
+        isSave()
+    })
+}
+const initSubmit = () =>{
+    $('#submit').click(()=>{
+        isSubmit()
+    })
 }
 const initInsert = () =>{
     $('#insertElem').click(()=>{
         isInsert()
     })
 }
-const initTableByEmpty = () =>{
-    initTable([])
+const initTableByBack = () =>{
+    const hmk = global.hmk
+    const homeworkId = hmk.homeworkId;
+    teamList({homeworkId}).then(data=>{
+        initTable(data)
+    })
 }
-const initUI = ({course,clazz}) => {
+const initUI = ({course,clazz,row}) => {
     $("[name='courseName']").val(course.name)
     $("[name='clazzName']").val(clazz.name)
+    $("[name='hmkName']").val(row.name)
+    $("[name='hmkDetail']").val(row.detail)
+    $("[name='hmkStartTime']").val(dateStr(row.startTime));
+    $("[name='hmkEndTime']").val(dateStr(row.endTime));
 }
 const norTeamInit = (obj) =>{
     if (obj===null){
@@ -239,8 +413,11 @@ const norTeamInit = (obj) =>{
     }
     $('#main').html(main)
     initUI(obj)
-    initTableByEmpty()
+    initGlobal(obj)
+    initTableByBack()
     initConfirm()
     initInsert()
+    initSave()
+    initSubmit()
 }
 export default norTeamInit

@@ -10,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 * @Entity backend.model.po.TeamAssign
 */
 public interface TeamAssignMapper extends BaseMapper<TeamAssign> {
-
+    Integer countFromTeamByNo(Integer teamId,String no);
 }
 
 

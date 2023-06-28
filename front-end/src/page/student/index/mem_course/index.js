@@ -4,9 +4,7 @@ import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
 import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
 import {semesterStr} from "../../../../utils/string";
-import {memCourseList} from "../../../../mockApi/memCourse";
-import memTaskInit from "../mem_task";
-import leaHmkInit from "../mem_hmk";
+import {memCourseList} from "../../../../api/course";
 import memHmkInit from "../mem_hmk";
 const frame = {
     idField:'courseId',

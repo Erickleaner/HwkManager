@@ -35,11 +35,12 @@ public class TeaBusiness {
     @PostMapping("/acquire")
     public Result<Boolean> acquire(@RequestBody AcquireDto acquireDto, HttpServletRequest request) {
         int teacherId = Tool.teaIdFromSession(request);
-        Course course = acquireDto.getCourse();
+        int courseId = acquireDto.getCourse().getCourseId();
+        if (!judgeAcquire(teacherId,courseId)) return Result.success(false);
         List<Clazz> clazzList = acquireDto.getClazzList();
         Tc tc = new Tc();
         tc.setTeacherId(teacherId);
-        tc.setCourseId(course.getCourseId());
+        tc.setCourseId(courseId);
         tcService.save(tc);
         for (Clazz clazz : clazzList) {
             Ctc ctc = new Ctc();
@@ -48,6 +49,13 @@ public class TeaBusiness {
             ctcService.save(ctc);
         }
         return Result.success(true);
+    }
+    private boolean judgeAcquire(int teacherId,int courseId){
+        LambdaQueryWrapper<Tc> tcQueryWrapper = new LambdaQueryWrapper<>();
+        tcQueryWrapper.eq(Tc::getTeacherId,teacherId);
+        tcQueryWrapper.eq(Tc::getCourseId,courseId);
+        int count = (int) tcService.count(tcQueryWrapper);
+        return count == 0;
     }
     @GetMapping("/teach")
     public Result<List<TeachVo>> teach(HttpServletRequest request) {

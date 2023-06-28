@@ -4,9 +4,9 @@ import backend.model.po.Task;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
-* @author 伟大的力量
+* @author lenovo
 * @description 针对表【task】的数据库操作Mapper
-* @createDate 2023-06-24 18:17:59
+* @createDate 2023-06-28 08:22:09
 * @Entity backend.model.po.Task
 */
 public interface TaskMapper extends BaseMapper<Task> {

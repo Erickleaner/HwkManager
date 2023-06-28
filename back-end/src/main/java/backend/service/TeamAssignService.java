@@ -9,5 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-06-27 10:30:51
 */
 public interface TeamAssignService extends IService<TeamAssign> {
-
+    Integer countFromTeamByNo(Integer teamId,String no);
 }

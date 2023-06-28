@@ -8,11 +8,12 @@ import {teaBzTeach} from "../../../../api/teaBusiness";
 import {hmkInsert, hmkTeachList} from "../../../../api/hmk";
 import edit from "./edit.html";
 import {dateStr} from "../../../../utils/string";
+import norTaskInit from "../nor_task";
 
 
 const frame = {
     idField:'homeworkId',
-    insertBtn:'分组添加',
+    insertBtn:'大作业添加',
     operate:{
         list:homeworkList,
     },
@@ -38,9 +39,6 @@ const frame = {
             title: '分组数',
             field: 'groupNum',
             align: 'center',
-            formatter: function (value) {
-                if (value===undefined||value===null) return 0
-            },
         },
         {
             title: '是否分组发布',
@@ -69,18 +67,39 @@ const frame = {
         {
             title: '操作',
             align: 'center',
-            formatter: function () {
-                return '<a href="#" class="operate-task">分组发布</a>'
-            },
+            formatter: function (value,row) {
+                const isPublish = row.publish === 1
+                if (!isPublish) {
+                    return '<a href="#" class="operate-team">分组发布</a>'
+                }else {
+                    return '<a href="#" class="operate-task">任务管理</a>'
+                }
+           }
+            ,
             events: {
+                'click .operate-team': function (e, value, row, index) {
+                    e.preventDefault()
+                    hmkManage(row)
+                },
                 'click .operate-task': function (e, value, row, index) {
                     e.preventDefault()
-                    hmkManage()
+                    const more = courseAndClazz()
+                    norTaskInit({row,more})
                 },
             }
         }
     ],
 }
+
+const courseAndClazz = () =>{
+    let teachVo  = JSON.parse($('#selectCourse').val())
+    let clazz  = JSON.parse($('#selectClazz').val())
+    return {
+        course:teachVo.course,
+        clazz:clazz
+    }
+}
+
 
 const Operate = {
     INSERT:'INSERT',
@@ -110,6 +129,7 @@ const initConfirm = () => {
             const row = emptyRow()
             bindRow(row)
             row.ctcId = getCtcId()
+            row.publish = 0
             hmkInsert(row).then(data=>{
                 if (!data.isInsert){
                     row.homeworkId = data.insertId
@@ -150,11 +170,11 @@ const initTable = () =>{
         ]
     });
 }
-const hmkManage = () =>{
+const hmkManage = (row) =>{
     let teachVo = JSON.parse($('#selectCourse').val())
     const course = teachVo.course
     let clazz  = JSON.parse($('#selectClazz').val())
-    norTeamInit({course,clazz})
+    norTeamInit({course,clazz,row})
 }
 const initInsert = () =>{
     $('#insertElem').text(frame.insertBtn).click(()=>{
@@ -176,6 +196,7 @@ const initCurrentClazz = () => {
     const teachVo = JSON.parse($('#selectCourse').val())
     $('#selectClazz').html('')
     new Promise(resolve => {
+        if (teachVo===null) return
         teachVo.clazzList.forEach(clazz=>{
             const option = $('<option>').text(clazz.name).val(JSON.stringify(clazz));
             $('#selectClazz').append(option)
@@ -186,17 +207,18 @@ const initCurrentClazz = () => {
         let clazz  = JSON.parse($('#selectClazz').val())
         const tc = teachVo.tc
         hmkTeachList({clazz,tc}).then(data=>{
-            console.log(data)
             loadTable(data)
         })
     })
 }
-const initTeach = () =>{
+const initTeach = (obj) =>{
     teaBzTeach().then(data=>{
         teachVoList = data
     }).then(()=>{
         initSelector()
         initCurrentClazz()
+    }).then(()=>{
+        initChoose(obj)
     })
 }
 const listenSelector = () =>{
@@ -204,12 +226,24 @@ const listenSelector = () =>{
         initCurrentClazz()
     })
 }
-const norHmkInit = () =>{
+const initChoose = (obj) =>{
+    if (obj!==null&&obj!==undefined){
+        const chooseId = obj.courseId
+        teachVoList.forEach(item=>{
+            //此处使用代码不会调用change函数
+            if (item.course.courseId === chooseId){
+                $('#selectCourse').val(JSON.stringify(item));
+                initCurrentClazz()
+            }
+        })
+    }
+}
+const norHmkInit = (obj) =>{
     $('#main').html(main)
     initConfirm()
     initInsert()
-    initTeach()
     listenSelector()
+    initTeach(obj)
     initTable()
 }
 export default norHmkInit

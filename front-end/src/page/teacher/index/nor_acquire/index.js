@@ -33,6 +33,7 @@ const acquireDto = (row) =>{
 }
 const editClazzList = () => {
     let clazzArr = $(`[name="clazzList"]`).val();
+    if (clazzArr===null) return null
     let clazzList = []
     clazzArr.forEach(clazzId=>{
         clazzList.push(
@@ -51,11 +52,15 @@ const initConfirm = () => {
         if (operate===Operate.ACQUIRE){
             $('#myModal').modal('hide')
             const dto = acquireDto(row)
+            if (dto.clazzList===null){
+                alert('领课对应的班级至少为1个！')
+                return
+            }
             teaBusinessAcquire(dto).then((isAcquire) => {
                 if (isAcquire){
                     alert('领课成功！')
                 }else {
-                    alert('领课失败！')
+                    alert('不能重复领课！')
                 }
             })
         }

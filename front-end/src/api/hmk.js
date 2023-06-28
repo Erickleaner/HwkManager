@@ -20,3 +20,18 @@ export function hmkList() {
         method: 'get',
     })
 }
+export function hmkSave(obj) {
+    return request({
+        url: '/hmk/save',
+        method: 'post',
+        data: obj
+    })
+}
+
+export function hmkSubmit(obj) {
+    return request({
+        url: '/hmk/submit',
+        method: 'get',
+        params:obj
+    })
+}

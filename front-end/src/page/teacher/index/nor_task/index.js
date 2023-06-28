@@ -2,16 +2,14 @@ import './main.css'
 import main from './main.html'
 import 'bootstrap-table/dist/bootstrap-table.css'
 import 'bootstrap-table/dist/bootstrap-table'
-import norTeamInit from "../nor_team";
-import {taskList} from "../../../../mockApi/task";
+import {taskInsert, taskPublish, taskTeaList} from "../../../../api/task";
+import edit from "./edit.html";
+import {dateStr} from "../../../../utils/string";
 
 
 const frame = {
     idField:'taskId',
     insertBtn:'添加任务',
-    operate:{
-        list:taskList,
-    },
     columns: [
         {
             title: '序号',
@@ -27,22 +25,28 @@ const frame = {
         },
         {
             title: '任务描述',
-            field: 'desc',
+            field: 'detail',
             align: 'center'
         },
         {
             title: '开始时间',
             field: 'startTime',
-            align: 'center'
+            align: 'center',
+            formatter: function (value) {
+                return dateStr(value)
+            },
         },
         {
             title: '截止时间',
             field: 'endTime',
-            align: 'center'
+            align: 'center',
+            formatter: function (value) {
+                return dateStr(value)
+            },
         },
         {
             title: '发布状态',
-            field: 'isPublish',
+            field: 'publish',
             align: 'center',
             formatter: function (value) {
                 return value===0? '否':'是'
@@ -50,47 +54,73 @@ const frame = {
         },
         {
             title: '操作',
-            field: 'isPublish',
             align: 'center',
-            formatter: function (value) {
-                if (value===0) return '<a href="#" class="operate-update mr-15">修改</a>' +
-                    '<a href="#" class="operate-delete" >删除</a>';
-                if (value===1) return '无'
+            formatter: function (value,row) {
+                const isPublish = row.publish === 1
+                if (!isPublish) {
+                    return '<a href="#" class="operate-publish mr-15">发布</a>'
+                }else {
+                    return '无'
+                }
             },
             events: {
-                'click .operate-update': function (e, value, row, index) {
+                'click .operate-publish': function (e, value, row, index) {
                     e.preventDefault()
-                },
-                'click .operate-delete': function (e, value, row, index) {
-                    e.preventDefault()
+                    isSubmit(row)
                 },
             }
         },
-        {
-            title: '发布',
-            field: 'isPublish',
-            align: 'center',
-            formatter: function (value) {
-                if (value===1) return '<a href="#" class="operate-cancel">取消发布</a>'
-                if (value===0) return '<a href="#" class="operate-publish">发布</a>'
-            },
-            events: {
-                'click .operate-task': function (e, value, row, index) {
-                    e.preventDefault()
-                },
-            }
-        }
     ],
 }
 
 const Operate = {
-    REMOVE:'REMOVE',
+    INSERT:'INSERT',
+    PUBLISH:'PUBLISH'
+}
+
+const isSubmit = (row) =>{
+    $('#myModalLabel').text('发布任务')
+    $(".modal-body").html('是否确认发布？')
+    $('#confirm').data('operate',Operate.PUBLISH).data('row',row);
+    $('#myModal').modal('show')
 }
 
 const initConfirm = () => {
     $('#confirm').click(function() {
-        let row = $(this).data('row');
         const operate = $(this).data('operate');
+        if (operate===Operate.INSERT){
+            const row = emptyRow();
+            bindEdit(row)
+            row.homeworkId = global.homeworkId
+            taskInsert(row).then(data=>{
+                if (data.insert){
+                    row.courseId = data.insertId
+                    $('#myModal').modal('hide')
+                    $('#table_server').bootstrapTable('append', row);
+                    alert('添加任务成功！')
+                }else {
+                    $('#myModal').modal('hide')
+                    alert('添加任务失败！')
+                }
+            })
+        }
+        if (operate===Operate.PUBLISH){
+            const row = $(this).data('row');
+            const taskId = row.taskId
+            taskPublish({taskId}).then(data=>{
+                if (data){
+                    row.publish = 1
+                    $('#table_server').bootstrapTable('updateByUniqueId', {
+                        [frame.idField]: row[frame.idField],
+                        row: row
+                    });
+                    alert('发布任务成功！')
+                }else {
+                    alert('发布任务失败！')
+                }
+                $('#myModal').modal('hide')
+            })
+        }
     })
 }
 const initTable = (data) =>{
@@ -117,19 +147,53 @@ const initTable = (data) =>{
         ]
     });
 }
+const emptyRow = () =>{
+    return{
+        name:'',
+        detail:'',
+        startTime:null,
+        endTime:null,
+    }
+}
+const bindEdit = (row) =>{
+    for (const key in row){
+        if (key===frame.idField) continue
+        row[key] = $(`[name="${key}"]`).val();
+    }
+}
 const initInsert = () =>{
     $('#insertElem').text(frame.insertBtn).click(()=>{
-        norTeamInit(null)
+        $('#myModalLabel').text('添加任务')
+        $(".modal-body").html(edit)
+        $('#confirm').data('operate',Operate.INSERT);
+        $('#myModal').modal('show')
     })
 }
-const initTableByBack = () =>{
-    frame.operate.list().then(data => {
+const initTableByBack = (obj) =>{
+    const {row} = obj
+    const homeworkId = row.homeworkId;
+    taskTeaList({homeworkId}).then(data=>{
         initTable(data)
     })
 }
-const norTaskInit = () =>{
+const initUI = (obj) =>{
+    const {row,more} = obj
+    global.homeworkId = row.homeworkId
+    $('[name="courseName"]').val(more.course.name)
+    $('[name="clazzName"]').val(more.clazz.name)
+    $('[name="hmkName"]').val(row.name)
+}
+let global = {
+    homeworkId:null
+}
+const norTaskInit = (obj) =>{
+    if (obj===null||obj===undefined){
+        alert('请选择大作业进入')
+        return
+    }
     $('#main').html(main)
-    initTableByBack()
+    initUI(obj)
+    initTableByBack(obj)
     initConfirm()
     initInsert()
 }

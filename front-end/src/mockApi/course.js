@@ -1,3 +1,4 @@
+/*
 import mockRequest from "../utils/mockRequest";
 
 export function courseList() {
@@ -6,3 +7,4 @@ export function courseList() {
         method: 'get',
     })
 }
+*/

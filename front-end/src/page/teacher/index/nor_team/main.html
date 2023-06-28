@@ -13,21 +13,21 @@
     <div class="mb-20 d-flex justify-content-between align-items-start">
         <div class="input-group">
             <span class="input-group-addon">大作业名：</span>
-            <input id="hmkNameInput" type="text" class="form-control" placeholder="请输入大作业名">
+            <input name="hmkName" type="text" class="form-control" placeholder="请输入大作业名">
         </div>
         <div class="input-group">
             <span class="input-group-addon">大作业描述：</span>
-            <textarea id="hmkDescInput" rows="2" cols="23" class="form-control" placeholder="请输入大作业描述"></textarea>
+            <textarea name="hmkDetail" rows="2" cols="23" class="form-control" placeholder="请输入大作业描述"></textarea>
         </div>
     </div>
     <div class="mb-20 d-flex justify-content-between align-items-start">
         <div class="input-group">
             <span class="input-group-addon">开始时间：&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input id="hmkStartTimeInput" type="date" class="form-control" placeholder="请输入开始时间">
+            <input name="hmkStartTime" type="date" class="form-control" placeholder="请输入开始时间">
         </div>
         <div class="input-group">
             <span class="input-group-addon">截止时间：&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <input id="hmkEndTimeInput" type="date" class="form-control" placeholder="请输入截止时间">
+            <input name="hmkEndTime" type="date" class="form-control" placeholder="请输入截止时间">
         </div>
     </div>
 </div>
@@ -38,7 +38,8 @@
         </div>
     </div>
     <div class="d-flex justify-content-right">
-        <button id="insertSubmit" class="btn ft-18 btn-primary mr-30">确认分组</button>
+        <button id="submit" class="btn ft-18 btn-primary mr-30">确认分组</button>
+        <button id="save" class="btn ft-18 btn-primary mr-30">保存</button>
         <button id="insertElem" class="btn ft-18 btn-primary">添加小组</button>
     </div>
 </div>
