@@ -1,8 +1,8 @@
 import mockRequest from "../utils/mockRequest";
 
-export function mockCourseList() {
+export function leaScoreList() {
     return mockRequest({
-        url: '/course/list',
+        url: '/leaScore/list',
         method: 'get',
     })
 }
