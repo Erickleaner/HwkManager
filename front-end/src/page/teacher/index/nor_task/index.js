@@ -49,6 +49,7 @@ const frame = {
             field: 'publish',
             align: 'center',
             formatter: function (value) {
+                console.log(value)
                 return value===0? '否':'是'
             },
         },
@@ -95,6 +96,7 @@ const initConfirm = () => {
             taskInsert(row).then(data=>{
                 if (data.insert){
                     row.taskId = data.insertId
+                    row.publish = 0
                     $('#myModal').modal('hide')
                     $('#table_server').bootstrapTable('append', row);
                     alert('添加任务成功！')
