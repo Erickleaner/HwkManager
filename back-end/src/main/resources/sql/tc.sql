@@ -10,6 +10,4 @@ create table tc
         foreign key (course_id) references course (course_id)
 );
 
-INSERT INTO hmk_manager.tc (tc_id, teacher_id, course_id) VALUES (1, 1, 1);
-INSERT INTO hmk_manager.tc (tc_id, teacher_id, course_id) VALUES (2, 1, 2);
-INSERT INTO hmk_manager.tc (tc_id, teacher_id, course_id) VALUES (3, 1, 9);
+INSERT INTO hmk_manager.tc (tc_id, teacher_id, course_id) VALUES (13, 100, 1);

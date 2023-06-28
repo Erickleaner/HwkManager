@@ -71,6 +71,13 @@ public class HmkController {
         List<Homework> homeworkList = homeworkService.list();
         return Result.success(homeworkList);
     }
+    @GetMapping("/memList")
+    public Result<List<Homework>> memList(int ctcId) {
+        LambdaQueryWrapper<Homework> hmkQueryWrapper = new LambdaQueryWrapper<>();
+        hmkQueryWrapper.eq(Homework::getCtcId,ctcId);
+        List<Homework> homeworkList = homeworkService.list(hmkQueryWrapper);
+        return Result.success(homeworkList);
+    }
     @PostMapping("/insert")
     public Result<InsertVo> insert(@RequestBody Homework homework) {
         InsertVo insertVo = new InsertVo();
