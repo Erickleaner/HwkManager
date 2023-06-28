@@ -20,6 +20,7 @@ import memTaskInit from "./mem_task";
 import memPlanInit from "./mem_plan";
 import memHmkInit from "./mem_hmk";
 import leaTaskInit from "./lea_task";
+import {quit} from "../../../api/login";
 
 $('#root').html(main)
 
@@ -35,8 +36,14 @@ const commonEvent =[
     {
         id:'loginOut',
         action:()=>{
-            removeUser()
-            redirectLogin()
+            quit().then(data=>{
+                if (data){
+                    removeUser()
+                    redirectLogin()
+                }else {
+                    alert('退出登录失败')
+                }
+            })
         }
     },
 ]
@@ -95,4 +102,4 @@ const initEvent = () => {
 }
 initUI();
 initEvent();
-leaTaskInit()
+infoInit()

@@ -6,7 +6,6 @@ import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
 import {leaHmkList} from "../../../../mockApi/leaHmk";
 import memTaskInit from "../mem_task";
 import leaTaskInit from "../lea_task";
-import {memHmkList} from "../../../../api/hmk";
 import {dateStr} from "../../../../utils/string";
 
 
@@ -214,7 +213,7 @@ const initInsert = () =>{
 }
 const initTableByBack = (obj) =>{
     const {ctcId} = obj
-    memHmkList({ctcId}).then(data => {
+    leaHmkList({ctcId}).then(data => {
         initTable(data)
     })
 }

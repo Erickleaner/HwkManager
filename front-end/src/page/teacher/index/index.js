@@ -24,6 +24,7 @@ import norHmkInit from "./nor_hmk";
 import norTeamInit from "./nor_team";
 import norTaskInit from "./nor_task";
 import norExamineInit from "./nor_examine";
+import {quit} from "../../../api/login";
 
 $('#root').html(main)
 
@@ -54,8 +55,14 @@ const normalEvent = [
     {
         id:'loginOut',
         action:()=>{
-            removeUser()
-            redirectLogin()
+            quit().then(data=>{
+                if (data){
+                    removeUser()
+                    redirectLogin()
+                }else {
+                    alert('退出登录失败')
+                }
+            })
         }
     },
     {

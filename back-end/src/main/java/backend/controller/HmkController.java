@@ -75,7 +75,7 @@ public class HmkController {
     }
     @GetMapping("/memList")
     public Result<List<MemHomeworkVo>> memList(int ctcId,HttpServletRequest request) {
-        Integer currentId = Tool.stuIdFromSession(request);
+        Integer currentId = Tool.getUserIdFromSession(request);
         LambdaQueryWrapper<Homework> hmkQueryWrapper = new LambdaQueryWrapper<>();
         hmkQueryWrapper.eq(Homework::getCtcId,ctcId);
         hmkQueryWrapper.eq(Homework::getPublish,1);

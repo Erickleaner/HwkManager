@@ -6,5 +6,6 @@ import lombok.Data;
 public class LoginVo {
     Object user;
     Boolean isLogin;
+    String role;
     public LoginVo(){}
 }

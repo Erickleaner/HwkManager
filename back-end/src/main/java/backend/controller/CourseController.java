@@ -65,7 +65,7 @@ public class CourseController {
     //
     @GetMapping("/ownList")
     public Result<List<CourseDto>> ownList(HttpServletRequest request) {
-        int teacherId = Tool.teaIdFromSession(request);
+        int teacherId = Tool.getUserIdFromSession(request);
         List<CourseDto> courseList = courseService.getCourseByTeacherId(teacherId);
         for (CourseDto courseDto:courseList){
             //find target tc
@@ -83,7 +83,7 @@ public class CourseController {
     }
     @GetMapping("/memList")
     public Result<List<MemCourseVo>> memList(HttpServletRequest request) {
-        int studentId = Tool.stuIdFromSession(request);
+        int studentId = Tool.getUserIdFromSession(request);
         List<MemCourseVo> memCourseVoList = new ArrayList<>();
         Student student = studentService.getById(studentId);
         Clazz clazz = clazzService.getById(student.getClazzId());

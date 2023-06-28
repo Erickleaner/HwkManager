@@ -2,9 +2,7 @@ create table team
 (
     team_id     int auto_increment
         primary key,
-    homework_id int null,
-    constraint FK_Reference_8
-        foreign key (homework_id) references homework (homework_id)
+    homework_id int null
 );
 
 INSERT INTO hmk_manager.team (team_id, homework_id) VALUES (1, 7);

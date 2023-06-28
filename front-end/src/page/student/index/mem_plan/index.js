@@ -56,7 +56,7 @@ const frame = {
             events: {
                 'click .operate-finish': function (e, value, row, index) {
                     e.preventDefault()
-                    isUpdate(row)
+                    //isUpdate(row)
                 },
             }
         }

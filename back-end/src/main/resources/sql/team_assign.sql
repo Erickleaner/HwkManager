@@ -3,11 +3,7 @@ create table team_assign
     team_assign_id int auto_increment
         primary key,
     student_id     int null,
-    team_id        int null,
-    constraint FK_Reference_10
-        foreign key (student_id) references student (student_id),
-    constraint FK_Reference_11
-        foreign key (team_id) references team (team_id)
+    team_id        int null
 );
 
 INSERT INTO hmk_manager.team_assign (team_assign_id, student_id, team_id) VALUES (1, 1, 1);

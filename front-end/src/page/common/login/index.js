@@ -7,7 +7,7 @@ import './main.css'
 //mock data
 import '../../../mock/user'
 
-import {login} from "../../../api/login";
+import {login, session} from "../../../api/login";
 import {redirectStudent, redirectTeacher} from "../../../tool/redirect";
 import {getUser, saveUser} from "../../../storage";
 
@@ -44,18 +44,19 @@ const initEvent = () => {
     })
 }
 const entry = () => {
-    const user = getUser();
-    if (user!==null&&user!==undefined){
-        const role = user.role;
-        if (role==='student'){
-            saveUser(user)
-            redirectStudent()
+    session().then(sessionDto=>{
+        if(sessionDto===null) return
+        const {user,ifLogin} = sessionDto
+        if (ifLogin){
+            if (user.role==='teacher'){
+                saveUser(user)
+                redirectTeacher()
+            }else {
+                saveUser(user)
+                redirectStudent()
+            }
         }
-        if (role==='teacher'){
-            saveUser(user)
-            redirectTeacher()
-        }
-    }
+    })
 }
 initEvent()
 entry()

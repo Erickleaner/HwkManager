@@ -7,3 +7,15 @@ export function login(obj) {
         data: obj
     })
 }
+export function session() {
+    return request({
+        url: '/user/session',
+        method: 'get',
+    })
+}
+export function quit() {
+    return request({
+        url: '/user/quit',
+        method: 'get',
+    })
+}

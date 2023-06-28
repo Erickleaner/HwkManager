@@ -133,6 +133,7 @@ const initConfirm = () => {
             hmkInsert(row).then(data=>{
                 if (!data.isInsert){
                     row.homeworkId = data.insertId
+                    row.groupNum = 0
                     $('#myModal').modal('hide')
                     $('#table_server').bootstrapTable('append', row);
                 }else {

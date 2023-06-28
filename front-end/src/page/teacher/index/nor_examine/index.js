@@ -36,14 +36,9 @@ const frame = {
             title: '操作',
             align: 'center',
             formatter: function () {
-                return '<a href="#" class="operate-detail mr-15">查看提交</a>' +
-                    '<a href="#" class="operate-examine" >修改评分</a>';
+                return '<a href="#" class="operate-examine" >修改评分</a>';
             },
             events: {
-                'click .operate-detail': function (e, value, row, index) {
-                    e.preventDefault()
-
-                },
                 'click .operate-examine': function (e, value, row, index) {
                     e.preventDefault()
                     updateGrade(row)

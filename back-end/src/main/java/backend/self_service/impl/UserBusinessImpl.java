@@ -67,6 +67,7 @@ public class UserBusinessImpl implements UserBusiness {
                 Clazz clazz = clazzService.getById(clazzId);
                 loginStuDto.setClazz(clazz.getName());
                 loginVo.setUser(loginStuDto);
+                loginVo.setRole("student");
             }
             if (role.equals(Role.TEACHER.value)){
                 Teacher teacher = teacherService.getById(id);
@@ -80,6 +81,7 @@ public class UserBusinessImpl implements UserBusiness {
                 loginTeaDto.setTeacherId(teacherId);
                 loginTeaDto.setPower(teacher.getPower());
                 loginVo.setUser(loginTeaDto);
+                loginVo.setRole("teacher");
             }
         }
         return loginVo;
