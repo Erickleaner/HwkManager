@@ -18,7 +18,7 @@ const hmkList = [
         'identity':'member'
     },
 ]
-Mock.mock(`/leaHmk/list`, 'get', (options) => {
+Mock.mock(`/leaHmk/list`, 'get', () => {
     return{
         code:200,
         data:hmkList
