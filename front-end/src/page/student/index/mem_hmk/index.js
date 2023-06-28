@@ -6,6 +6,8 @@ import 'bootstrap-table/src/locale/bootstrap-table-zh-CN'
 import {leaHmkList} from "../../../../mockApi/leaHmk";
 import memTaskInit from "../mem_task";
 import leaTaskInit from "../lea_task";
+import {memHmkList} from "../../../../api/hmk";
+import {dateStr} from "../../../../utils/string";
 
 
 const frame = {
@@ -28,33 +30,41 @@ const frame = {
         },
         {
             title: '大作业描述',
-            field: 'desc',
+            field: 'detail',
             align: 'center'
         },
         {
             title: '开始时间',
             field: 'startTime',
-            align: 'center'
+            align: 'center',
+            formatter: function (value) {
+                return dateStr(value)
+            },
         },
         {
             title: '截止时间',
             field: 'endTime',
-            align: 'center'
+            align: 'center',
+            formatter: function (value) {
+                return dateStr(value)
+            },
         },
         {
             title: '组内身份',
-            field: 'identity',
+            field: 'ifLeader',
             align: 'center',
             formatter: function(value) {
-                if (value==='member') return '组员'
-                if (value==='leader') return '组长'
+                if (value) return '组长'
+                else return '组员'
             }
         },
         {
             title: '组长职能',
             align: 'center',
             formatter: function (value, row) {
-                if (row.identity==='leader') return '<a href="#" class="operate-leaTask">大作业任务</a>'
+                const ifLeader = row.ifLeader
+                if (ifLeader) return '<a href="#" class="operate-leaTask">大作业任务</a>'
+                else return '无'
             },
             events: {
                 'click .operate-leaTask': function (e, value, row, index) {
@@ -202,14 +212,25 @@ const initInsert = () =>{
         isInsert()
     })
 }
-const initTableByBack = () =>{
-    frame.operate.list().then(data => {
+const initTableByBack = (obj) =>{
+    const {ctcId} = obj
+    memHmkList({ctcId}).then(data => {
         initTable(data)
     })
 }
-const memHmkInit = () =>{
+const initUI = obj => {
+    const {name,teacherName} = obj
+    $('[name="courseName"]').val(name)
+    $('[name="teacherName"]').val(teacherName)
+}
+const memHmkInit = (obj) =>{
+    if (obj===null||obj===undefined){
+        alert('从我的课程入口点击进入')
+        return
+    }
     $('#main').html(main)
-    initTableByBack()
+    initTableByBack(obj)
+    initUI(obj)
     initConfirm()
     initInsert()
 }

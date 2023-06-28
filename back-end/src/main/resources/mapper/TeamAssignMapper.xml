@@ -18,4 +18,11 @@
         WHERE ta.team_id = #{teamId}
         AND s.no = #{no};
     </select>
+    <select id="countByStuId" resultMap="BaseResultMap">
+        SELECT COUNT(*)
+        FROM team_assign ta
+                 INNER JOIN student s ON ta.student_id = s.student_id
+        WHERE ta.team_id = #{teamId}
+          AND s.student_id = #{studentId};
+    </select>
 </mapper>

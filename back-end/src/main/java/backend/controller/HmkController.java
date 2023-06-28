@@ -4,10 +4,9 @@ package backend.controller;
 import backend.model.dto.HmkTeaDto;
 import backend.model.dto.StudentDto;
 import backend.model.po.*;
-import backend.model.vo.HomeworkVo;
-import backend.model.vo.InsertVo;
-import backend.model.vo.OptionVo;
+import backend.model.vo.*;
 import backend.service.*;
+import backend.tool.Tool;
 import backend.util.Result;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.sun.org.glassfish.external.statistics.annotations.Reset;
@@ -17,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/hmk")
@@ -33,6 +33,8 @@ public class HmkController {
     TeamAssignService teamAssignService;
     @Resource
     TeamService teamService;
+    @Resource
+    TeamLeaderService teamLeaderService;
     @PostMapping ("/teachList")
     public Result<List<HomeworkVo>> teaHmkList(@RequestBody HmkTeaDto hmkTeaDto, HttpServletRequest request) {
         //找到唯一的Ctc
@@ -72,11 +74,38 @@ public class HmkController {
         return Result.success(homeworkList);
     }
     @GetMapping("/memList")
-    public Result<List<Homework>> memList(int ctcId) {
+    public Result<List<MemHomeworkVo>> memList(int ctcId,HttpServletRequest request) {
+        Integer currentId = Tool.stuIdFromSession(request);
         LambdaQueryWrapper<Homework> hmkQueryWrapper = new LambdaQueryWrapper<>();
         hmkQueryWrapper.eq(Homework::getCtcId,ctcId);
+        hmkQueryWrapper.eq(Homework::getPublish,1);
         List<Homework> homeworkList = homeworkService.list(hmkQueryWrapper);
-        return Result.success(homeworkList);
+        List<MemHomeworkVo> homeworkVoList = new ArrayList<>();
+        for (Homework homework:homeworkList){
+            MemHomeworkVo homeworkVo = getMemHomeworkVo(homework);
+            LambdaQueryWrapper<Team> teamQueryWrapper = new LambdaQueryWrapper<>();
+            teamQueryWrapper.eq(Team::getHomeworkId,homeworkVo.getHomeworkId());
+            Team team = teamService.getOne(teamQueryWrapper);
+            Integer teamId = team.getTeamId();
+            TeamLeader teamLeader = teamLeaderService.getById(teamId);
+            Integer teamAssignId = teamLeader.getTeamAssignId();
+            TeamAssign teamAssign = teamAssignService.getById(teamAssignId);
+            Integer studentId = teamAssign.getStudentId();
+            if (Objects.equals(studentId, currentId)) homeworkVo.setIfLeader(true);
+            else homeworkVo.setIfLeader(false);
+        }
+        return Result.success(homeworkVoList);
+    }
+    private MemHomeworkVo getMemHomeworkVo(Homework homework){
+        MemHomeworkVo memHomeworkVo = new MemHomeworkVo();
+        memHomeworkVo.setHomeworkId(homework.getHomeworkId());
+        memHomeworkVo.setCtcId(homework.getCtcId());
+        memHomeworkVo.setStartTime(homework.getStartTime());
+        memHomeworkVo.setEndTime(homework.getEndTime());
+        memHomeworkVo.setName(homework.getName());
+        memHomeworkVo.setDetail(homework.getDetail());
+        memHomeworkVo.setPublish(homework.getPublish());
+        return memHomeworkVo;
     }
     @PostMapping("/insert")
     public Result<InsertVo> insert(@RequestBody Homework homework) {

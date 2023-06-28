@@ -35,3 +35,10 @@ export function hmkSubmit(obj) {
         params:obj
     })
 }
+export function memHmkList(obj) {
+    return request({
+        url: '/hmk/memList',
+        method: 'get',
+        params:obj
+    })
+}

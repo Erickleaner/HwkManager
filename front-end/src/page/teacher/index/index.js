@@ -107,7 +107,7 @@ const initEvent = () => {
     initNormal()
     initSpecial()
 }
-norHmkInit()
+infoInit()
 
 /*norTeamInit(
     {

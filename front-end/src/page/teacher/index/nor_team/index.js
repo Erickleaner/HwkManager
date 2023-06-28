@@ -71,6 +71,10 @@ const initGlobal = (obj) =>{
 
 const makeRow = ({leader,members,teamId}) =>{
     return {
+        teamRowVo:{
+            leader,
+            members,
+        },
         teamId,
         leaderName:leader.name,
         leaderNo:leader.no,
@@ -104,6 +108,13 @@ const hmkData = () =>{
         startTime: $("[name='hmkStartTime']").val(),
         endTime: $("[name='hmkEndTime']").val(),
     }
+}
+const newRowData = (row,currentRow) => {
+    row.teamRowVo = currentRow
+    const {leader,members} = currentRow
+    row.leaderName = leader.name
+    row.leaderNo = leader.no
+    row.groupNum = members.length+1
 }
 const initConfirm = () => {
     $('#confirm').click(function() {
@@ -148,7 +159,7 @@ const initConfirm = () => {
             const teamId = row.teamId
             teamUpdate({leader,members,teamId,hmk}).then(data=>{
                 if (data){
-                    row.teamRowVo = currentRow
+                    newRowData(row,currentRow)
                     alert('更新成功！')
                     $('#table_server').bootstrapTable('updateByUniqueId', {
                         [frame.idField]: row[frame.idField],
@@ -335,16 +346,16 @@ const initInsetEvent = () =>{
     })
 }
 const cloneRow = (row) =>{
-    const leader = row.leader
-    const members = row.members
+    const {teamRowVo} = row
+    const leader = teamRowVo.leader
+    const members = teamRowVo.members
     return {leader,members:[...members]}
 }
 const isUpdate = (row) =>{
     $('#myModalLabel').text('更新分组')
     $(".modal-body").html(team)
     initInsetEvent()
-    const teamRow = cloneRow(row.teamRowVo)
-    currentRow = teamRow
+    currentRow = cloneRow(row)
     renderTable()
     $('#confirm').data('operate',Operate.UPDATE).data('row',row);
     $('#myModal').modal('show')

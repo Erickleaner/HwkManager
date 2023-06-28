@@ -8,9 +8,10 @@ request.interceptors.response.use(res=>{
   if(res.data.code===200){
     return Promise.resolve(res.data.data)
   }
-  return Promise.reject(res.data)
+  alert('网络错误或者返回值有误')
 },err=>{
-  return Promise.reject(err)
+  alert('网络错误或者返回值有误')
+  //return Promise.reject(err)
 });
 
 

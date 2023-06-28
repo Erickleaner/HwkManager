@@ -94,7 +94,7 @@ const initConfirm = () => {
             row.homeworkId = global.homeworkId
             taskInsert(row).then(data=>{
                 if (data.insert){
-                    row.courseId = data.insertId
+                    row.taskId = data.insertId
                     $('#myModal').modal('hide')
                     $('#table_server').bootstrapTable('append', row);
                     alert('添加任务成功！')

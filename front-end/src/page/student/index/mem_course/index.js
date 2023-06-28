@@ -7,7 +7,7 @@ import {semesterStr} from "../../../../utils/string";
 import {memCourseList} from "../../../../api/course";
 import memHmkInit from "../mem_hmk";
 const frame = {
-    idField:'courseId',
+    idField:'ctcId',
     operate:{
         list:memCourseList,
     },
@@ -61,13 +61,15 @@ const frame = {
             events: {
                 'click .operate-leaTask': function (e, value, row, index) {
                     e.preventDefault()
-                    memHmkInit()
+                    memHmkInit(row)
                 },
             }
         },
     ],
 }
+const hmkData = (row) => {
 
+}
 const Operate = {
     REMOVE:'REMOVE',
     UPDATE:'UPDATE',

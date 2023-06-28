@@ -92,11 +92,21 @@ public class CourseController {
         ctcQueryWrapper.eq(Ctc::getClazzId,clazzId);
         List<Ctc> ctcList = ctcService.list(ctcQueryWrapper);
         for (Ctc ctc:ctcList){
+            int ctcId = ctc.getCtcId();
             int tcId = ctc.getTcId();
             Tc tc = tcService.getById(tcId);
             Teacher teacher = teacherService.getById(tc.getTeacherId());
             Course course = courseService.getById(tc.getCourseId());
+            MemCourseVo memCourseVo = new MemCourseVo();
+            memCourseVo.setName(course.getName());
+            memCourseVo.setTeacherName(teacher.getName());
+            memCourseVo.setSerialNum(course.getSerialNum());
+            memCourseVo.setScore(course.getScore());
+            memCourseVo.setStuTime(course.getStuTime());
+            memCourseVo.setSemester(course.getSemester());
+            memCourseVo.setCtcId(ctcId);
+            memCourseVoList.add(memCourseVo);
         }
-        return Result.success(null);
+        return Result.success(memCourseVoList);
     }
 }

@@ -216,33 +216,47 @@ const initTeach = (obj) =>{
         teachVoList = data
     }).then(()=>{
         initSelector()
-        initCurrentClazz()
-    }).then(()=>{
-        initChoose(obj)
+        if (obj!==null&&obj!==undefined){
+            initChoose(obj)
+        }else {
+            initCurrentClazz()
+        }
     })
 }
-const listenSelector = () =>{
+const initSimpleClazz = () =>{
+    let teachVo  = JSON.parse($('#selectCourse').val())
+    let clazz  = JSON.parse($('#selectClazz').val())
+    const tc = teachVo.tc
+    hmkTeachList({clazz,tc}).then(data=>{
+        loadTable(data)
+    })
+}
+const listenCourse = () =>{
     $('#selectCourse').change(val=>{
         initCurrentClazz()
     })
 }
+const listenClazz = () =>{
+    $('#selectClazz').change(val=>{
+        initSimpleClazz()
+    })
+}
 const initChoose = (obj) =>{
-    if (obj!==null&&obj!==undefined){
-        const chooseId = obj.courseId
-        teachVoList.forEach(item=>{
-            //此处使用代码不会调用change函数
-            if (item.course.courseId === chooseId){
-                $('#selectCourse').val(JSON.stringify(item));
-                initCurrentClazz()
-            }
-        })
-    }
+    const chooseId = obj.courseId
+    teachVoList.forEach(item=>{
+        //此处使用代码不会调用change函数
+        if (item.course.courseId === chooseId){
+            $('#selectCourse').val(JSON.stringify(item));
+            initCurrentClazz()
+        }
+    })
 }
 const norHmkInit = (obj) =>{
     $('#main').html(main)
     initConfirm()
     initInsert()
-    listenSelector()
+    listenCourse()
+    listenClazz()
     initTeach(obj)
     initTable()
 }

@@ -87,7 +87,7 @@ public class TeamController {
         return Result.success(judgeInsert(teamInsert));
     }
     private void removeTemple(List<TeamAssign> teamAssignList,TeamLeader leader){
-        teamLeaderService.removeById(leader.getTeamAssignId());
+        teamLeaderService.removeById(leader.getTeamLeaderId());
         for (TeamAssign teamAssign:teamAssignList){
             teamAssignService.removeById(teamAssign.getTeamAssignId());
         }
